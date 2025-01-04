@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Enum\Auth\RolesEnum;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Str;
 
 /**
@@ -24,21 +26,46 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'country_code' => fake()->numberBetween('900', '963'),
+            'phone_number' => fake()->phoneNumber(),
             'remember_token' => Str::random(10),
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
+    public function staticAdmin(): Factory
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->state([
+            'country_code' => '963',
+            'phone_number' => '968259851',
+            'remember_token' => Str::random(10),
+        ])->afterCreating(function (User $user) {
+            $user->assignRole(RolesEnum::ADMIN);
+        });
+    }
+
+    public function staticUser(): Factory
+    {
+        return $this->state([
+            'country_code' => '963',
+            'phone_number' => '968259852',
+            'remember_token' => Str::random(10),
+        ])->afterCreating(function (User $user) {
+            $user->assignRole(RolesEnum::USER);
+        });
+    }
+
+    public function syrianNumber()
+    {
+        return $this->state(new Sequence(
+            function (Sequence $sequence) {
+                $randomPhoneNumber =
+                    '968'.fake()->numberBetween(111111, 999999);
+
+                return [
+                    'country_code' => '963',
+                    'phone_number' => $randomPhoneNumber,
+                ];
+            }
+        ));
     }
 }

@@ -1,0 +1,470 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "In Abstract Controller",
+        "version": "1"
+    },
+    "paths": {
+        "/admin/users": {
+            "get": {
+                "tags": [
+                    "admins"
+                ],
+                "summary": "Display a listing of the resource.",
+                "operationId": "60abfa1474bf57a132f8180ff927722f",
+                "responses": {
+                    "200": {
+                        "description": "Item fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "1"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/files": {
+            "get": {
+                "tags": [
+                    "files"
+                ],
+                "operationId": "5f5d7a9f14764b7a00b1a6d263730e0a",
+                "responses": {
+                    "204": {
+                        "description": "File uploaded successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/files": {
+            "post": {
+                "tags": [
+                    "files"
+                ],
+                "operationId": "08f811d5e879722f476c4451e5d3c8ae",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UploadFileData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "File uploaded successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UploadFileResponseData"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/auth/login": {
+            "post": {
+                "tags": [
+                    "userAuth"
+                ],
+                "operationId": "3b5c35ea1a3a8ce62ea2667f6a863f77",
+                "responses": {
+                    "401": {
+                        "description": "Authentication Failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/cars": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "operationId": "32134785f4984fdf23994e68ae7ca584",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCarOfferRequestData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CarResponseData": {},
+            "CreateFilePathData": {
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "public_id": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "FilePathData": {
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ShowFileData": {
+                "properties": {
+                    "uid": {
+                        "type": "integer"
+                    },
+                    "url": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateFileData": {
+                "properties": {
+                    "uid": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "url": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UploadFileData": {
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "UploadFileResponseData": {
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "public_id": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ListData": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginFailedResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "adminCursorPaginatedAbstract": {
+                "properties": {
+                    "per_page": {
+                        "type": "integer"
+                    },
+                    "next_cursor": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "adminPaginatedAbstract": {
+                "properties": {
+                    "current_page": {
+                        "type": "integer"
+                    },
+                    "per_page": {
+                        "type": "integer"
+                    },
+                    "total": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginRequestData": {},
+            "CreateCarOfferRequestData": {
+                "properties": {
+                    "manufacturer_id": {
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "is_new_car": {
+                        "type": "integer"
+                    },
+                    "year_manufactured": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "car_color": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "model": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "car_price": {
+                        "type": "integer"
+                    },
+                    "car_sell_currency": {
+                        "$ref": "#/components/schemas/Currency"
+                    },
+                    "fuel_type": {
+                        "$ref": "#/components/schemas/FuelType"
+                    },
+                    "car_sell_location": {
+                        "type": "integer"
+                    },
+                    "is_car_shippable_to_a_different_city": {
+                        "type": "boolean"
+                    },
+                    "car_import_type": {
+                        "$ref": "#/components/schemas/ImportType"
+                    },
+                    "car_label_origin": {
+                        "type": "integer"
+                    },
+                    "transmission": {
+                        "$ref": "#/components/schemas/TransmissionType"
+                    },
+                    "miles_travelled_in_km": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "has_tuf_check_passed": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "user_has_legal_car_papers": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "faragha_jahzeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_tajrobeh": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "Currency": {
+                "description": "[0 => Male, 1 => Female]",
+                "type": "integer",
+                "enum": [
+                    0,
+                    1
+                ]
+            },
+            "FuelType": {
+                "description": "[0 => Male, 1 => Female]",
+                "type": "integer",
+                "enum": [
+                    0,
+                    1,
+                    2
+                ]
+            },
+            "Gender": {
+                "description": "[0 => Male, 1 => Female]",
+                "type": "integer",
+                "enum": [
+                    0,
+                    1
+                ]
+            },
+            "ImportType": {
+                "description": "[0 => Male, 1 => Female]",
+                "type": "integer",
+                "enum": [
+                    0,
+                    1,
+                    2,
+                    3
+                ]
+            },
+            "Latest": {
+                "type": "string",
+                "enum": [
+                    "TestCase"
+                ]
+            },
+            "SyrianCity": {
+                "description": "[0 => Male, 1 => Female]",
+                "type": "integer",
+                "enum": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    18,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    37,
+                    38,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43,
+                    44,
+                    45,
+                    46,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    56,
+                    57,
+                    58,
+                    58,
+                    59,
+                    60
+                ]
+            },
+            "TransmissionType": {
+                "description": "[0 => Male, 1 => Female]",
+                "type": "integer",
+                "enum": [
+                    0,
+                    1
+                ]
+            }
+        },
+        "parameters": {
+            "localeQueryParameter": {
+                "name": "locale",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "securitySchemes": {
+            "ref_to_be_used_below_csrf": {
+                "type": "apiKey",
+                "name": "X-XSRF-TOKEN",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "ref_to_be_used_below_csrf": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "admins",
+            "description": "admins"
+        },
+        {
+            "name": "files",
+            "description": "files"
+        },
+        {
+            "name": "userAuth",
+            "description": "userAuth"
+        },
+        {
+            "name": "users",
+            "description": "users"
+        }
+    ]
+}
