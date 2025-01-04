@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use Artisan;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 
 class CreateInvokableControllerWithData extends Command
 {
@@ -13,7 +12,7 @@ class CreateInvokableControllerWithData extends Command
      *
      * @var string
      */
-    protected $signature = 'make:data-controller {name} {--path==} {--post==} {--post-form==} {--patch==} {--patch-form==} {--get-one==} {--get-many==} {--delete-one} {--delete-many==}';
+    protected $signature = 'make:data-controller {name} {--path==} {--query==} {--post==} {--post-form==} {--patch==} {--patch-form==} {--get-one==} {--get-many==} {--delete-one} {--delete-many==}';
 
     /**
      * The console command description.
@@ -35,8 +34,6 @@ class CreateInvokableControllerWithData extends Command
                 '\\',
                 $this->argument('name')
             );
-
-        // Log::info($path);
 
         $class_name =
             explode(
@@ -128,6 +125,48 @@ class CreateInvokableControllerWithData extends Command
             .'s'
             .$path_data_class;
             // .'PathParameterData';
+
+        }
+
+        $data_query_option = $this->option('query');
+
+        if ($data_query_option) {
+            Artisan::call('make:data', [
+                'name' => $data_query_option.'QueryParameter',
+            ]);
+        }
+        $query_class_import = '';
+
+        $query_variable_declaration = '';
+
+        if ($this->option('query')) {
+
+            $query_option = $this->option('query');
+
+            $query_query =
+            str_replace(
+                '/',
+                '\\',
+                $query_option
+            );
+
+            $query_option_array =
+            explode(
+                '\\',
+                $query_query,
+            );
+
+            $query_data_class =
+                $query_option_array[count($query_option_array) - 1].'QueryParameterData';
+
+            $query_data_name =
+                $query_data_class;
+
+            $query_final_name = $query_query.'QueryParameterData;';
+
+            $query_class_import = 'use App\Data\\'.$query_final_name;
+
+            $query_variable_declaration = $query_data_name.' $request,';
 
         }
 
@@ -366,6 +405,7 @@ class CreateInvokableControllerWithData extends Command
 
             namespace App\Http\Controllers\\$real_path;
 
+            $query_class_import
             use App\Http\Controllers\Controller;
             use App\Data\\$get_many_final_name;
             use App\Data\Shared\Swagger\Response\SuccessListResponse;
@@ -376,7 +416,7 @@ class CreateInvokableControllerWithData extends Command
 
                 #[OAT\Get(path: '/$main_route/{id}', tags: ['$tag'])]
                 #[SuccessListResponse($get_many_data_name)]
-                public function __invoke()
+                public function __invoke($query_variable_declaration)
                 {
 
                 }

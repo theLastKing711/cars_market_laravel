@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class CreateDataFile extends Command
+class CreateEnumFile extends Command
 {
     /**
      * The name and signature of the console command.
@@ -18,7 +18,7 @@ class CreateDataFile extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new Laravel-Spatie-Data File';
+    protected $description = 'Create a new Laravel-Spatie-Data Enum';
 
     /**
      * Execute the console command.
