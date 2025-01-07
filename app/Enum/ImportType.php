@@ -7,10 +7,10 @@ use OpenApi\Attributes as OAT;
 #[OAT\Schema(description: '[0 => Male, 1 => Female]', type: 'integer')]
 enum ImportType: int
 {
-    case EuropeNew = 0;
-    case EuropeOld = 1;
-    case Khaliji = 2;
-    case Kassah = 3;
+    case EuropeNew = 1;
+    case EuropeOld = 2;
+    case Khaliji = 3;
+    case Kassah = 4;
 
     public function label(): string
     {

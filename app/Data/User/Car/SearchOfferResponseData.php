@@ -2,6 +2,8 @@
 
 namespace App\Data\User\Car;
 
+use App\Data\Shared\Swagger\Property\ArrayProperty;
+use Illuminate\Support\Collection;
 use OpenApi\Attributes as OAT;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
@@ -11,14 +13,7 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class SearchOfferResponseData extends Data
 {
     public function __construct(
-        #[OAT\Property]
-        public ?int $price_from,
-        #[OAT\Property]
-        public ?int $price_to,
-        #[OAT\Property]
-        public ?int $manufacturer_id,
-        #[OAT\Property]
-        public ?int $year_manufactured,
-
+        #[ArrayProperty(ManufacturerListResponseData::class)]
+        public Collection $manufacturers,
     ) {}
 }

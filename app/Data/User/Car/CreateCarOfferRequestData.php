@@ -2,6 +2,7 @@
 
 namespace App\Data\User\Car;
 
+use App\Enum\Color;
 use App\Enum\Currency;
 use App\Enum\FuelType;
 use App\Enum\ImportType;
@@ -25,7 +26,7 @@ class CreateCarOfferRequestData extends Data
         #[OAT\Property]
         public ?int $year_manufactured,
         #[OAT\Property]
-        public ?int $car_color,
+        public ?Color $car_color,
         #[OAT\Property]
         public ?int $model,
         #[OAT\Property]
@@ -58,6 +59,11 @@ class CreateCarOfferRequestData extends Data
         public ?bool $is_tajrobeh,
     ) {}
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
     public static function rules(): array
     {
         return [

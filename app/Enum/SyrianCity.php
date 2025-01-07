@@ -7,131 +7,131 @@ use OpenApi\Attributes as OAT;
 #[OAT\Schema(description: '[0 => Male, 1 => Female]', type: 'integer')]
 enum SyrianCity: int
 {
-    case Aleppo = 0;
+    case Aleppo = 1;
 
-    case Damascus = 1;
+    case Damascus = 2;
 
-    case Homs = 2;
+    case Homs = 3;
 
-    case Hammah = 3;
+    case Hammah = 4;
 
-    case Latakia = 4;
+    case Latakia = 5;
 
-    case Raqqa = 5;
+    case Raqqa = 6;
 
-    case DierElZor = 6;
+    case DierElZor = 7;
 
-    case AlHasaka = 7;
+    case AlHasaka = 8;
 
-    case Qamishli = 8;
+    case Qamishli = 9;
 
-    case Tartus = 9;
+    case Tartus = 10;
 
-    case Douma = 10;
+    case Douma = 11;
 
-    case AlSuwayda = 11;
+    case AlSuwayda = 12;
 
-    case Quneitra = 12;
+    case Quneitra = 13;
 
-    case AlbuKamal = 13;
+    case AlbuKamal = 14;
 
-    case Afrin = 14;
+    case Afrin = 15;
 
-    case AlAtarib = 15;
+    case AlAtarib = 16;
 
-    case Azaz = 16;
+    case Azaz = 17;
 
-    case AlBab = 18;
+    case AlBab = 19;
 
-    case Baniyas = 18;
+    case Baniyas = 20;
 
-    case Darayya = 19;
+    case Darayya = 21;
 
-    case Duraykish = 20;
+    case Duraykish = 22;
 
-    case Fiq = 21;
+    case Fiq = 23;
 
-    case AlHaffah = 22;
+    case AlHaffah = 24;
 
-    case Izra = 23;
+    case Izra = 25;
 
-    case Jableh = 24;
+    case Jableh = 26;
 
-    case Jarabulus = 25;
+    case Jarabulus = 27;
 
-    case JisrAlShughur = 26;
+    case JisrAlShughur = 28;
 
-    case MaaratAlNuman = 27;
+    case MaaratAlNuman = 29;
 
-    case AlMalikiyah = 28;
+    case AlMalikiyah = 30;
 
-    case Manbij = 29;
+    case Manbij = 31;
 
-    case Masyaf = 30;
+    case Masyaf = 32;
 
-    case Mayadin = 31;
+    case Mayadin = 33;
 
-    case Mhardeh = 32;
+    case Mhardeh = 34;
 
-    case AlMukharram = 33;
+    case AlMukharram = 35;
 
-    case Qardaha = 34;
+    case Qardaha = 36;
 
-    case Qatana = 35;
+    case Qatana = 37;
 
-    case Qudsaya = 36;
+    case Qudsaya = 38;
 
-    case AlQusayer = 37;
+    case AlQusayer = 39;
 
-    case AlQutayfah = 37;
+    case AlQutayfah = 40;
 
-    case RasAlAyn = 38;
+    case RasAlAyn = 41;
 
-    case AlRastan = 39;
+    case AlRastan = 42;
 
-    case AlSafira = 40;
+    case AlSafira = 43;
 
-    case Safita = 41;
+    case Safita = 44;
 
-    case Salamiyah = 42;
+    case Salamiyah = 45;
 
-    case Salkhad = 43;
+    case Salkhad = 46;
 
-    case AlSanamayn = 44;
+    case AlSanamayn = 47;
 
-    case Salqin = 45;
+    case Salqin = 48;
 
-    case AlShaykhBadr = 46;
+    case AlShaykhBadr = 49;
 
-    case AlSuqaylabiyah = 47;
+    case AlSuqaylabiyah = 50;
 
-    case Tadmur = 48;
+    case Tadmur = 51;
 
-    case TellAbyad = 49;
+    case TellAbyad = 52;
 
-    case Taldou = 50;
+    case Taldou = 53;
 
-    case Talalakh = 51;
+    case Talalakh = 54;
 
-    case AlTall = 52;
+    case AlTall = 55;
 
-    case AlThawrah = 53;
+    case AlThawrah = 56;
 
-    case Yabroud = 54;
+    case Yabroud = 57;
 
-    case Zabadani = 55;
+    case Zabadani = 58;
 
-    case Daraa = 56;
+    case Daraa = 59;
 
-    case Idleb = 57;
+    case Idleb = 60;
 
-    case Ariha = 58;
+    case Ariha = 61;
 
-    case DayrHafir = 58;
+    case DayrHafir = 62;
 
-    case AlNabk = 59;
+    case AlNabk = 63;
 
-    case AynAlArab = 60;
+    case AynAlArab = 64;
 
     public function label(): string
     {

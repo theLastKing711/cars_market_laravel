@@ -20966,6 +20966,20 @@ namespace  {
              * 
              *
              * @see \App\Providers\BuilderMacrosServiceProvider::boot()
+             * @param \Illuminate\Contracts\Database\Query\Expression|string $column
+             * @param \iterable $values
+             * @param string $boolean
+             * @param bool $not
+             * @return \Illuminate\Database\Eloquent\Model|static|null 
+             * @static 
+             */            public static function whereBetween($column, $values, $boolean, $not)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::whereBetween($column, $values, $boolean, $not);
+            }
+                            /**
+             * 
+             *
+             * @see \App\Providers\BuilderMacrosServiceProvider::boot()
              * @param string|int $id
              * @return \Illuminate\Database\Eloquent\Model|static|null 
              * @static 
@@ -21588,20 +21602,6 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->whereNotNull($columns, $boolean);
-            }
-                            /**
-             * Add a where between statement to the query.
-             *
-             * @param \Illuminate\Contracts\Database\Query\Expression|string $column
-             * @param \Illuminate\Database\Query\iterable $values
-             * @param string $boolean
-             * @param bool $not
-             * @return \Illuminate\Database\Eloquent\Builder<static> 
-             * @static 
-             */            public static function whereBetween($column, $values, $boolean = 'and', $not = false)
-            {
-                                /** @var \Illuminate\Database\Query\Builder $instance */
-                                return $instance->whereBetween($column, $values, $boolean, $not);
             }
                             /**
              * Add a where between statement using columns to the query.

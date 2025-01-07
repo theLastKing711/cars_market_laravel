@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean('is_new_car')->default(false);
             $table->string('model');
             $table->year('year_manufactured')->nullable();
-            $table->integer('car_color')->nullable();
+            $table->integer('car_color')->nullable(); // Car Enum
             $table->text('description')->nullable();
             $table->integer('car_price');
             $table->integer('car_sell_currency'); //Currency usd or sp;

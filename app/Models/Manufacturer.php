@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as Models;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-
 /**
- * 
- *
  * @property int $id
  * @property string $name_ar
  * @property string $name_en
@@ -19,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Model> $models
  * @property-read int|null $models_count
+ *
  * @method static \Database\Factories\ManufacturerFactory factory($count = null, $state = [])
  * @method static Illuminate\Database\Eloquent\Builder<static> joinRelationship(string $relations, \Closure(Illuminate\Database\Query\JoinClause $join)|array $join_callback_or_array)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer newModelQuery()
@@ -44,6 +42,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer whereNameAr($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer whereNameEn($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class Manufacturer extends Eloquent
@@ -53,11 +52,17 @@ class Manufacturer extends Eloquent
 
     /**
      * Get all of the models for the Manufacturer
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function models(): HasMany
     {
         return $this->hasMany(Model::class);
+    }
+
+    /**
+     * Get all of the cars for the Manufacturer
+     */
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Car::class);
     }
 }

@@ -95,6 +95,27 @@
             }
         },
         "/users/cars": {
+            "get": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "fde87b86959bae5679c3342adef1c8b1",
+                "responses": {
+                    "200": {
+                        "description": "Items fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SearchOfferResponseData"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "users"
@@ -250,7 +271,11 @@
                         "nullable": true
                     },
                     "car_color": {
-                        "type": "integer",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Color"
+                            }
+                        ],
                         "nullable": true
                     },
                     "model": {
@@ -268,16 +293,28 @@
                         "$ref": "#/components/schemas/Currency"
                     },
                     "fuel_type": {
-                        "$ref": "#/components/schemas/FuelType"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/FuelType"
+                            }
+                        ],
+                        "nullable": true
                     },
                     "car_sell_location": {
-                        "type": "integer"
+                        "type": "integer",
+                        "nullable": true
                     },
                     "is_car_shippable_to_a_different_city": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "nullable": true
                     },
                     "car_import_type": {
-                        "$ref": "#/components/schemas/ImportType"
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ImportType"
+                            }
+                        ],
+                        "nullable": true
                     },
                     "car_label_origin": {
                         "type": "integer"
@@ -302,10 +339,51 @@
                         "nullable": true
                     },
                     "is_tajrobeh": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "nullable": true
                     }
                 },
                 "type": "object"
+            },
+            "SearchOfferQueryParameterData": {
+                "properties": {
+                    "price_from": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "price_to": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "manufacturer_id": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "year_manufactured": {
+                        "type": "integer",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "SearchOfferResponseData": {},
+            "Color": {
+                "type": "string",
+                "enum": [
+                    "White",
+                    "Yellow",
+                    "Red",
+                    "Pink",
+                    "Blue",
+                    "Gray",
+                    "Black",
+                    "Orange",
+                    "Purple",
+                    "Brown",
+                    "Silver",
+                    "Gold",
+                    "Indigo"
+                ]
             },
             "Currency": {
                 "description": "[0 => Male, 1 => Female]",
@@ -465,6 +543,10 @@
         {
             "name": "users",
             "description": "users"
+        },
+        {
+            "name": "usersCars",
+            "description": "usersCars"
         }
     ]
 }

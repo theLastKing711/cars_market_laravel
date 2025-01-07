@@ -39,6 +39,48 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereUpdatedAt($value)
  *
+ * @property int $manufacturer_id
+ * @property int $user_id
+ * @property int $is_new_car
+ * @property string $model
+ * @property string|null $year_manufactured
+ * @property int|null $car_color
+ * @property string|null $description
+ * @property int $car_price
+ * @property int $car_sell_currency
+ * @property int|null $fuel_type
+ * @property int|null $car_sell_location
+ * @property int|null $is_car_shippable_to_a_different_city
+ * @property int $car_import_type
+ * @property int $car_label_origin
+ * @property int|null $transmission
+ * @property int $miles_travelled_in_km
+ * @property int|null $has_tuf_check_passed
+ * @property int|null $user_has_legal_car_papers
+ * @property int|null $faragha_jahzeh
+ * @property int $is_tajrobeh
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarImportType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarLabelOrigin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarSellCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarSellLocation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereFaraghaJahzeh($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereFuelType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereHasTufCheckPassed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereIsCarShippableToADifferentCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereIsNewCar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereIsTajrobeh($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereManufacturerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereMilesTravelledInKm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereTransmission($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereUserHasLegalCarPapers($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereYearManufactured($value)
+ *
  * @mixin Eloquent
  */
 class Car extends Eloquent
@@ -54,5 +96,13 @@ class Car extends Eloquent
     public function Model(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the Manufacturer that owns the Car
+     */
+    public function Manufacturer(): BelongsTo
+    {
+        return $this->belongsTo(Manufacturer::class);
     }
 }

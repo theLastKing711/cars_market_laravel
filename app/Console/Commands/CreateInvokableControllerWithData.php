@@ -43,7 +43,9 @@ class CreateInvokableControllerWithData extends Command
 
         $tag = strtolower(
             $class_name[0]
-        ).'s';
+        ).'s'
+        .$class_name[1]
+        .'s';
 
         $main_route =
         strtolower(
@@ -414,7 +416,7 @@ class CreateInvokableControllerWithData extends Command
             class $file_class_name extends Controller
             {
 
-                #[OAT\Get(path: '/$main_route/{id}', tags: ['$tag'])]
+                #[OAT\Get(path: '/$main_route', tags: ['$tag'])]
                 #[SuccessListResponse($get_many_data_name)]
                 public function __invoke($query_variable_declaration)
                 {
