@@ -4,6 +4,7 @@ namespace App\Data\User\Car\QueryParameters;
 
 use App\Enum\FuelType;
 use App\Enum\ImportType;
+use App\Enum\SyrianCity;
 use OpenApi\Attributes as OAT;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
@@ -13,6 +14,10 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class SearchOfferQueryParameterData extends Data
 {
     public function __construct(
+        #[OAT\Property]
+        public ?string $search,
+        #[OAT\Property]
+        public ?SyrianCity $user_current_syrian_city,
         #[OAT\Property]
         public ?int $manufacturer_id,
         #[OAT\Property]
@@ -38,6 +43,6 @@ class SearchOfferQueryParameterData extends Data
         #[OAT\Property]
         public ?bool $faragha_jahzeh,
         #[OAT\Property]
-        public ImportType $import_type,
+        public ?ImportType $import_type,
     ) {}
 }

@@ -10,7 +10,9 @@ enum ImportType: int
     case EuropeNew = 1;
     case EuropeOld = 2;
     case Khaliji = 3;
-    case Kassah = 4;
+    case Korean = 3;
+    case American = 4;
+    case Kassah = 5;
 
     public function label(): string
     {
@@ -18,6 +20,8 @@ enum ImportType: int
             self::EuropeNew => 'أوروبي جديد',
             self::EuropeOld => 'أوروبي قديم',
             self::Khaliji => 'خليجي',
+            self::Korean => 'كوري',
+            self::American => 'أمريكي',
             self::Kassah => 'قصة',
         };
     }

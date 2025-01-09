@@ -48,7 +48,7 @@ Route::prefix('users')
             ->group(function () {
                 Route::prefix('cars')->group(function () {
                     Route::post('', CreateCarOfferController::class);
-                    // Route::get('/search', SearchCarOfferController::class);
+                    Route::get('', SearchCarOfferController::class);
                 });
             });
     });

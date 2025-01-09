@@ -2,26 +2,23 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model as Models;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 
  *
  * @property int $id
- * @property string $name_ar
- * @property string $name_en
- * @property string $logo
+ * @property int $car_id
+ * @property int $city
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Model> $models
- * @property-read int|null $models_count
- * @method static \Database\Factories\ManufacturerFactory factory($count = null, $state = [])
+ * @property-read \App\Models\Car|null $cars
+ * @method static \Database\Factories\ShippableToCityFactory factory($count = null, $state = [])
  * @method static Illuminate\Database\Eloquent\Builder<static> joinRelationship(string $relations, \Closure(Illuminate\Database\Query\JoinClause $join)|array $join_callback_or_array)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ShippableToCity newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ShippableToCity newQuery()
  * @method static Illuminate\Database\Eloquent\Builder<static> orderByLeftPowerJoins(string|array<string, \Illuminate\Contracts\Database\Query\Expression> $column)
  * @method static Illuminate\Database\Eloquent\Builder<static> orderByLeftPowerJoinsCount(string $column, string|null $order)
  * @method static Illuminate\Database\Eloquent\Builder<static> orderByPowerJoins(string|array<string, \Illuminate\Contracts\Database\Query\Expression> $column)
@@ -36,35 +33,24 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Illuminate\Database\Eloquent\Builder<static> orderByPowerLeftJoinsSum(string $column, string|null $order)
  * @method static Illuminate\Database\Eloquent\Builder<static> powerJoinHas(string $relations, mixed operater, mixed value)
  * @method static Illuminate\Database\Eloquent\Builder<static> powerJoinWhereHas(string $relations, \Closure(Illuminate\Database\Query\JoinClause $join)|array $join_callback_or_array)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer whereLogo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer whereNameAr($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer whereNameEn($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Manufacturer whereUpdatedAt($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Car> $cars
- * @property-read int|null $cars_count
- * @mixin Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ShippableToCity query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ShippableToCity whereCarId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ShippableToCity whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ShippableToCity whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ShippableToCity whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ShippableToCity whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-class Manufacturer extends Eloquent
+class ShippableToCity extends Model
 {
-    /** @use HasFactory<\Database\Factories\ManufacturerFactory> */
+    /** @use HasFactory<\Database\Factories\ShippableToCityFactory> */
     use HasFactory;
 
     /**
-     * Get all of the models for the Manufacturer
+     * The cars that belong to the ShippableToCity
      */
-    public function models(): HasMany
+    public function cars(): BelongsTo
     {
-        return $this->hasMany(Model::class);
-    }
-
-    /**
-     * Get all of the cars for the Manufacturer
-     */
-    public function cars(): HasMany
-    {
-        return $this->hasMany(Car::class);
+        return $this->belongsTo(Car::class);
     }
 }

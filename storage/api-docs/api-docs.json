@@ -100,6 +100,99 @@
                     "usersCars"
                 ],
                 "operationId": "fde87b86959bae5679c3342adef1c8b1",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "manufacturer_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "price_from",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "price_to",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "car_sell_location",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "year_manufactured",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fuel_type",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "car_label_origin",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "miles_travelled_in_km_from",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "miles_travelled_in_km_to",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_has_legal_car_papers",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "faragha_jahzeh",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "car_import_type",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Items fetched successfully",
@@ -345,8 +438,38 @@
                 },
                 "type": "object"
             },
+            "ManufacturerListResponseData": {
+                "properties": {
+                    "name_ar": {
+                        "type": "string"
+                    },
+                    "name_en": {
+                        "type": "string"
+                    },
+                    "logo": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "SearchOfferQueryParameterData": {
                 "properties": {
+                    "search": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "user_current_syrian_city": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SyrianCity"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "manufacturer_id": {
+                        "type": "integer",
+                        "nullable": true
+                    },
                     "price_from": {
                         "type": "integer",
                         "nullable": true
@@ -355,18 +478,68 @@
                         "type": "integer",
                         "nullable": true
                     },
-                    "manufacturer_id": {
+                    "car_sell_location": {
                         "type": "integer",
                         "nullable": true
                     },
                     "year_manufactured": {
                         "type": "integer",
                         "nullable": true
+                    },
+                    "fuel_type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/FuelType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "car_label_origin": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "miles_travelled_in_km": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "miles_travelled_in_km_from": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "miles_travelled_in_km_to": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "user_has_legal_car_papers": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "faragha_jahzeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "import_type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ImportType"
+                            }
+                        ],
+                        "nullable": true
                     }
                 },
                 "type": "object"
             },
-            "SearchOfferResponseData": {},
+            "SearchOfferResponseData": {
+                "properties": {
+                    "manufacturers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ManufacturerListResponseData"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "Color": {
                 "type": "string",
                 "enum": [
@@ -389,35 +562,37 @@
                 "description": "[0 => Male, 1 => Female]",
                 "type": "integer",
                 "enum": [
-                    0,
-                    1
+                    1,
+                    2
                 ]
             },
             "FuelType": {
                 "description": "[0 => Male, 1 => Female]",
                 "type": "integer",
                 "enum": [
-                    0,
                     1,
-                    2
+                    2,
+                    3
                 ]
             },
             "Gender": {
                 "description": "[0 => Male, 1 => Female]",
                 "type": "integer",
                 "enum": [
-                    0,
-                    1
+                    1,
+                    2
                 ]
             },
             "ImportType": {
                 "description": "[0 => Male, 1 => Female]",
                 "type": "integer",
                 "enum": [
-                    0,
                     1,
                     2,
-                    3
+                    3,
+                    3,
+                    4,
+                    5
                 ]
             },
             "Latest": {
@@ -430,7 +605,6 @@
                 "description": "[0 => Male, 1 => Female]",
                 "type": "integer",
                 "enum": [
-                    0,
                     1,
                     2,
                     3,
@@ -447,8 +621,7 @@
                     14,
                     15,
                     16,
-                    18,
-                    18,
+                    17,
                     19,
                     20,
                     21,
@@ -467,7 +640,6 @@
                     34,
                     35,
                     36,
-                    37,
                     37,
                     38,
                     39,
@@ -490,9 +662,12 @@
                     56,
                     57,
                     58,
-                    58,
                     59,
-                    60
+                    60,
+                    61,
+                    62,
+                    63,
+                    64
                 ]
             },
             "TransmissionType": {

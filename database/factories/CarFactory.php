@@ -7,8 +7,10 @@ use App\Enum\FuelType;
 use App\Enum\ImportType;
 use App\Enum\SyrianCity;
 use App\Enum\TransmissionType;
+use App\Models\Car;
 use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Car>
@@ -51,6 +53,68 @@ class CarFactory extends Factory
             'is_tajrobeh' => fake()->boolean(),
         ];
     }
+
+    public function santaFeFirst()
+    {
+        return $this->
+            state([
+                'model' => 'سانتافيه',
+            ]);
+    }
+
+    public function santaFeSecond()
+    {
+        return $this->
+            state([
+                'model' => 'سنتافيه',
+            ]);
+    }
+
+    public function santaFeThrid()
+    {
+        return $this->state([
+            'model' => 'سانتفيه',
+        ]);
+    }
+
+    public function pick_random_shippable_syrian_cities(): static
+    {
+        $syrian_cities =
+            SyrianCity::cases();
+
+        return $this->afterCreating(function (Car $car) use ($syrian_cities) {
+
+            $random_number =
+                fake()->numberBetween(0, 3);
+
+            Log::info('random_number {random_number}', ['random_number' => $random_number]);
+
+            $random_number_of_syrian_cites =
+                fake()
+                    ->randomElements(
+                        $syrian_cities,
+                        2
+                    );
+
+            foreach ($random_number_of_syrian_cites as $key => $city) {
+                $car->shippable_to()
+                    ->create([
+                        'city' => $city,
+                    ]);
+            }
+
+        });
+    }
+
+    // public function shipsToRandomCity() {
+
+    //     $all_syrian_cities =
+    //         SyrianCity::cases()
+
+    //     // return $this->afterCreating(function (Car $car) {
+
+    //     // });
+    // }
 
     // public function labelFromAleppo()
     // {

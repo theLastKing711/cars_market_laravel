@@ -2,18 +2,23 @@
 
 namespace App\Models;
 
+use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Laravel\Scout\Searchable;
 
 /**
+ * 
+ *
  * @property int $id
  * @property int $model_id
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Model $Model
- *
  * @method static \Database\Factories\CarFactory factory($count = null, $state = [])
  * @method static Illuminate\Database\Eloquent\Builder<static> joinRelationship(string $relations, \Closure(Illuminate\Database\Query\JoinClause $join)|array $join_callback_or_array)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car newModelQuery()
@@ -38,7 +43,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereModelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereUpdatedAt($value)
- *
  * @property int $manufacturer_id
  * @property int $user_id
  * @property int $is_new_car
@@ -59,7 +63,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int|null $user_has_legal_car_papers
  * @property int|null $faragha_jahzeh
  * @property int $is_tajrobeh
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarColor($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarImportType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarLabelOrigin($value)
@@ -80,15 +83,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereUserHasLegalCarPapers($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereYearManufactured($value)
- *
+ * @property-read \App\Models\Manufacturer $Manufacturer
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Media> $medially
+ * @property-read int|null $medially_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShippableToCity> $shippable_to
+ * @property-read int|null $shippable_to_count
  * @mixin Eloquent
  */
 class Car extends Eloquent
 {
     /** @use HasFactory<\Database\Factories\CarFactory> */
-    use HasFactory;
+    use HasFactory, MediaAlly;
+
+    use Searchable;
 
     protected $guarded = ['id'];
+
+    public function medially(): MorphMany
+    {
+        return $this->morphMany(Media::class, 'medially');
+    }
 
     /**
      * Get the User that owns the Car
@@ -104,5 +118,26 @@ class Car extends Eloquent
     public function Manufacturer(): BelongsTo
     {
         return $this->belongsTo(Manufacturer::class);
+    }
+
+    /**
+     * Get all of the shippable_to for the Car
+     */
+    public function shippable_to(): HasMany
+    {
+        return $this->hasMany(ShippableToCity::class);
+    }
+
+    // #[SearchUsingFullText(['model', 'description'])]
+    public function toSearchableArray(): array
+    {
+        return [
+            'model' => $this->model,
+            'description' => $this->name,
+        ];
+
+        // Customize the data array...
+
+        return $array;
     }
 }

@@ -7,6 +7,7 @@ use App\Data\Shared\Swagger\Response\SuccessListResponse;
 use App\Data\User\Car\ManufacturerListResponseData;
 use App\Data\User\Car\QueryParameters\SearchOfferQueryParameterData;
 use App\Data\User\Car\SearchOfferResponseData;
+use App\Enum\ImportType;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\Manufacturer;
@@ -14,9 +15,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use OpenApi\Attributes as OAT;
 
-class SearchOfferController extends Controller
+class SearchCarOfferController extends Controller
 {
     #[OAT\Get(path: '/users/cars', tags: ['usersCars'])]
+    #[QueryParameter('search')]
     #[QueryParameter('manufacturer_id')]
     #[QueryParameter('price_from')]
     #[QueryParameter('price_to')]
@@ -32,23 +34,13 @@ class SearchOfferController extends Controller
     #[SuccessListResponse(SearchOfferResponseData::class)]
     public function __invoke(SearchOfferQueryParameterData $request)
     {
-        /** @var Collection<Manufacturer> $all_manufacturerers_that_have_car_offers_data */
-        $all_manufacturerers_that_have_car_offers =
-            Manufacturer::query()
-                ->powerJoinHas('cars')
-                ->get();
-        // ->joinRelationship('cars')
-        // ->whereHas('cars')
-        // ->get();
-
-        $all_manufacturerers_that_have_car_offers_data =
-            ManufacturerListResponseData::collect(
-                $all_manufacturerers_that_have_car_offers_data
-            );
+        $request_search =
+            $request
+                ->search;
 
         $request_manufacturer_id =
-            $request
-                ->manufacturer_id;
+        $request
+            ->manufacturer_id;
 
         $request_price_from =
             $request
@@ -95,7 +87,37 @@ class SearchOfferController extends Controller
             $request
                 ->import_type;
 
+        $user_current_city =
+            $request
+                ->user_current_syrian_city;
+
+        $cars_in_user_current_city =
+            Car::query()
+                ->where(
+                    'car_sell_location',
+                    $user_current_city
+                );
+
+        /** @var Collection<int, Manufacturer> $manufacturers_with_car_offers */
+        $manufacturers_with_car_offers =
+            Manufacturer::query()
+                ->powerJoinHas('cars')
+                ->get();
+
+        $manufacturers_with_car_offers_data =
+            ManufacturerListResponseData::collect(
+                $manufacturers_with_car_offers
+            );
+
+        $new_europian_imported_cars =
+            Car::query()
+                ->where(
+                    'car_import_type',
+                    ImportType::EuropeNew
+                );
+
         Car::query()
+            ->search($request_search)
             ->when(
                 $request_manufacturer_id,
                 fn (Builder $query) => $query
