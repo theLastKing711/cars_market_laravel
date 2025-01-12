@@ -56,11 +56,15 @@ class UserSeeder extends Seeder
             ->has(
                 Car::factory()
                     ->state([
+                        'manufacturer_id' => 1,
+                        'manufacturer_name_ar' => 'تويوتا',
+                        'manufacturer_name_en' => 'toyota',
                         'model' => 'كورولا',
                     ])
                     ->pick_random_shippable_syrian_cities()
                     ->count(1)
             )
+            ->hasFavouriteCars()
             ->create();
 
         // User::factory()

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -55,6 +56,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutRole($roles, $guard = null)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Car> $cars
  * @property-read int|null $cars_count
+ * @property-read \App\Data\Shared\ModelwithPivotCollection<\App\Models\Car,\Illuminate\Database\Eloquent\Relations\Pivot> $favouriteCars
+ * @property-read int|null $favourite_cars_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -89,6 +92,14 @@ class User extends Authenticatable
     public function cars(): HasMany
     {
         return $this->hasMany(Car::class);
+    }
+
+    /**
+     * The favouriteCars that belong to the User
+     */
+    public function favouriteCars(): BelongsToMany
+    {
+        return $this->belongsToMany(Car::class, 'user_favourites_cars');
     }
 
     /**

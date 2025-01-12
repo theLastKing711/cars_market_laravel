@@ -10,10 +10,12 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
 #[Oat\Schema()]
-class SearchOfferResponseData extends Data
+class SearchCarOfferResponseData extends Data
 {
     public function __construct(
         #[ArrayProperty(ManufacturerListResponseData::class)]
         public Collection $manufacturers,
+        #[ArrayProperty(CarListData::class)]
+        public Collection $user_city_cars,
     ) {}
 }

@@ -3,9 +3,11 @@
 namespace Database\Factories;
 
 use App\Enum\Auth\RolesEnum;
+use App\Models\Car;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
@@ -67,5 +69,34 @@ class UserFactory extends Factory
                 ];
             }
         ));
+    }
+
+    public function hasFavouriteCars()
+    {
+
+        /** @var Collection<int, int> $all_cars_in_random_order */
+        $all_cars_in_random_order =
+            Car::inRandomOrder()
+                ->pluck('id');
+
+        return $this->afterCreating(function (User $user) use ($all_cars_in_random_order) {
+
+            $random_number =
+                fake()
+                    ->numberBetween(1, 3);
+
+            if ($random_number) {
+                $random_cars_ids =
+                fake()
+                    ->randomElements(
+                        $all_cars_in_random_order,
+                        $random_number
+                    );
+
+                $user->favouriteCars()->attach($random_cars_ids);
+
+            }
+
+        });
     }
 }

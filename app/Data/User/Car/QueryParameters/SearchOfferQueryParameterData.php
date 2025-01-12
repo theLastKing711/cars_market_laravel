@@ -2,6 +2,7 @@
 
 namespace App\Data\User\Car\QueryParameters;
 
+use App\Data\Shared\Swagger\Property\ArrayProperty;
 use App\Enum\FuelType;
 use App\Enum\ImportType;
 use App\Enum\SyrianCity;
@@ -13,6 +14,9 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[Oat\Schema()]
 class SearchOfferQueryParameterData extends Data
 {
+    /**
+     * @param  array<SyrianCity>  $shippable_to  Description
+     **/
     public function __construct(
         #[OAT\Property]
         public ?string $search,
@@ -44,5 +48,7 @@ class SearchOfferQueryParameterData extends Data
         public ?bool $faragha_jahzeh,
         #[OAT\Property]
         public ?ImportType $import_type,
+        #[ArrayProperty(SyrianCity::class)]
+        public ?array $shippable_to,
     ) {}
 }

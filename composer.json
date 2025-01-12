@@ -12,6 +12,7 @@
         "algolia/algoliasearch-client-php": "^4.12",
         "cloudinary-labs/cloudinary-laravel": "^2.2",
         "darkaonline/l5-swagger": "^8.6",
+        "kirschbaum-development/eloquent-power-joins": "^4.0",
         "laravel/folio": "^1.1",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",

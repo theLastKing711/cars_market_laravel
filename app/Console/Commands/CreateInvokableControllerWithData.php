@@ -238,6 +238,46 @@ class CreateInvokableControllerWithData extends Command
 
         if ($patch_option) {
 
+            if ($patch_option == 'null') {
+
+                $fileContents = <<<EOT
+                <?php
+
+                namespace App\Http\Controller\\$real_path;
+
+                use App\Http\Controllers\Controller;
+                use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
+                use OpenApi\Attributes as OAT;
+
+                #[
+                    OAT\PathItem(
+                        path: '/$main_route/{id}',
+                        parameters: [
+                            new OAT\PathParameter(
+                                ref: '#/components/parameters/$path_ref',
+                            ),
+                        ],
+                    ),
+                ]
+                class $file_class_name extends Controller
+                {
+
+                    #[OAT\Patch(path: '/$main_route/{id}', tags: ['$tag'])]
+                    #[SuccessNoContentResponse]
+                    public function __invoke($path_variable_declaration)
+                    {
+
+                    }
+                }
+
+                EOT;
+
+                $written = \Storage::disk('app')
+                    ->put('Http\Controllers'.'\\'.$this->argument('name').'Controller.php', $fileContents);
+
+                return;
+            }
+
             $patch_path =
                 str_replace(
                     '/',
@@ -285,7 +325,7 @@ class CreateInvokableControllerWithData extends Command
             class $file_class_name extends Controller
             {
 
-                #[OAT\Patch(path: /$main_route/{id}', tags: ['$tag'])]
+                #[OAT\Patch(path: '/$main_route/{id}', tags: ['$tag'])]
                 #[JsonRequestBody($patch_data_name)]
                 #[SuccessNoContentResponse]
                 public function __invoke($path_variable_declaration $patch_data_class \$request)
@@ -695,7 +735,7 @@ class CreateInvokableControllerWithData extends Command
             class $file_class_name extends Controller
             {
 
-                #[OAT\Get(path: ''/$main_route', tags: ['$tag'])]
+                #[OAT\Get(path: '/$main_route', tags: ['$tag'])]
                 public function __invoke()
                 {
 

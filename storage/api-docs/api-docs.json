@@ -5,6 +5,13 @@
         "version": "1"
     },
     "paths": {
+        "/users/cars/{id}": {
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/usersCarIdPathParameterData"
+                }
+            ]
+        },
         "/admin/users": {
             "get": {
                 "tags": [
@@ -99,7 +106,7 @@
                 "tags": [
                     "usersCars"
                 ],
-                "operationId": "fde87b86959bae5679c3342adef1c8b1",
+                "operationId": "25f82991a1bd0f16d02b98eb7e3fbe70",
                 "parameters": [
                     {
                         "name": "search",
@@ -191,6 +198,16 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "shippable_to[]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -201,7 +218,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/SearchOfferResponseData"
+                                        "$ref": "#/components/schemas/SearchCarOfferResponseData"
                                     }
                                 }
                             }
@@ -224,6 +241,42 @@
                         }
                     }
                 },
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/cars/favourite/{id}": {
+            "post": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "1dd5f4e22564023603ced8aa7859a330",
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/cars/sell/{id}": {
+            "get": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "213b5cf2ebee657bb4f2b01f07d47a91",
                 "responses": {
                     "204": {
                         "description": "",
@@ -348,6 +401,43 @@
                 "type": "object"
             },
             "LoginRequestData": {},
+            "CarListData": {
+                "properties": {
+                    "manufacturer_id": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "manufacturer_name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "model": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "year_manufactured": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "car_price": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "car_import_type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ImportType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "miles_travelled_in_km": {
+                        "type": "integer",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "CreateCarOfferRequestData": {
                 "properties": {
                     "manufacturer_id": {
@@ -525,16 +615,29 @@
                             }
                         ],
                         "nullable": true
+                    },
+                    "shippable_to": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SyrianCity"
+                        },
+                        "nullable": true
                     }
                 },
                 "type": "object"
             },
-            "SearchOfferResponseData": {
+            "SearchCarOfferResponseData": {
                 "properties": {
                     "manufacturers": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/ManufacturerListResponseData"
+                        }
+                    },
+                    "user_city_cars": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CarListData"
                         }
                     }
                 },
@@ -686,6 +789,14 @@
                 "required": false,
                 "schema": {
                     "type": "string"
+                }
+            },
+            "usersCarIdPathParameterData": {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer"
                 }
             }
         },

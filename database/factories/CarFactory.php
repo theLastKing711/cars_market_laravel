@@ -25,14 +25,16 @@ class CarFactory extends Factory
     public function definition(): array
     {
 
-        $manufacturer_id =
+        /** @var Manufacturer $var description */
+        $random_manufacturer =
             Manufacturer::query()
                 ->inRandomOrder()
-                ->first()
-                ->id;
+                ->first();
 
         return [
-            'manufacturer_id' => $manufacturer_id,
+            'manufacturer_id' => $random_manufacturer->id,
+            'manufacturer_name_ar' => $random_manufacturer->name_ar,
+            'manufacturer_name_en' => $random_manufacturer->name_en,
             'is_new_car' => fake()->boolean(),
             'model' => fake()->text('10'),
             'year_manufactured' => fake()->year(),
