@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\User\Car;
 
 use App\Data\Shared\Swagger\Parameter\QueryParameter\QueryParameter;
+use App\Data\Shared\Swagger\Response\SuccessItemResponse;
 use App\Data\Shared\Swagger\Response\SuccessListResponse;
 use App\Data\User\Car\ManufacturerListResponseData;
 use App\Data\User\Car\QueryParameters\SearchOfferQueryParameterData;
+use App\Data\User\Car\SearchCarOfferPaginationResultData;
 use App\Data\User\Car\SearchCarOfferResponseData;
 use App\Enum\ImportType;
 use App\Http\Controllers\Controller;
@@ -33,7 +35,7 @@ class SearchCarOfferController extends Controller
     #[QueryParameter('user_has_legal_car_papers')]
     #[QueryParameter('faragha_jahzeh')]
     #[QueryParameter('car_import_type')]
-    #[SuccessListResponse(SearchCarOfferResponseData::class)]
+    #[SuccessItemResponse(SearchCarOfferPaginationResultData::class)]
     public function __invoke(SearchOfferQueryParameterData $request)
     {
 
@@ -152,7 +154,7 @@ class SearchCarOfferController extends Controller
         //         :
         //         '';
 
-        return
+        $remote_cars_search =
             Car::search(
                 $request_search
             )
@@ -234,7 +236,9 @@ class SearchCarOfferController extends Controller
                 ->query(
                     fn (EloquentBuilder $query) => $query->with('shippable_to')
                 )
-                ->get();
+                ->paginate(2);
+
+        return $remote_cars_search;
 
         /** @var Collection<int, Manufacturer> $manufacturers_with_car_offers */
         $manufacturers_with_car_offers =
