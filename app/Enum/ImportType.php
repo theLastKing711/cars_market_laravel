@@ -10,9 +10,9 @@ enum ImportType: int
     case EuropeNew = 1;
     case EuropeOld = 2;
     case Khaliji = 3;
-    case Korean = 3;
-    case American = 4;
-    case Kassah = 5;
+    case Korean = 4;
+    case American = 5;
+    case Kassah = 6;
 
     public function label(): string
     {

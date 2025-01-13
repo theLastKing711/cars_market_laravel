@@ -4,12 +4,10 @@ namespace App\Http\Controllers\User\Car;
 
 use App\Data\Shared\Swagger\Parameter\QueryParameter\QueryParameter;
 use App\Data\Shared\Swagger\Response\SuccessItemResponse;
-use App\Data\Shared\Swagger\Response\SuccessListResponse;
-use App\Data\User\Car\ManufacturerListResponseData;
+use App\Data\User\Car\CarListData;
 use App\Data\User\Car\QueryParameters\SearchOfferQueryParameterData;
 use App\Data\User\Car\SearchCarOfferPaginationResultData;
 use App\Data\User\Car\SearchCarOfferResponseData;
-use App\Enum\ImportType;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\Manufacturer;
@@ -141,6 +139,7 @@ class SearchCarOfferController extends Controller
             :
             '';
 
+        //get applied on remote side in addtion to when filters
         $query_filters =
             $car_price_from_query && $car_travelled_in_km_query
             ?
@@ -236,38 +235,21 @@ class SearchCarOfferController extends Controller
                 ->query(
                     fn (EloquentBuilder $query) => $query->with('shippable_to')
                 )
-                ->paginate(2);
+                ->simplePaginate(2);
 
-        return $remote_cars_search;
+        return CarListData::collect($remote_cars_search);
 
-        /** @var Collection<int, Manufacturer> $manufacturers_with_car_offers */
-        $manufacturers_with_car_offers =
-            Manufacturer::query()
-                ->powerJoinHas('cars')
-                ->get();
+        // /** @var Collection<int, Manufacturer> $manufacturers_with_car_offers */
+        // $manufacturers_with_car_offers =
+        //     Manufacturer::query()
+        //         ->powerJoinHas('cars')
+        //         ->get();
 
-        $manufacturers_with_car_offers_data =
-            ManufacturerListResponseData::collect(
-                $manufacturers_with_car_offers
-            );
-
-        // $new_europian_imported_cars =
-        //     Car::query()
-        //         ->where(
-        //             'car_import_type',
-        //             ImportType::EuropeNew
-        //         );
-
-        ////https://www.algolia.com/doc/api-reference/search-api-parameters/
-        // return Car::search(
-        //     $request->search,
-        // )
-        //     ->options([
-        //         'optionalWords' => [ // if a record is corolla and query is toyota corllola return true, would be false withot this parameter
-        //             'تويوتا',
-        //         ],
-        //     ])
-        //     ->get();
+        // return SearchCarOfferResponseData::from([
+        //     'paginated_cars_search_result' => CarListData::collect($remote_cars_search),
+        //     'user_city_cars' => collect([]),
+        //     // CarListData::collect($manufacturers_with_car_offers),
+        // ]);
 
     }
 }

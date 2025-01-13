@@ -2,7 +2,9 @@
 
 namespace App\Data\User\Car;
 
+use App\Data\Shared\Swagger\Property\ArrayProperty;
 use App\Enum\ImportType;
+use Illuminate\Support\Collection;
 use OpenApi\Attributes as OAT;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
@@ -26,5 +28,8 @@ class CarListData extends Data
         public ?ImportType $car_import_type,
         #[OAT\Property]
         public ?int $miles_travelled_in_km,
+        #[ArrayProperty(ShippableToCityData::class)]
+        public Collection $shippable_to,
+
     ) {}
 }

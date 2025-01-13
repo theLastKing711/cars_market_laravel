@@ -213,7 +213,7 @@ class CreateDataFile extends Command
             EOT;
 
             $written = \Storage::disk('app')
-                ->put('Data'.'\\'.$real_path.'\\'.$file_class_name, $fileContents);
+                ->put('Data'.'\\'.$real_path.'\\'.$file_class_name.'Data.php', $fileContents);
 
             if ($written) {
                 $this->info('Created new Repo '.$this->argument('name').'Repository.php in App\Repositories.');

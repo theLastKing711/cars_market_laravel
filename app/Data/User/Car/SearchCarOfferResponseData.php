@@ -13,8 +13,8 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class SearchCarOfferResponseData extends Data
 {
     public function __construct(
-        #[ArrayProperty(ManufacturerListResponseData::class)]
-        public Collection $manufacturers,
+        #[OAT\Property(SearchCarOfferPaginationResultData::class)]
+        public SearchCarOfferPaginationResultData $paginated_cars_search_result,
         #[ArrayProperty(CarListData::class)]
         public Collection $user_city_cars,
     ) {}
