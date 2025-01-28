@@ -33,6 +33,7 @@ enum Color: int
             self::Black => 'أسود',
             self::Orange => 'برتقالي',
             self::Purple => 'بنفسحي',
+            self::Silver => 'فضي',
             self::Brown => 'بني',
             self::Gold => 'ذهبي',
             self::Indigo => 'نيلي'

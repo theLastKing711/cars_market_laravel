@@ -15,7 +15,7 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class SearchOfferQueryParameterData extends Data
 {
     /**
-     * @param  array<SyrianCity>  $shippable_to  Description
+     * @param  array<SyrianCity>  $shippable_to
      **/
     public function __construct(
         #[OAT\Property]
@@ -49,6 +49,7 @@ class SearchOfferQueryParameterData extends Data
         #[OAT\Property]
         public ?ImportType $import_type,
         #[ArrayProperty(SyrianCity::class)]
+        /** @var SyrianCity[] */
         public ?array $shippable_to,
     ) {}
 }

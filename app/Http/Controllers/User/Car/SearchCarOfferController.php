@@ -37,6 +37,7 @@ class SearchCarOfferController extends Controller
     public function __invoke(SearchOfferQueryParameterData $request)
     {
 
+        // return Car::simplePaginate(2);
         $request_search =
             $request
                 ->search;
@@ -231,7 +232,8 @@ class SearchCarOfferController extends Controller
                             $request_import_type
                         )
                 )
-            //get executed after we get the result from remote fulltext search
+            //queryFn({paramPage}) pageParam parameter will be of this type (number | null), otherwise undefined and errors
+            // gets called on client side after remote query success
                 ->query(
                     fn (EloquentBuilder $query) => $query->with('shippable_to')
                 )

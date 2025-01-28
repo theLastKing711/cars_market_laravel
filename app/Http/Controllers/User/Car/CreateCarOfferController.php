@@ -7,43 +7,60 @@ use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
 use App\Data\User\Car\CreateCarOfferRequestData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
 class CreateCarOfferController extends Controller
 {
-    #[OAT\Post(path: '/users/cars', tags: ['users'])]
+    #[OAT\Post(path: '/users/cars', tags: ['usersCars'])]
     #[JsonRequestBody(CreateCarOfferRequestData::class)]
     #[SuccessNoContentResponse]
-    public function __invoke(CreateCarOfferRequestData $request)
+    public function __invoke(CreateCarOfferRequestData $createCarOfferRequestData, Request $request)
     {
 
-        Log::info($request);
+        Log::info('request {request}', ['request' => $createCarOfferRequestData]);
 
-        Car::query()
-            ->create([
-                'manufacturer_id' => 25,
-                'user_id' => $request->user_id,
-                'is_new_car' => $request->is_new_car,
-                'model' => $request->model,
-                'year_manufactured' => $request->year_manufactured,
-                'car_color' => $request->car_color,
-                'description' => $request->description,
-                'car_price' => $request->car_price,
-                'car_sell_currency' => $request->car_sell_currency,
-                'fuel_type' => $request->fuel_type,
-                'car_sell_location' => $request->car_sell_location,
-                'is_car_shippable_to_a_different_city' => $request->is_car_shippable_to_a_different_city,
-                'car_import_type' => $request->car_import_type,
-                'car_label_origin' => $request->car_label_origin,
-                'transmission' => $request->transmission,
-                'miles_travelled_in_km' => $request->miles_travelled_in_km,
-                'has_tuf_check_passed' => $request->has_tuf_check_passed,
-                'user_has_legal_car_papers' => $request->user_has_legal_car_papers,
-                'faragha_jahzeh' => $request->faragha_jahzeh,
-                'is_tajrobeh' => $request->is_tajrobeh,
-            ]);
+        $uploaded_car_images_session_key =
+            config('constants.session.upload_car_images');
 
-        return [];
+        /** @var string[] $user_uploaded_car_images */
+        $user_car_medias =
+            $request
+                ->session()
+                ->get($uploaded_car_images_session_key);
+
+        // $logged_user_id = Auth::User()->id;
+
+        DB::transaction(function () use ($createCarOfferRequestData, $user_car_medias) {
+            $car = Car::query()
+                ->create([
+                    // 'user_id' => $logged_user_id,
+                    'user_id' => 1,
+                    'manufacturer_id' => $createCarOfferRequestData->manufacturer_id,
+                    'manufacturer_name_ar' => $createCarOfferRequestData->manufacturer_name_ar,
+                    'manufacturer_name_en' => $createCarOfferRequestData->manufacturere_name_en,
+                    'model' => $createCarOfferRequestData->model,
+                    'is_new_car' => $createCarOfferRequestData->is_new_car,
+                    'car_price' => $createCarOfferRequestData->car_price,
+                    'fuel_type' => $createCarOfferRequestData->fuel_type,
+                    'transmission' => $createCarOfferRequestData->transmission,
+                    'miles_travelled_in_km' => $createCarOfferRequestData->miles_travelled_in_km,
+                    'is_faragha_jahzeh' => $createCarOfferRequestData->is_faragha_jahzeh,
+                    'is_kassah' => $createCarOfferRequestData->is_kassah,
+                    'is_khalyeh' => $createCarOfferRequestData->is_khalyeh,
+                ]);
+
+            $car
+                ->medially()
+                ->saveMany($user_car_medias);
+        });
+
+        $request
+            ->session()
+            ->remove($uploaded_car_images_session_key);
+
+        return 1;
     }
 }

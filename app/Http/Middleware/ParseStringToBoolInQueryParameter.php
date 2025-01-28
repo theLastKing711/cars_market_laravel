@@ -15,6 +15,7 @@ class ParseStringToBoolInQueryParameter
      */
     public function handle(Request $request, Closure $next): Response
     {
+
         foreach ($request->query() as $key => $value) {
             if ($value === 'true') {
                 $request[$key] = true;

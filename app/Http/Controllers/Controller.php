@@ -18,6 +18,16 @@ use OpenApi\Attributes as OAT;
         ['ref_to_be_used_below_csrf' => []],
     ]),
 ]
+#[
+    OAT\PathItem(
+        path: '/users/cars/{id}',
+        parameters: [
+            new OAT\PathParameter(
+                ref: '#/components/parameters/usersCarIdPathParameterData',
+            ),
+        ],
+    ),
+]
 abstract class Controller
 {
     //

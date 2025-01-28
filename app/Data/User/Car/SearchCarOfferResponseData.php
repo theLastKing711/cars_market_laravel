@@ -12,6 +12,9 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[Oat\Schema()]
 class SearchCarOfferResponseData extends Data
 {
+    /**
+     * @param  Collection<int, CarListData>  $user_city_cars
+     **/
     public function __construct(
         #[OAT\Property(SearchCarOfferPaginationResultData::class)]
         public SearchCarOfferPaginationResultData $paginated_cars_search_result,

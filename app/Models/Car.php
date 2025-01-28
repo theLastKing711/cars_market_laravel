@@ -6,6 +6,7 @@ use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Eloquent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -96,14 +97,20 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereYearManufactured($value)
  *
+ * @property int|null $is_faragha_jahzeh
+ * @property int $is_kassah
+ * @property int $is_khalyeh
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereIsFaraghaJahzeh($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereIsKassah($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereIsKhalyeh($value)
+ *
  * @mixin Eloquent
  */
-class Car extends Eloquent
+class Car extends Model
 {
     /** @use HasFactory<\Database\Factories\CarFactory> */
-    use HasFactory, MediaAlly;
-
-    use Searchable;
+    use HasFactory, MediaAlly, Searchable;
 
     protected $guarded = ['id'];
 
@@ -164,7 +171,7 @@ class Car extends Eloquent
             'car_import_type' => $this->car_import_type,
         ];
 
-        //load shippable city to this remote table index
+        //load shippable city to this remote table(cars) index
         $index_attributes_array['city'] =
             $this->shippable_to
                 ->map(function ($data) {
@@ -182,7 +189,7 @@ class Car extends Eloquent
     //     return $models->load('shippable_to');
     // }
 
-    // add to remote index if it does return true
+    // add to remote search index if it does return true
     public function shouldBeSearchable()
     {
         $is_car_not_sold = ! $this->is_sold;

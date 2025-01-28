@@ -42,7 +42,14 @@ return [
     |
     */
 
-    'queue' => env('SCOUT_QUEUE', false),
+    //changed second argument from false to true,
+    //so that we return the response to user
+    //while indexing the new entered value
+    //is done on remote queue
+    // and not while the request is
+    //beign served, which save time
+    //from couple of seconds to millsecond response
+    'queue' => env('SCOUT_QUEUE', true),
 
     /*
     |--------------------------------------------------------------------------

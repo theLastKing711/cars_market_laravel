@@ -51,7 +51,9 @@ class CarFactory extends Factory
             'miles_travelled_in_km' => fake()->numberBetween(0, 100000),
             'has_tuf_check_passed' => fake()->boolean(),
             'user_has_legal_car_papers' => fake()->boolean(),
-            'faragha_jahzeh' => fake()->boolean(),
+            'is_faragha_jahzeh' => fake()->boolean(),
+            'is_kassah' => fake()->boolean(),
+            'is_khalyeh' => fake()->boolean(),
             'is_tajrobeh' => fake()->boolean(),
         ];
     }

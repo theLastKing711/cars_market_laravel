@@ -1,7 +1,3 @@
-declare namespace App.Data.Admin.Car {
-export type CarResponseData = {
-};
-}
 declare namespace App.Data.Shared {
 export type ListData = {
 id: number;
@@ -38,6 +34,7 @@ export type LoginRequestData = {
 }
 declare namespace App.Data.User.Car {
 export type CarListData = {
+id: number;
 manufacturer_id: number | null;
 manufacturer_name: string | null;
 model: string | null;
@@ -45,37 +42,64 @@ year_manufactured: number | null;
 car_price: number | null;
 car_import_type: App.Enum.ImportType | null;
 miles_travelled_in_km: number | null;
+is_new_car: boolean | null;
+fuel_type: App.Enum.FuelType | null;
+car_sell_location: App.Enum.SyrianCity | null;
+is_kassah: boolean | null;
+is_khalyeh: boolean | null;
+faragha_jahzeh: boolean | null;
+shippable_to: Array<App.Data.User.Car.ShippableToCityData>;
+};
+export type CarOfferDetailsRespnseData = {
+id: number;
+manufacturer_id: number | null;
+manufacturer_name_en: string | null;
+manufacturer_name_ar: string | null;
+model: string | null;
+year_manufactured: number | null;
+car_price: number | null;
+car_label_origin: number | null;
+car_import_type: App.Enum.ImportType | null;
+miles_travelled_in_km: number | null;
+is_new_car: boolean | null;
+fuel_type: App.Enum.FuelType | null;
+car_sell_location: App.Enum.SyrianCity | null;
+is_kassah: boolean | null;
+is_khalyeh: boolean | null;
+is_faragha_jahzeh: boolean | null;
+shippable_to: Array<App.Data.User.Car.ShippableToCityData>;
 };
 export type CreateCarOfferRequestData = {
-manufacturer_id: number;
-user_id: number;
-is_new_car: number;
-year_manufactured: number | null;
-car_color: App.Enum.Color | null;
-model: number | null;
-description: string | null;
-car_price: number;
-car_sell_currency: App.Enum.Currency;
+manufacturer_id: number | null;
+manufacturer_name_ar: string | null;
+manufacturere_name_en: string | null;
+model: string | null;
+is_new_car: boolean | null;
+car_price: number | null;
 fuel_type: App.Enum.FuelType | null;
-car_sell_location: number | null;
-is_car_shippable_to_a_different_city: boolean | null;
-car_import_type: App.Enum.ImportType | null;
-car_label_origin: number;
-transmission: App.Enum.TransmissionType;
+transmission_type: App.Enum.TransmissionType | null;
 miles_travelled_in_km: number | null;
-has_tuf_check_passed: boolean | null;
-user_has_legal_car_papers: boolean | null;
-faragha_jahzeh: boolean | null;
-is_tajrobeh: boolean | null;
+is_faragha_jahzeh: boolean | null;
+is_kassah: boolean | null;
+is_khalyeh: boolean | null;
 };
 export type ManufacturerListResponseData = {
 name_ar: string;
 name_en: string;
 logo: string;
 };
+export type SearchCarOfferPaginationResultData = {
+data: Array<App.Data.User.Car.CarListData>;
+current_page: number;
+per_page: number;
+total: number;
+};
 export type SearchCarOfferResponseData = {
-manufacturers: Array<any>;
+paginated_cars_search_result: App.Data.User.Car.SearchCarOfferPaginationResultData;
 user_city_cars: Array<any>;
+};
+export type ShippableToCityData = {
+city: App.Enum.SyrianCity;
 };
 }
 declare namespace App.Data.User.Car.QueryParameters {
@@ -95,7 +119,7 @@ miles_travelled_in_km_to: number | null;
 user_has_legal_car_papers: boolean | null;
 faragha_jahzeh: boolean | null;
 import_type: App.Enum.ImportType | null;
-shippable_to: Array<any> | null;
+shippable_to: Array<App.Enum.SyrianCity> | null;
 };
 }
 declare namespace App.Enum {
@@ -103,9 +127,9 @@ export type Color = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
 export type Currency = 1 | 2;
 export type FuelType = 1 | 2 | 3;
 export type Gender = 1 | 2;
-export type ImportType = 1 | 2 | 3 | 3 | 4 | 5;
+export type ImportType = 1 | 2 | 3 | 4 | 5 | 6;
 export type Latest = 1;
-export type SyrianCity = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 | 64;
+export type SyrianCity = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 61 | 16 | 64 | 17 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 62 | 63;
 export type TransmissionType = 0 | 1;
 }
 declare namespace App.Enum.Auth {

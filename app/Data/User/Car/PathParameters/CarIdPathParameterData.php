@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data\User\Car;
+namespace App\Data\User\Car\PathParameters;
 
 use OpenApi\Attributes as OAT;
 use Spatie\LaravelData\Attributes\FromRouteParameter;

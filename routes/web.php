@@ -2,6 +2,7 @@
 
 use App\Enum\Auth\RolesEnum;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\User\Car\CarOfferDetailsController;
 use App\Http\Controllers\User\Car\CreateCarOfferController;
 use App\Http\Controllers\User\Car\FavouriteCarController;
 use App\Http\Controllers\User\Car\SearchCarOfferController;
@@ -13,6 +14,7 @@ Route::prefix('files')
     ->group(function () {
         Route::get('', [FileController::class, 'index']);
         Route::post('', [FileController::class, 'store']);
+        Route::post('many', [FileController::class, 'storeMany']);
     });
 
 Route::prefix('admin')
@@ -52,6 +54,8 @@ Route::prefix('users')
                     Route::post('', CreateCarOfferController::class);
                     Route::get('', SearchCarOfferController::class);
                     Route::post('favourite/{id}', FavouriteCarController::class);
+                    Route::post('', CreateCarOfferController::class);
+                    Route::get('/{id}', CarOfferDetailsController::class);
                     Route::patch('users/cars/sell/{id}', SellCarController::class);
                 });
             });

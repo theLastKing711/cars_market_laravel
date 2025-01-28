@@ -247,4 +247,7 @@ $cars = [
 
 return [
     'cars' => $cars,
+    'session' => [
+        'upload_car_images' => 'upload_car_images',
+    ],
 ];

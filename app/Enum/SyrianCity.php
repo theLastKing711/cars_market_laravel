@@ -7,6 +7,8 @@ use OpenApi\Attributes as OAT;
 #[OAT\Schema(description: '[0 => Male, 1 => Female]', type: 'integer')]
 enum SyrianCity: int
 {
+    case All = 0;
+
     case Aleppo = 1;
 
     case Damascus = 2;
@@ -37,7 +39,11 @@ enum SyrianCity: int
 
     case Afrin = 15;
 
+    case Ariha = 61;
+
     case AlAtarib = 16;
+
+    case AynAlArab = 64;
 
     case Azaz = 17;
 
@@ -125,13 +131,9 @@ enum SyrianCity: int
 
     case Idleb = 60;
 
-    case Ariha = 61;
-
     case DayrHafir = 62;
 
     case AlNabk = 63;
-
-    case AynAlArab = 64;
 
     public function label(): string
     {

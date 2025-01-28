@@ -3,22 +3,12 @@
 namespace App\Http\Controllers\User\Car;
 
 use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
-use App\Data\User\Car\CarIdPathParameterData;
+use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use OpenApi\Attributes as OAT;
 
-#[
-    OAT\PathItem(
-        path: '/users/cars/{id}',
-        parameters: [
-            new OAT\PathParameter(
-                ref: '#/components/parameters/usersCarIdPathParameterData',
-            ),
-        ],
-    ),
-]
 class FavouriteCarController extends Controller
 {
     #[OAT\Post(path: '/user/cars/favourite/{id}', tags: ['usersCars'])]
@@ -26,7 +16,7 @@ class FavouriteCarController extends Controller
     public function __invoke(CarIdPathParameterData $carIdPathParameterData)
     {
 
-        $user_id = Auth::User()->id;
+        $user_id = FacadesAuth::User()->id;
 
         $logged_user =
             User::query()
