@@ -12,7 +12,7 @@ class Media extends \CloudinaryLabs\CloudinaryLaravel\Model\Media
     //and possibly add more features for the model in the future
     use HasFactory;
 
-    public static function fromCloudinaryUploadresponse(CloudinaryEngine $response_file): self
+    public static function fromCloudinaryUploadResponse(CloudinaryEngine $response_file): self
     {
 
         $media = new Media;

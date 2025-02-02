@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Shared\File\PathParameters\FilePublicIdPathParameterData;
 use App\Data\Shared\File\UploadFileData;
 use App\Data\Shared\File\UploadFileListData;
 use App\Data\Shared\File\UploadFileResponseData;
@@ -16,6 +17,16 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
+#[
+    OAT\PathItem(
+        path: '/files/{id}',
+        parameters: [
+            new OAT\PathParameter(
+                ref: '#/components/parameters/filesPublicIdPathParameterData',
+            ),
+        ],
+    ),
+]
 class FileController extends Controller
 {
     #[OAT\Get(path: '/admin/files', tags: ['files'])]
@@ -115,29 +126,14 @@ class FileController extends Controller
     {
         Log::info($uploadFileData);
 
-        $files = collect($uploadFileData->files);
-
-        // if ($files->count() > 0) {
-        //     \Storage::disk('app')->put('Test.php', 'hello world');
-
-        //     $files->map(
-        //         function ($var) {
-
-        //             \Storage::disk('app')->put('Test2.php', $var);
-        //         }
-        //     );
-
-        // }
-
-        // return 1;
-
-        // return $uploadFileData;
-
-        // return $files;
+        $files = $uploadFileData->files;
 
         /** @var Collection<int, Media> $uploaded_medias */
-        $uploaded_medias = $files->map(
-            function ($file) {
+        $session_uploaded_media = collect([]);
+
+        /** @var Collection<int, Media> $uploaded_medias */
+        $uploaded_medias_data = $files->map(
+            function ($file) use ($session_uploaded_media) {
 
                 Log::info(
                     'accessing FileController with files {files}',
@@ -189,19 +185,24 @@ class FileController extends Controller
                 // example result: jasldkjGAsdfkj
                 // $cloudinary_public_id = $response->getPublicId();
 
-                return Media::fromCloudinaryUploadresponse($response);
+                $uploaded_media = Media::fromCloudinaryUploadResponse($response);
+
+                $session_uploaded_media->push($uploaded_media);
+
+                return new UploadFileResponseData(
+                    url: $uploaded_media->file_url,
+                    public_id: $response->getPublicId()
+                );
             }
         );
 
         $upload_cars_images_session_key = config('constants.session.upload_car_images');
 
-        // \Storage::disk('app')->put('Test.php', 'hello world 2');
-
         $request
             ->session()
             ->put(
                 $upload_cars_images_session_key,
-                $uploaded_medias
+                $session_uploaded_media
             );
 
         \Storage::disk('app')
@@ -212,19 +213,7 @@ class FileController extends Controller
                     ->get($upload_cars_images_session_key)
             );
 
-        // $request->session()->remove($upload_cars_images_session_key));
-
-        // $items =
-        //     $request
-        //         ->session()
-        //         ->get($upload_cars_images_session_key);
-
-        return $uploaded_medias->map(
-            fn ($media) => new UploadFileResponseData(
-                url: $media->file_url,
-                public_id: ''
-            )
-        );
+        return $uploaded_medias_data;
 
     }
 
@@ -271,4 +260,25 @@ class FileController extends Controller
     //     ],
     //     "api_key": "379721987165773"
     //   }
+
+    #[OAT\Delete(path: '/files/{public_id}', tags: ['files'])]
+    #[SuccessNoContentResponse]
+    public function delete(FilePublicIdPathParameterData $deleteFileData)
+    {
+        \Storage::disk('app')
+            ->put(
+                'Test.php',
+                $deleteFileData->public_id
+            );
+
+        Cloudinary::destroy($deleteFileData->public_id);
+
+        \Storage::disk('app')
+            ->put(
+                'Test2.php',
+                $deleteFileData->public_id
+            );
+
+        return 1;
+    }
 }

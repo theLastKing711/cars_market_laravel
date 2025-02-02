@@ -15,6 +15,7 @@ Route::prefix('files')
         Route::get('', [FileController::class, 'index']);
         Route::post('', [FileController::class, 'store']);
         Route::post('many', [FileController::class, 'storeMany']);
+        Route::delete('{public_id}', [FileController::class, 'delete']);
     });
 
 Route::prefix('admin')

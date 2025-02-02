@@ -30,6 +30,13 @@
                 }
             ]
         },
+        "/files/{id}": {
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/filesPublicIdPathParameterData"
+                }
+            ]
+        },
         "/admin/users": {
             "get": {
                 "tags": [
@@ -126,6 +133,24 @@
                                         "$ref": "#/components/schemas/UploadFileListData"
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/files/{public_id}": {
+            "delete": {
+                "tags": [
+                    "files"
+                ],
+                "operationId": "b52d1e9d72aaaf50eb426fd91728e567",
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }
@@ -341,6 +366,14 @@
                 },
                 "type": "object"
             },
+            "DeleteFileData": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "FilePathData": {
                 "properties": {
                     "url": {
@@ -349,6 +382,7 @@
                 },
                 "type": "object"
             },
+            "FilePublicIdPathParameterData": {},
             "ShowFileData": {
                 "properties": {
                     "uid": {
@@ -965,6 +999,14 @@
             }
         },
         "parameters": {
+            "filesPublicIdPathParameterData": {
+                "name": "public_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
             "localeQueryParameter": {
                 "name": "locale",
                 "in": "query",
