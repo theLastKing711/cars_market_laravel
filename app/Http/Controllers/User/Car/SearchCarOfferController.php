@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User\Car;
 use App\Data\Shared\Swagger\Parameter\QueryParameter\QueryParameter;
 use App\Data\Shared\Swagger\Response\SuccessItemResponse;
 use App\Data\User\Car\CarListData;
-use App\Data\User\Car\QueryParameters\SearchOfferQueryParameterData;
+use App\Data\User\Car\QueryParameters\SearchCarOfferQueryParameterData;
 use App\Data\User\Car\SearchCarOfferPaginationResultData;
 use App\Data\User\Car\SearchCarOfferResponseData;
 use App\Http\Controllers\Controller;
@@ -34,7 +34,7 @@ class SearchCarOfferController extends Controller
     #[QueryParameter('faragha_jahzeh')]
     #[QueryParameter('car_import_type')]
     #[SuccessItemResponse(SearchCarOfferPaginationResultData::class)]
-    public function __invoke(SearchOfferQueryParameterData $request)
+    public function __invoke(SearchCarOfferQueryParameterData $request)
     {
 
         // return Car::simplePaginate(2);

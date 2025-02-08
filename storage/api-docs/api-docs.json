@@ -733,7 +733,7 @@
                 },
                 "type": "object"
             },
-            "SearchOfferQueryParameterData": {
+            "SearchCarOfferQueryParameterData": {
                 "properties": {
                     "search": {
                         "type": "string",

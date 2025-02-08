@@ -135,7 +135,7 @@ enum SyrianCity: int
 
     case AlNabk = 63;
 
-    public function label(): string
+    public function label(): array
     {
         return match ($this) {
             self::Aleppo => 'حلب',

@@ -103,7 +103,7 @@ city: App.Enum.SyrianCity;
 };
 }
 declare namespace App.Data.User.Car.QueryParameters {
-export type SearchOfferQueryParameterData = {
+export type SearchCarOfferQueryParameterData = {
 search: string | null;
 user_current_syrian_city: App.Enum.SyrianCity | null;
 manufacturer_id: number | null;

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('manufacturer_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->string('manufacturer_name_ar');
-            $table->string('manufacturer_name_en');
+            $table->string('manufacturer_name_ar')->nullable();
+            $table->string('manufacturer_name_en')->nullable();
             $table->boolean('is_new_car')->default(false);
             $table->string('model');
             $table->year('year_manufactured')->nullable();

@@ -34,13 +34,16 @@ class CreateCarOfferController extends Controller
         // $logged_user_id = Auth::User()->id;
 
         DB::transaction(function () use ($createCarOfferRequestData, $user_car_medias) {
+
+            $car_manufacturer_name_en = config('constants.cars');
+
             $car = Car::query()
                 ->create([
                     // 'user_id' => $logged_user_id,
                     'user_id' => 1,
                     'manufacturer_id' => $createCarOfferRequestData->manufacturer_id,
-                    'manufacturer_name_ar' => $createCarOfferRequestData->manufacturer_name_ar,
-                    'manufacturer_name_en' => $createCarOfferRequestData->manufacturere_name_en,
+                    // 'manufacturer_name_ar' => $createCarOfferRequestData->manufacturer_name_ar,
+                    // 'manufacturer_name_en' => $createCarOfferRequestData->manufacturere_name_en,
                     'model' => $createCarOfferRequestData->model,
                     'is_new_car' => $createCarOfferRequestData->is_new_car,
                     'car_price' => $createCarOfferRequestData->car_price,

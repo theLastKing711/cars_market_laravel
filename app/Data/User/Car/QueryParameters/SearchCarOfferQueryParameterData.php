@@ -12,7 +12,7 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
 #[Oat\Schema()]
-class SearchOfferQueryParameterData extends Data
+class SearchCarOfferQueryParameterData extends Data
 {
     /**
      * @param  array<SyrianCity>  $shippable_to
@@ -36,8 +36,6 @@ class SearchOfferQueryParameterData extends Data
         public ?FuelType $fuel_type,
         #[OAT\Property]
         public ?int $car_label_origin,
-        #[OAT\Property]
-        public ?int $miles_travelled_in_km,
         #[OAT\Property]
         public ?int $miles_travelled_in_km_from,
         #[OAT\Property]
