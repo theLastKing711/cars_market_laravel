@@ -42,14 +42,18 @@ return [
     |
     */
 
-    //changed second argument from false to true,
+    //if changed from false to true
+    // we execute scout:import in command line
+    // database updated data and structre don't get reflected
+    // in remote index for some reason
+    //if changed second argument from false to true,
     //so that we return the response to user
     //while indexing the new entered value
     //is done on remote queue
     // and not while the request is
     //beign served, which save time
     //from couple of seconds to millsecond response
-    'queue' => env('SCOUT_QUEUE', true),
+    'queue' => env('SCOUT_QUEUE', false),
 
     /*
     |--------------------------------------------------------------------------

@@ -14,6 +14,7 @@ use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Scout\Builder as ScoutBuilder;
 use OpenApi\Attributes as OAT;
 
@@ -21,6 +22,7 @@ class SearchCarOfferController extends Controller
 {
     #[OAT\Get(path: '/users/cars', tags: ['usersCars'])]
     #[QueryParameter('search')]
+    #[QueryParameter('model')]
     #[QueryParameter('manufacturer_id')]
     #[QueryParameter('price_from')]
     #[QueryParameter('price_to')]
@@ -31,7 +33,10 @@ class SearchCarOfferController extends Controller
     #[QueryParameter('miles_travelled_in_km_from')]
     #[QueryParameter('miles_travelled_in_km_to')]
     #[QueryParameter('user_has_legal_car_papers')]
-    #[QueryParameter('faragha_jahzeh')]
+    #[QueryParameter('is_faragha_jahzeh')]
+    #[QueryParameter('is_new_car')]
+    #[QueryParameter('is_khalyeh')]
+    #[QueryParameter('is_kassah')]
     #[QueryParameter('car_import_type')]
     #[SuccessItemResponse(SearchCarOfferPaginationResultData::class)]
     public function __invoke(SearchCarOfferQueryParameterData $request)
@@ -41,6 +46,10 @@ class SearchCarOfferController extends Controller
         $request_search =
             $request
                 ->search;
+
+        $request_model =
+            $request
+                ->model;
 
         // return Car::with('shippable_to')
         //     ->get();
@@ -92,9 +101,21 @@ class SearchCarOfferController extends Controller
             $request
                 ->user_has_legal_car_papers;
 
-        $request_faragha_jahzeh =
+        $request_is_faragha_jahzeh =
             $request
-                ->faragha_jahzeh;
+                ->is_faragha_jahzeh;
+
+        $request_is_new_car =
+            $request
+                ->is_new_car;
+
+        $request_is_khalyeh =
+            $request
+                ->is_khalyeh;
+
+        $request_is_kassah =
+            $request
+                ->is_kassah;
 
         $request_import_type =
             $request
@@ -117,13 +138,13 @@ class SearchCarOfferController extends Controller
             $request_price_from !== null;
 
         $car_price_from_query =
-        $is_request_price_from_available ?
-            'car_price:'.
-            (string) $request_price_from.
-            ' TO '.
-            (string) $request_price_to
-            :
-            '';
+            $is_request_price_from_available ?
+                'car_price:'.
+                (string) $request_price_from.
+                ' TO '.
+                (string) $request_price_to
+                :
+                '';
 
         $is_request_price_to_available =
             $request_price_to != null;
@@ -153,13 +174,12 @@ class SearchCarOfferController extends Controller
         //         'car_price <=' . $request_price_to
         //         :
         //         '';
-
         $remote_cars_search =
             Car::search(
-                $request_search
+                $request_model
             )
                 ->options([
-                    'filters' => $query_filters,
+                    'filters' => $query_filters, // used for where between or where greater or where smaller, because they are not avaialble in api nativley, gets merged with other filters below
                     // 'restrictSearchableAttributes' => [ // potinal performance imporvment, in dashboad configuration -> add tosearchable attributes for it to work
                     //     'manufacturer_ar',
                     // ],
@@ -217,11 +237,35 @@ class SearchCarOfferController extends Controller
                         )
                 )
                 ->when(
-                    $request_faragha_jahzeh,
+                    $request_is_faragha_jahzeh,
                     fn (ScoutBuilder $query) => $query
                         ->where(
-                            'faragha_jahzeh',
-                            $request_faragha_jahzeh
+                            'is_faragha_jahzeh',
+                            $request_is_faragha_jahzeh
+                        )
+                )
+                ->when(
+                    $request_is_new_car,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'is_new_car',
+                            $request_is_new_car
+                        )
+                )
+                ->when(
+                    $request_is_khalyeh,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'is_khalyeh',
+                            $request_is_khalyeh
+                        )
+                )
+                ->when(
+                    $request_is_kassah,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'is_kassah',
+                            $request_is_kassah
                         )
                 )
                 ->when(
@@ -232,12 +276,14 @@ class SearchCarOfferController extends Controller
                             $request_import_type
                         )
                 )
-            //queryFn({paramPage}) pageParam parameter will be of this type (number | null), otherwise undefined and errors
-            // gets called on client side after remote query success
+        //queryFn({paramPage}) pageParam parameter will be of this type (number | null), otherwise undefined and errors
+        // gets called on client side after remote query success
                 ->query(
                     fn (EloquentBuilder $query) => $query->with('shippable_to')
                 )
                 ->simplePaginate(2);
+
+        Storage::disk('app')->put('text2.php', json_encode($remote_cars_search->items()));
 
         return CarListData::collect($remote_cars_search);
 

@@ -192,6 +192,13 @@
                         }
                     },
                     {
+                        "name": "model",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "manufacturer_id",
                         "in": "query",
                         "schema": {
@@ -262,7 +269,28 @@
                         }
                     },
                     {
-                        "name": "faragha_jahzeh",
+                        "name": "is_faragha_jahzeh",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "is_new_car",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "is_khalyeh",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "is_kassah",
                         "in": "query",
                         "schema": {
                             "type": "string"
@@ -503,7 +531,11 @@
                         "type": "integer",
                         "nullable": true
                     },
-                    "manufacturer_name": {
+                    "manufacturer_name_en": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "manufacturer_name_ar": {
                         "type": "string",
                         "nullable": true
                     },
@@ -559,7 +591,7 @@
                         "type": "boolean",
                         "nullable": true
                     },
-                    "faragha_jahzeh": {
+                    "is_faragha_jahzeh": {
                         "type": "boolean",
                         "nullable": true
                     },
@@ -739,6 +771,10 @@
                         "type": "string",
                         "nullable": true
                     },
+                    "model": {
+                        "type": "string",
+                        "nullable": true
+                    },
                     "user_current_syrian_city": {
                         "oneOf": [
                             {
@@ -779,10 +815,6 @@
                         "type": "integer",
                         "nullable": true
                     },
-                    "miles_travelled_in_km": {
-                        "type": "integer",
-                        "nullable": true
-                    },
                     "miles_travelled_in_km_from": {
                         "type": "integer",
                         "nullable": true
@@ -795,7 +827,19 @@
                         "type": "boolean",
                         "nullable": true
                     },
-                    "faragha_jahzeh": {
+                    "is_faragha_jahzeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_new_car": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_khalyeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_kassah": {
                         "type": "boolean",
                         "nullable": true
                     },
@@ -857,6 +901,57 @@
                     }
                 },
                 "type": "object"
+            },
+            "CarManufacturer": {
+                "type": "string",
+                "enum": [
+                    "Toyota",
+                    "Kia",
+                    "Hyundai",
+                    "Ford",
+                    "Mitsubishi",
+                    "Nissan",
+                    "Chevrolet",
+                    "Mazda",
+                    "Mg",
+                    "Infinity",
+                    "Mini",
+                    "Citron",
+                    "Chery",
+                    "Haval",
+                    "Changan",
+                    "Jetour",
+                    "Volkswagen",
+                    "Renault",
+                    "Baic",
+                    "Suzuki",
+                    "Maxus",
+                    "Honda",
+                    "BMW",
+                    "Porche",
+                    "Ferrari",
+                    "MercedesBenz",
+                    "Audi",
+                    "Geely",
+                    "Genesis",
+                    "Bugatti",
+                    "Daewoo",
+                    "Dodge",
+                    "Jeep",
+                    "Lamborghini",
+                    "Opwl",
+                    "Skoda",
+                    "Subaru",
+                    "Volvo",
+                    "Lexus",
+                    "LandRover",
+                    "Jaguar",
+                    "Isuzu",
+                    "Iveco",
+                    "Peugeot",
+                    "Saba",
+                    "AstonMartin"
+                ]
             },
             "Color": {
                 "type": "string",

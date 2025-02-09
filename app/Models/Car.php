@@ -157,6 +157,7 @@ class Car extends Model
 
         $index_attributes_array = [
             'model' => $this->model,
+            'manufacturer_id' => $this->manufacturer_id,
             'description' => $this->name,
             'manufacturer_ar' => $this->manufacturer_name_ar,
             'manufacturer_en' => $this->manufacturer_name_en,
@@ -167,9 +168,15 @@ class Car extends Model
             'fuel_type' => $this->fuel_type,
             'miles_travelled_in_km' => $this->miles_travelled_in_km,
             'user_has_legal_car_papers' => $this->user_has_legal_car_papers,
-            'faragha_jahzeh' => $this->user_has_legal_car_papers,
+            'is_new_car' => $this->is_new_car,
+            'is_faragha_jahzeh' => $this->is_faragha_jahzeh,
+            'is_kassah' => $this->is_kassah,
+            'is_khalyeh' => $this->is_khalyeh,
             'car_import_type' => $this->car_import_type,
         ];
+
+        $index_attributes_array['manufacturer_id'] =
+            $this->Manufacturer->id;
 
         //load shippable city to this remote table(cars) index
         $index_attributes_array['city'] =

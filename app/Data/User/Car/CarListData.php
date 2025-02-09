@@ -22,7 +22,9 @@ class CarListData extends Data
         #[OAT\Property]
         public ?int $manufacturer_id,
         #[OAT\Property]
-        public ?string $manufacturer_name,
+        public ?string $manufacturer_name_en,
+        #[OAT\Property]
+        public ?string $manufacturer_name_ar,
         #[OAT\Property]
         public ?string $model,
         #[OAT\Property]
@@ -44,7 +46,7 @@ class CarListData extends Data
         #[OAT\Property]
         public ?bool $is_khalyeh,
         #[OAT\Property]
-        public ?bool $faragha_jahzeh,
+        public ?bool $is_faragha_jahzeh,
         #[ArrayProperty(ShippableToCity::class)]
         /** @var ShippableToCityData[] */
         public Collection $shippable_to,

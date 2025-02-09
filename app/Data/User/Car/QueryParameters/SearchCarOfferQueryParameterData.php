@@ -21,6 +21,8 @@ class SearchCarOfferQueryParameterData extends Data
         #[OAT\Property]
         public ?string $search,
         #[OAT\Property]
+        public ?string $model,
+        #[OAT\Property]
         public ?SyrianCity $user_current_syrian_city,
         #[OAT\Property]
         public ?int $manufacturer_id,
@@ -43,7 +45,13 @@ class SearchCarOfferQueryParameterData extends Data
         #[OAT\Property]
         public ?bool $user_has_legal_car_papers,
         #[OAT\Property]
-        public ?bool $faragha_jahzeh,
+        public ?bool $is_faragha_jahzeh,
+        #[OAT\Property]
+        public ?bool $is_new_car,
+        #[OAT\Property]
+        public ?bool $is_khalyeh,
+        #[OAT\Property]
+        public ?bool $is_kassah,
         #[OAT\Property]
         public ?ImportType $import_type,
         #[ArrayProperty(SyrianCity::class)]
