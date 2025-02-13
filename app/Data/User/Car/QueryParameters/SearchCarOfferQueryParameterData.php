@@ -2,17 +2,17 @@
 
 namespace App\Data\User\Car\QueryParameters;
 
+use App\Data\Shared\Pagination\QueryParameters\PaginationQueryParameterData;
 use App\Data\Shared\Swagger\Property\ArrayProperty;
 use App\Enum\FuelType;
 use App\Enum\ImportType;
 use App\Enum\SyrianCity;
 use OpenApi\Attributes as OAT;
-use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
 #[Oat\Schema()]
-class SearchCarOfferQueryParameterData extends Data
+class SearchCarOfferQueryParameterData extends PaginationQueryParameterData
 {
     /**
      * @param  array<SyrianCity>  $shippable_to

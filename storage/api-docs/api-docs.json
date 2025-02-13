@@ -185,6 +185,20 @@
                 "operationId": "25f82991a1bd0f16d02b98eb7e3fbe70",
                 "parameters": [
                     {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
                         "name": "search",
                         "in": "query",
                         "schema": {

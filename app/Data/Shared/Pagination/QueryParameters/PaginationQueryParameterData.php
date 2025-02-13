@@ -9,8 +9,5 @@ class PaginationQueryParameterData extends Data
     public function __construct(
         public ?int $page,
         public ?int $perPage,
-    ) {
-    }
+    ) {}
 }
-
-

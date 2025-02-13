@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User\Car;
 
+use App\Data\Shared\Swagger\Parameter\QueryParameter\ListQueryParameter;
 use App\Data\Shared\Swagger\Parameter\QueryParameter\QueryParameter;
 use App\Data\Shared\Swagger\Response\SuccessItemResponse;
 use App\Data\User\Car\CarListData;
@@ -13,14 +14,17 @@ use App\Models\Car;
 use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Scout\Builder as ScoutBuilder;
 use OpenApi\Attributes as OAT;
 
+use function Illuminate\Support\enum_value;
+
 class SearchCarOfferController extends Controller
 {
     #[OAT\Get(path: '/users/cars', tags: ['usersCars'])]
+    #[QueryParameter('page', 'integer')]
+    #[QueryParameter('per_page', 'integer')]
     #[QueryParameter('search')]
     #[QueryParameter('model')]
     #[QueryParameter('manufacturer_id')]
@@ -38,11 +42,11 @@ class SearchCarOfferController extends Controller
     #[QueryParameter('is_khalyeh')]
     #[QueryParameter('is_kassah')]
     #[QueryParameter('car_import_type')]
+    #[ListQueryParameter('shippable_to')]
     #[SuccessItemResponse(SearchCarOfferPaginationResultData::class)]
     public function __invoke(SearchCarOfferQueryParameterData $request)
     {
 
-        // return Car::simplePaginate(2);
         $request_search =
             $request
                 ->search;
@@ -51,14 +55,8 @@ class SearchCarOfferController extends Controller
             $request
                 ->model;
 
-        // return Car::with('shippable_to')
-        //     ->get();
-
         $request_shippable_to =
             $request->shippable_to;
-
-        // $is_car_shippable_to_different_cities =
-        // count($request_shippable_to);
 
         $request_manufacturer_id =
         $request
@@ -125,14 +123,122 @@ class SearchCarOfferController extends Controller
             $request
                 ->user_current_syrian_city;
 
+        $is_request_search_set = $request_search != null;
+
+        if (! $is_request_search_set) {
+
+            $local_cars_search =
+                Car::when(
+                    $request_shippable_to,
+                    fn (EloquentBuilder $query) => $query
+                        ->whereHas(
+                            'shippable_to',
+                            fn (EloquentBuilder $query) => $query->whereIn('id', $request_shippable_to)
+                        )
+                )
+                    // ->when(
+                    //     $request_manufacturer_id,
+                    //     fn (EloquentBuilder $query) => $query
+                    //         ->where(
+                    //             'manufacturer_id',
+                    //             $request_manufacturer_id
+                    //         )
+                    // )
+                    ->when(
+                        $request_car_sell_location,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'car_sell_location',
+                                $request_car_sell_location
+                            )
+                    )
+                    ->when(
+                        $request_year_manufactured,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'year_manufactured',
+                                $request_year_manufactured
+                            )
+                    )
+                    ->when(
+                        $request_fuel_type,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'fuel_type',
+                                $request_fuel_type
+                            )
+                    )
+                    ->when(
+                        $request_car_label_origin,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'car_label_origin',
+                                $request_car_label_origin
+                            )
+                    )
+                    ->when(
+                        $request_user_has_legal_car_papers,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'user_has_legal_car_papers',
+                                true
+                            )
+                    )
+                    ->when(
+                        $request_is_faragha_jahzeh,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'is_faragha_jahzeh',
+                                $request_is_faragha_jahzeh
+                            )
+                    )
+                    ->when(
+                        $request_is_new_car,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'is_new_car',
+                                $request_is_new_car
+                            )
+                    )
+                    ->when(
+                        $request_is_khalyeh,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'is_khalyeh',
+                                $request_is_khalyeh
+                            )
+                    )
+                    ->when(
+                        $request_is_kassah,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'is_kassah',
+                                $request_is_kassah
+                            )
+                    )
+                    ->when(
+                        $request_import_type,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'car_import_type',
+                                $request_import_type
+                            )
+                    )
+        // gets called on client side after remote query success
+                    ->with('shippable_to')
+                    ->paginate(2);
+            // Storage::disk('app')->put('text2.php', 'before collection');
+
+            return CarListData::collect($local_cars_search);
+        }
+        // Storage::disk('app')->put('text2.php', 'before remote call');
+
         // $cars_in_user_current_city =
         //     Car::query()
         //         ->where(
         //             'car_sell_location',
         //             $user_current_city
         //         );
-
-        Log::info($request_price_from);
 
         $is_request_price_from_available =
             $request_price_from !== null;
@@ -174,9 +280,16 @@ class SearchCarOfferController extends Controller
         //         'car_price <=' . $request_price_to
         //         :
         //         '';
+
+        // if ($request->page) {
+        // Storage::disk('app')->put('text2.php', $request->page);
+        // }
+
+        // Storage::disk('app')->put('text2.php', 'before remote call');
+
         $remote_cars_search =
             Car::search(
-                $request_model
+                $request_search
             )
                 ->options([
                     'filters' => $query_filters, // used for where between or where greater or where smaller, because they are not avaialble in api nativley, gets merged with other filters below
@@ -217,7 +330,7 @@ class SearchCarOfferController extends Controller
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'fuel_type',
-                            $request_fuel_type
+                            enum_value($request_fuel_type)
                         )
                 )
                 ->when(
@@ -281,9 +394,11 @@ class SearchCarOfferController extends Controller
                 ->query(
                     fn (EloquentBuilder $query) => $query->with('shippable_to')
                 )
-                ->simplePaginate(2);
+                ->paginate(2);
 
-        Storage::disk('app')->put('text2.php', json_encode($remote_cars_search->items()));
+        // Storage::disk('app')->put('text2.php', json_encode($remote_cars_search->items()));
+
+        // Storage::disk('app')->put('text2.php', 'latest');
 
         return CarListData::collect($remote_cars_search);
 
