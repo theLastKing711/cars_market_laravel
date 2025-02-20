@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('manufacturer_name_ar')->nullable();
             $table->string('manufacturer_name_en')->nullable();
             $table->boolean('is_new_car')->default(false);
-            $table->string('model');
+            $table->string('model')->nullable();
             $table->year('year_manufactured')->nullable();
             $table->integer('car_color')->nullable(); // Car Enum
             $table->text('description')->nullable();

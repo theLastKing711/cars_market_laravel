@@ -10,6 +10,7 @@ use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use OpenApi\Attributes as OAT;
 
 class CreateCarOfferController extends Controller
@@ -41,10 +42,9 @@ class CreateCarOfferController extends Controller
                 ->create([
                     // 'user_id' => $logged_user_id,
                     'user_id' => 1,
-                    'manufacturer_id' => $createCarOfferRequestData->manufacturer_id,
-                    // 'manufacturer_name_ar' => $createCarOfferRequestData->manufacturer_name_ar,
+                    'manufacturer_id' => 1,
+                    'manufacturer_name_ar' => $createCarOfferRequestData->manufacturer_name_ar,
                     // 'manufacturer_name_en' => $createCarOfferRequestData->manufacturere_name_en,
-                    'model' => $createCarOfferRequestData->model,
                     'is_new_car' => $createCarOfferRequestData->is_new_car,
                     'car_price' => $createCarOfferRequestData->car_price,
                     'fuel_type' => $createCarOfferRequestData->fuel_type,
@@ -59,6 +59,8 @@ class CreateCarOfferController extends Controller
                 ->medially()
                 ->saveMany($user_car_medias);
         });
+
+        Storage::disk('app')->put('text2.txt', 'hello world');
 
         $request
             ->session()

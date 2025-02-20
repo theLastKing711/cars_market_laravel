@@ -127,6 +127,8 @@ class SearchCarOfferController extends Controller
 
         if (! $is_request_search_set) {
 
+            Storage::disk('app')->put('test4.txt', json_encode([$request_price_from, $request_price_to]));
+
             $local_cars_search =
                 Car::when(
                     $request_shippable_to,
@@ -176,14 +178,14 @@ class SearchCarOfferController extends Controller
                                 $request_car_label_origin
                             )
                     )
-                    ->when(
-                        $request_user_has_legal_car_papers,
-                        fn (EloquentBuilder $query) => $query
-                            ->where(
-                                'user_has_legal_car_papers',
-                                true
-                            )
-                    )
+                    // ->when(
+                    //     $request_user_has_legal_car_papers,
+                    //     fn (EloquentBuilder $query) => $query
+                    //         ->where(
+                    //             'user_has_legal_car_papers',
+                    //             true
+                    //         )
+                    // )
                     ->when(
                         $request_is_faragha_jahzeh,
                         fn (EloquentBuilder $query) => $query
@@ -224,10 +226,31 @@ class SearchCarOfferController extends Controller
                                 $request_import_type
                             )
                     )
+                    ->when(
+                        $request_price_from,
+                        fn (EloquentBuilder $query) => $query
+                            ->whereBetween(
+                                'car_price',
+                                [$request_price_from, $request_price_to]
+                            )
+                    )
+                    ->when(
+                        $request_miles_travelled_in_km_from,
+                        fn (EloquentBuilder $query) => $query
+                            ->whereBetween(
+                                'miles_travelled_in_km',
+                                [
+                                    $request_miles_travelled_in_km_from,
+                                    $request_miles_travelled_in_km_to,
+                                ]
+                            )
+                    )
         // gets called on client side after remote query success
                     ->with('shippable_to')
                     ->paginate(2);
             // Storage::disk('app')->put('text2.php', 'before collection');
+
+            Storage::disk('app')->put('test4.txt', json_encode([$request_price_from, $request_price_to]));
 
             return CarListData::collect($local_cars_search);
         }

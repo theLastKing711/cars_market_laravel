@@ -23,15 +23,16 @@ class BuilderMacrosServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-        Builder::macro('whereBetween', function (\Illuminate\Contracts\Database\Query\Expression|string $column, iterable $values, string $boolean, bool $not): Model|static|null {
+        //need fix too few argument when passing first two only
+        // Builder::macro('whereBetween', function (\Illuminate\Contracts\Database\Query\Expression|string $column, iterable $values, string $boolean, bool $not): Model|static|null {
 
-            /** @var Builder $this */
+        //     /** @var Builder $this */
 
-            return $this->whereBetween(
-                $column,
-                $values
-            );
-        });
+        //     return $this->whereBetween(
+        //         $column,
+        //         $values
+        //     );
+        // });
 
         Builder::macro('firstWhereId', function (string|int $id): Model|static|null {
 
