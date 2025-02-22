@@ -127,8 +127,6 @@ class SearchCarOfferController extends Controller
 
         if (! $is_request_search_set) {
 
-            Storage::disk('app')->put('test4.txt', json_encode([$request_price_from, $request_price_to]));
-
             $local_cars_search =
                 Car::when(
                     $request_shippable_to,
@@ -246,11 +244,8 @@ class SearchCarOfferController extends Controller
                             )
                     )
         // gets called on client side after remote query success
-                    ->with('shippable_to')
+                    ->with('medially')
                     ->paginate(2);
-            // Storage::disk('app')->put('text2.php', 'before collection');
-
-            Storage::disk('app')->put('test4.txt', json_encode([$request_price_from, $request_price_to]));
 
             return CarListData::collect($local_cars_search);
         }
@@ -415,7 +410,12 @@ class SearchCarOfferController extends Controller
         //queryFn({paramPage}) pageParam parameter will be of this type (number | null), otherwise undefined and errors
         // gets called on client side after remote query success
                 ->query(
-                    fn (EloquentBuilder $query) => $query->with('shippable_to')
+                    fn (EloquentBuilder $query) => $query
+                        ->with(
+                            [
+                                'medially' => fn (EloquentBuilder $query) => $query->take(1),
+                            ]
+                        )
                 )
                 ->paginate(2);
 

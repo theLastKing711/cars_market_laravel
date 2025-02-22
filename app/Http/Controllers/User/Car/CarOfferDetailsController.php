@@ -25,14 +25,14 @@ class CarOfferDetailsController extends Controller
 
         $car =
             Car::query()
-                ->selectRaw(
-                    '*, (select exists (select 1 from user_favourites_cars where cars.id = user_favourites_cars.car_id AND user_favourites_cars.user_id = ? ) ) as is_car_favourited_by_user',
-                    [$logged_user_id]
-                )
-                ->whereId(2)
+                // ->selectRaw(
+                //     '*, (select exists (select 1 from user_favourites_cars where cars.id = user_favourites_cars.car_id AND user_favourites_cars.user_id = ? ) ) as is_car_favourited_by_user',
+                //     [$logged_user_id]
+                // )
+                ->whereId($request->id)
                 ->with(
                     [
-                        // 'medially',
+                        'medially',
                         'shippable_to',
                     ]
                 )

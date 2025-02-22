@@ -2,12 +2,14 @@
 
 namespace App\Data\User\Car;
 
+use App\Data\Shared\Media\MediaData;
 use App\Data\Shared\Swagger\Property\ArrayProperty;
 use App\Enum\FuelType;
 use App\Enum\ImportType;
 use App\Enum\SyrianCity;
 use Illuminate\Support\Collection;
 use OpenApi\Attributes as OAT;
+use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -15,6 +17,10 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[Oat\Schema()]
 class CarOfferDetailsRespnseData extends Data
 {
+    /**
+     * @param  Collection<int, ShippableToCityData>  $shippable_to
+     * @param  Collection<int, MediaData>  $images
+     **/
     public function __construct(
         #[OAT\Property]
         public int $id,
@@ -51,5 +57,9 @@ class CarOfferDetailsRespnseData extends Data
         #[ArrayProperty(ShippableToCityData::class)]
         /** @var ShippableToCityData[] */
         public Collection $shippable_to,
+        #[ArrayProperty(MediaData::class)]
+        #[MapOutputName('images')]
+        /** @var MediaData[] */
+        public Collection $medially,
     ) {}
 }
