@@ -20,18 +20,13 @@ class RegisterController extends Controller
 
         $request_phone_number = $request->phone_number;
 
-        $token = User::query()
-            ->create([
-                'country_code' => '963',
-                'phone_number' => $request_phone_number,
-            ])->createToken($request_phone_number);
-
-        // $user = User::query()
-        // ->firstWhere(
-        // 'phone_number',
-        // $request->phone_number
-        // )
-        // ->createToken($request_phone_number);
+        $token =
+            User::query()
+                ->create([
+                    'country_code' => '963',
+                    'phone_number' => $request_phone_number,
+                ])
+                ->createToken($request_phone_number);
 
         return new RegisterResponseData($token->plainTextToken);
 

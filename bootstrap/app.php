@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: ['*']);
+        $middleware->statefulApi();
         $middleware->append(ParseStringToBoolInQueryParameter::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {

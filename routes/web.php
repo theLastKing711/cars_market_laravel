@@ -50,15 +50,16 @@ Route::prefix('users')
         //sanctum middleware
         //allows Auth::user->id to return value for user and id in controller
         // Route::middleware(['auth:sanctum', "role:{$userRole}"])
-        Route::middleware([])
-            ->group(function () {
-                Route::prefix('cars')->group(function () {
-                    Route::post('', CreateCarOfferController::class);
-                    Route::get('', SearchCarOfferController::class);
-                    Route::post('favourite/{id}', FavouriteCarController::class);
-                    Route::post('', CreateCarOfferController::class);
-                    Route::get('/{id}', CarOfferDetailsController::class);
-                    Route::patch('users/cars/sell/{id}', SellCarController::class);
-                });
+
+        Route::prefix('cars')->group(function () {
+            Route::get('', SearchCarOfferController::class);
+            Route::post('favourite/{id}', FavouriteCarController::class);
+            Route::get('/{id}', CarOfferDetailsController::class);
+            Route::patch('users/cars/sell/{id}', SellCarController::class);
+
+            Route::middleware(['auth:sanctum'])->group(function () {
+                Route::post('', CreateCarOfferController::class);
             });
+        });
+
     });
