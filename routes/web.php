@@ -2,6 +2,7 @@
 
 use App\Enum\Auth\RolesEnum;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\Car\CarOfferDetailsController;
 use App\Http\Controllers\User\Car\CreateCarOfferController;
 use App\Http\Controllers\User\Car\FavouriteCarController;
@@ -39,7 +40,7 @@ Route::prefix('users')
     ->group(function () {
 
         Route::prefix('auth')->group(function () {
-            // Route::post('signup', SignUpController::class);
+            Route::post('register', RegisterController::class);
             // Route::post('login', UserLoginController::class);
             // Route::post('logout', UserLogoutController::class);
         });

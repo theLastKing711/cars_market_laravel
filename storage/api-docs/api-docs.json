@@ -157,12 +157,12 @@
                 }
             }
         },
-        "/user/auth/login": {
+        "/users/auth/login": {
             "post": {
                 "tags": [
-                    "userAuth"
+                    "usersAuth"
                 ],
-                "operationId": "3b5c35ea1a3a8ce62ea2667f6a863f77",
+                "operationId": "5a743fea2fef108552d85f6001b69370",
                 "responses": {
                     "401": {
                         "description": "Authentication Failed",
@@ -170,6 +170,36 @@
                             "application/json": {
                                 "schema": {
                                     "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/auth/register": {
+            "post": {
+                "tags": [
+                    "usersAuth"
+                ],
+                "operationId": "aa7e2d048b2a67158ee3c7251acbff2e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequestData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Item fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RegisterResponseData"
                                 }
                             }
                         }
@@ -315,6 +345,16 @@
                         "in": "query",
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shippable_to[]",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
                         }
                     }
                 ],
@@ -509,6 +549,28 @@
                 },
                 "type": "object"
             },
+            "MediaData": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "file_url": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SingleMedia": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "file_url": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "adminCursorPaginatedAbstract": {
                 "properties": {
                     "per_page": {
@@ -536,6 +598,22 @@
                 "type": "object"
             },
             "LoginRequestData": {},
+            "RegisterRequestData": {
+                "properties": {
+                    "phone_number": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterResponseData": {
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "CarListData": {
                 "properties": {
                     "id": {
@@ -608,12 +686,6 @@
                     "is_faragha_jahzeh": {
                         "type": "boolean",
                         "nullable": true
-                    },
-                    "shippable_to": {
-                        "type": "array",
-                        "items": {
-                            "type": "App\\Models\\ShippableToCity"
-                        }
                     }
                 },
                 "type": "object"
@@ -699,6 +771,12 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/ShippableToCityData"
+                        }
+                    },
+                    "medially": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MediaData"
                         }
                     }
                 },
@@ -1156,8 +1234,8 @@
             "description": "files"
         },
         {
-            "name": "userAuth",
-            "description": "userAuth"
+            "name": "usersAuth",
+            "description": "usersAuth"
         },
         {
             "name": "usersCars",

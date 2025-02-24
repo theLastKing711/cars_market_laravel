@@ -14,7 +14,7 @@ use OpenApi\Attributes as OAT;
 
 class LoginController extends Controller
 {
-    #[OAT\Post(path: '/user/auth/login', tags: ['userAuth'])]
+    #[OAT\Post(path: '/users/auth/login', tags: ['usersAuth'])]
     // #[JsonRequestBody(LoginData::class)]
     // #[SuccessItemResponse(LoginSuccessResponseData::class)]
     #[FailureAuthenticationFailedResponse]
