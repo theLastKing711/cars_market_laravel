@@ -411,11 +411,9 @@ class SearchCarOfferController extends Controller
         // gets called on client side after remote query success
                 ->query(
                     fn (EloquentBuilder $query) => $query
-                        ->with(
-                            [
-                                'medially' => fn (EloquentBuilder $query) => $query->take(1),
-                            ]
-                        )
+                        ->with([
+                            'medially' => fn ($comments) => $comments->take(1),
+                        ])
                 )
                 ->paginate(2);
 
