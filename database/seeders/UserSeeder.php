@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             ->create();
 
         User::factory()
+            ->hasRandomSubscriptionType()
             ->has(
                 Car::factory()
                     ->santaFeFirst()
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
             ->create();
 
         User::factory()
+            ->hasRandomSubscriptionType()
             ->has(
                 Car::factory()
                     ->santaFeSecond()
@@ -36,6 +38,7 @@ class UserSeeder extends Seeder
             ->create();
 
         User::factory()
+            ->hasRandomSubscriptionType()
             ->has(
                 Car::factory()
                     ->santaFeThrid()
@@ -45,6 +48,7 @@ class UserSeeder extends Seeder
             ->create();
 
         User::factory()
+            ->hasRandomSubscriptionType()
             ->has(
                 Car::factory()
                     ->state([
@@ -65,6 +69,27 @@ class UserSeeder extends Seeder
                     ->count(1)
             )
             ->hasFavouriteCars()
+            ->create();
+
+        User::factory()
+            ->hasRandomSubscriptionType()
+            ->has(
+                Car::factory()
+                    ->state([
+                        'model' => 'كيا ريو',
+                    ])
+                    ->count(1)
+            )
+            ->has(
+                Car::factory()
+                    ->state([
+                        'manufacturer_id' => 1,
+                        'manufacturer_name_ar' => 'تويوتا',
+                        'manufacturer_name_en' => 'toyota',
+                        'model' => 'كورولا',
+                    ])
+                    ->count(1)
+            )
             ->create();
 
         // User::factory()

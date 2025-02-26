@@ -4,15 +4,11 @@ namespace App\Enum\Auth;
 
 enum RolesEnum: string
 {
-    // case NAMEINAPP = 'name-in-database';
-
     case ADMIN = 'admin';
 
     case USER = 'user';
 
-    case DRIVER = 'driver';
-
-    case STORE = 'store';
+    case COMPANY = 'company';
 
     // extra helper to allow for greater customization of displayed values,
     // without disclosing the name/value data directly
@@ -22,8 +18,7 @@ enum RolesEnum: string
         return match ($this) {
             self::ADMIN => 'Admin',
             self::USER => 'User',
-            self::DRIVER => 'Driver',
-            self::STORE => 'Store',
+            self::COMPANY => 'company',
         };
     }
 }

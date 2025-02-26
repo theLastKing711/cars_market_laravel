@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('country_code')->nullable();
             $table->string('phone_number')->unique();
+            $table->foreignId('subscription_id')->constrained()->nullable();
             // $table->string('name');
             // $table->string('email')->unique();
             // $table->timestamp('email_verified_at')->nullable();

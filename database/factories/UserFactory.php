@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enum\Auth\RolesEnum;
 use App\Models\Car;
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -29,6 +30,7 @@ class UserFactory extends Factory
     {
         return [
             'country_code' => fake()->numberBetween('900', '963'),
+            'subscription_id' => Subscription::first(),
             'phone_number' => fake()->phoneNumber(),
             'remember_token' => Str::random(10),
         ];
@@ -53,6 +55,17 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
         ])->afterCreating(function (User $user) {
             $user->assignRole(RolesEnum::USER);
+        });
+    }
+
+    public function staticCompany(): Factory
+    {
+        return $this->state([
+            'country_code' => '963',
+            'phone_number' => '968259851',
+            'remember_token' => Str::random(10),
+        ])->afterCreating(function (User $user) {
+            $user->assignRole(RolesEnum::COMPANY);
         });
     }
 
@@ -97,6 +110,16 @@ class UserFactory extends Factory
 
             }
 
+        });
+    }
+
+    public function hasRandomSubscriptionType()
+    {
+        $subscriptions_ids = Subscription::inRandomOrder();
+
+        return $this->afterCreating(function (User $user) use ($subscriptions_ids) {
+
+            $user->subscription()->associate($subscriptions_ids->inRandomOrder()->first());
         });
     }
 }
