@@ -7,6 +7,7 @@ use App\Http\Controllers\User\Car\CarOfferDetailsController;
 use App\Http\Controllers\User\Car\CreateCarOfferController;
 use App\Http\Controllers\User\Car\FavouriteCarController;
 use App\Http\Controllers\User\Car\SearchCarOfferController;
+use App\Http\Controllers\User\Car\SearchMyCarController;
 use App\Http\Controllers\User\Car\SellCarController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,15 +52,21 @@ Route::prefix('users')
         //allows Auth::user->id to return value for user and id in controller
         // Route::middleware(['auth:sanctum', "role:{$userRole}"])
 
+        Route::middleware(['auth:sanctum'])
+
+            ->prefix('cars')
+            ->group(function () {
+                Route::post('', CreateCarOfferController::class);
+
+            });
+
         Route::prefix('cars')->group(function () {
+            Route::get('searchMyCars', SearchMyCarController::class);
             Route::get('', SearchCarOfferController::class);
             Route::post('favourite/{id}', FavouriteCarController::class);
             Route::get('/{id}', CarOfferDetailsController::class);
             Route::patch('users/cars/sell/{id}', SellCarController::class);
 
-            Route::middleware(['auth:sanctum'])->group(function () {
-                Route::post('', CreateCarOfferController::class);
-            });
         });
 
     });

@@ -416,6 +416,52 @@
                 }
             }
         },
+        "/users/cars/searchMyCars": {
+            "get": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "253c1673c669c2b778741190ace59ccf",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Items fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SearchMyCarData"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/users/cars/sell/{id}": {
             "get": {
                 "tags": [
@@ -953,6 +999,15 @@
                 },
                 "type": "object"
             },
+            "SearchMyCarQueryParameterData": {
+                "properties": {
+                    "search": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "SearchCarOfferPaginationResultData": {
                 "type": "object",
                 "allOf": [
@@ -986,6 +1041,7 @@
                 },
                 "type": "object"
             },
+            "SearchMyCarData": {},
             "ShippableToCityData": {
                 "properties": {
                     "city": {
