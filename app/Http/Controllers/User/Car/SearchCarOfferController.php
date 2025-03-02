@@ -27,7 +27,6 @@ class SearchCarOfferController extends Controller
     #[QueryParameter('per_page', 'integer')]
     #[QueryParameter('search')]
     #[QueryParameter('model')]
-    #[QueryParameter('manufacturer_id')]
     #[QueryParameter('price_from')]
     #[QueryParameter('price_to')]
     #[QueryParameter('car_sell_location')]
@@ -57,10 +56,6 @@ class SearchCarOfferController extends Controller
 
         $request_shippable_to =
             $request->shippable_to;
-
-        $request_manufacturer_id =
-        $request
-            ->manufacturer_id;
 
         $request_price_from =
             $request
@@ -136,14 +131,6 @@ class SearchCarOfferController extends Controller
                             fn (EloquentBuilder $query) => $query->whereIn('id', $request_shippable_to)
                         )
                 )
-                    // ->when(
-                    //     $request_manufacturer_id,
-                    //     fn (EloquentBuilder $query) => $query
-                    //         ->where(
-                    //             'manufacturer_id',
-                    //             $request_manufacturer_id
-                    //         )
-                    // )
                     ->when(
                         $request_car_sell_location,
                         fn (EloquentBuilder $query) => $query
@@ -318,14 +305,6 @@ class SearchCarOfferController extends Controller
                 ->when(
                     $request_shippable_to,
                     fn (ScoutBuilder $query) => $query->whereIn('city', $request_shippable_to)
-                )
-                ->when(
-                    $request_manufacturer_id,
-                    fn (ScoutBuilder $query) => $query
-                        ->where(
-                            'manufacturer_id',
-                            $request_manufacturer_id
-                        )
                 )
                 ->when(
                     $request_car_sell_location,

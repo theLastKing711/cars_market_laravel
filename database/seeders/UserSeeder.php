@@ -60,10 +60,8 @@ class UserSeeder extends Seeder
             ->has(
                 Car::factory()
                     ->state([
-                        'manufacturer_id' => 1,
                         'name_ar' => 'تويوتا',
-                        'manufacturer_name_en' => 'toyota',
-                        'name_ar' => 'كورولا',
+                        'name_en' => 'toyota',
                     ])
                     ->pick_random_shippable_syrian_cities()
                     ->count(1)
@@ -83,10 +81,8 @@ class UserSeeder extends Seeder
             ->has(
                 Car::factory()
                     ->state([
-                        'manufacturer_id' => 1,
                         'name_ar' => 'تويوتا',
-                        'manufacturer_name_en' => 'toyota',
-                        'name_ar' => 'كورولا',
+                        'name_en' => 'toyota',
                     ])
                     ->count(1)
             )

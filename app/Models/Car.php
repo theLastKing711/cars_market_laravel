@@ -15,10 +15,8 @@ use Laravel\Scout\Searchable;
 
 /**
  * @property int $id
- * @property int $manufacturer_id
  * @property int $user_id
  * @property string $name_ar
- * @property string $manufacturer_name_en
  * @property int $is_new_car
  * @property string $model
  * @property string|null $year_manufactured

@@ -65,8 +65,7 @@ token: string;
 declare namespace App.Data.User.Car {
 export type CarListData = {
 id: number;
-manufacturer_id: number | null;
-manufacturer_name_en: string | null;
+name_en: string | null;
 name_ar: string | null;
 model: string | null;
 year_manufactured: number | null;
@@ -83,8 +82,7 @@ medially: App.Data.Shared.Media.MediaData | null;
 };
 export type CarOfferDetailsRespnseData = {
 id: number;
-manufacturer_id: number | null;
-manufacturer_name_en: string | null;
+name_en: string | null;
 name_ar: string | null;
 model: string | null;
 year_manufactured: number | null;
@@ -102,7 +100,6 @@ shippable_to: Array<App.Data.User.Car.ShippableToCityData>;
 medially: Array<App.Data.Shared.Media.MediaData>;
 };
 export type CreateCarOfferRequestData = {
-manufacturer_id: number | null;
 name_ar: string | null;
 name_en: string | null;
 model: string | null;
@@ -139,7 +136,6 @@ export type SearchCarOfferQueryParameterData = {
 search: string | null;
 model: string | null;
 user_current_syrian_city: App.Enum.SyrianCity | null;
-manufacturer_id: number | null;
 price_from: number | null;
 price_to: number | null;
 car_sell_location: number | null;

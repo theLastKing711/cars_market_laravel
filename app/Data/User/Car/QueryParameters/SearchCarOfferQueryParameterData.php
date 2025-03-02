@@ -25,8 +25,6 @@ class SearchCarOfferQueryParameterData extends PaginationQueryParameterData
         #[OAT\Property]
         public ?SyrianCity $user_current_syrian_city,
         #[OAT\Property]
-        public ?int $manufacturer_id,
-        #[OAT\Property]
         public ?int $price_from,
         #[OAT\Property]
         public ?int $price_to,
