@@ -26,7 +26,6 @@ class SearchCarOfferController extends Controller
     #[QueryParameter('page', 'integer')]
     #[QueryParameter('per_page', 'integer')]
     #[QueryParameter('search')]
-    #[QueryParameter('model')]
     #[QueryParameter('price_from')]
     #[QueryParameter('price_to')]
     #[QueryParameter('car_sell_location')]
@@ -49,10 +48,6 @@ class SearchCarOfferController extends Controller
         $request_search =
             $request
                 ->search;
-
-        $request_model =
-            $request
-                ->model;
 
         $request_shippable_to =
             $request->shippable_to;

@@ -5,6 +5,13 @@
         "version": "1"
     },
     "paths": {
+        "/files/{id}": {
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/filesPublicIdPathParameterData"
+                }
+            ]
+        },
         "/users/cars/{id}": {
             "get": {
                 "tags": [
@@ -17,7 +24,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/CarOfferDetailsRespnseData"
+                                    "$ref": "#/components/schemas/CarOfferDetailsResponseData"
                                 }
                             }
                         }
@@ -30,10 +37,28 @@
                 }
             ]
         },
-        "/files/{id}": {
+        "/users/cars/updateDetails/{id}": {
+            "get": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "47910bf01b04ad5b212c110a0e428654",
+                "responses": {
+                    "200": {
+                        "description": "Item fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getUpdateCarOfferResponseData"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "parameters": [
                 {
-                    "$ref": "#/components/parameters/filesPublicIdPathParameterData"
+                    "$ref": "#/components/parameters/usersCarIdPathParameterData"
                 }
             ]
         },
@@ -230,20 +255,6 @@
                     },
                     {
                         "name": "search",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "model",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "manufacturer_id",
                         "in": "query",
                         "schema": {
                             "type": "string"
@@ -595,6 +606,17 @@
                 },
                 "type": "object"
             },
+            "DeletableMediaData": {
+                "properties": {
+                    "file_url": {
+                        "type": "string"
+                    },
+                    "public_id": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "MediaData": {
                 "properties": {
                     "id": {
@@ -665,19 +687,11 @@
                     "id": {
                         "type": "integer"
                     },
-                    "manufacturer_id": {
-                        "type": "integer",
-                        "nullable": true
-                    },
-                    "manufacturer_name_en": {
-                        "type": "string",
-                        "nullable": true
-                    },
                     "name_ar": {
                         "type": "string",
                         "nullable": true
                     },
-                    "model": {
+                    "name_en": {
                         "type": "string",
                         "nullable": true
                     },
@@ -736,20 +750,16 @@
                 },
                 "type": "object"
             },
-            "CarOfferDetailsRespnseData": {
+            "CarOfferDetailsResponseData": {
                 "properties": {
                     "id": {
                         "type": "integer"
                     },
-                    "manufacturer_id": {
-                        "type": "integer",
-                        "nullable": true
-                    },
-                    "manufacturer_name_en": {
+                    "name_ar": {
                         "type": "string",
                         "nullable": true
                     },
-                    "name_ar": {
+                    "name_en": {
                         "type": "string",
                         "nullable": true
                     },
@@ -801,6 +811,14 @@
                         ],
                         "nullable": true
                     },
+                    "transmission": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TransmissionType"
+                            }
+                        ],
+                        "nullable": true
+                    },
                     "is_kassah": {
                         "type": "boolean",
                         "nullable": true
@@ -830,19 +848,11 @@
             },
             "CreateCarOfferRequestData": {
                 "properties": {
-                    "manufacturer_id": {
-                        "type": "integer",
-                        "nullable": true
-                    },
-                    "name_ar": {
-                        "type": "string",
-                        "nullable": true
-                    },
                     "name_en": {
                         "type": "string",
                         "nullable": true
                     },
-                    "model": {
+                    "name_ar": {
                         "type": "string",
                         "nullable": true
                     },
@@ -909,20 +919,12 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "model": {
-                        "type": "string",
-                        "nullable": true
-                    },
                     "user_current_syrian_city": {
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/SyrianCity"
                             }
                         ],
-                        "nullable": true
-                    },
-                    "manufacturer_id": {
-                        "type": "integer",
                         "nullable": true
                     },
                     "price_from": {
@@ -1046,6 +1048,155 @@
                 "properties": {
                     "city": {
                         "$ref": "#/components/schemas/SyrianCity"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateCarOfferRequestData": {
+                "properties": {
+                    "name_ar": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "name_en": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "is_new_car": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "car_price": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "fuel_type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/FuelType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "transmission": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TransmissionType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "miles_travelled_in_km": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "is_faragha_jahzeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_kassah": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_khalyeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "getUpdateCarOfferResponseData": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name_ar": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "name_en": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "model": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "year_manufactured": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "car_price": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "car_label_origin": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "car_import_type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ImportType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "miles_travelled_in_km": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "is_new_car": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "fuel_type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/FuelType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "car_sell_location": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/SyrianCity"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "transmission": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TransmissionType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "is_kassah": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_khalyeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_faragha_jahzeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "shippable_to": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ShippableToCityData"
+                        }
+                    },
+                    "medially": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DeletableMediaData"
+                        }
                     }
                 },
                 "type": "object"

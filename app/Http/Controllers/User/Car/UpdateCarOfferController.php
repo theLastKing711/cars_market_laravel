@@ -8,17 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Car;
 use OpenApi\Attributes as OAT;
 
-#[
-    OAT\PathItem(
-        path: '/users/cars/{id}',
-        parameters: [
-            new OAT\PathParameter(
-                ref: '#/components/parameters/usersCarIdPathParameterData',
-            ),
-        ],
-    ),
-]
-class UpdateCarOfferController extends Controller
+class UpdateCarOfferController extends CarController
 {
     public function __invoke(UpdateCarOfferRequestData $request, CarIdPathParameterData $path_data)
     {

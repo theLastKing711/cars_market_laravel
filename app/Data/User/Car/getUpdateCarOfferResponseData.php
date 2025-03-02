@@ -2,25 +2,25 @@
 
 namespace App\Data\User\Car;
 
-use App\Data\Shared\Media\MediaData;
+use App\Data\Shared\Media\DeletableMediaData;
 use App\Data\Shared\Swagger\Property\ArrayProperty;
 use App\Enum\FuelType;
 use App\Enum\ImportType;
 use App\Enum\SyrianCity;
 use App\Enum\TransmissionType;
 use Illuminate\Support\Collection;
-use OpenApi\Attributes as OAT;
-use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
+use OpenApi\Attributes as OAT;
+use Spatie\LaravelData\Attributes\MapOutputName;
 
 #[TypeScript]
 #[Oat\Schema()]
-class CarOfferDetailsRespnseData extends Data
+class getUpdateCarOfferResponseData extends Data
 {
-    /**
+     /**
      * @param  Collection<int, ShippableToCityData>  $shippable_to
-     * @param  Collection<int, MediaData>  $images
+     * @param  Collection<int, DeletableMediaData>  $images
      **/
     public function __construct(
         #[OAT\Property]
@@ -58,9 +58,10 @@ class CarOfferDetailsRespnseData extends Data
         #[ArrayProperty(ShippableToCityData::class)]
         /** @var ShippableToCityData[] */
         public Collection $shippable_to,
-        #[ArrayProperty(MediaData::class)]
+        #[ArrayProperty(DeletableMediaData::class)]
         #[MapOutputName('images')]
-        /** @var MediaData[] */
+        /** @var DeletableMediaData[] */
         public Collection $medially,
     ) {}
+
 }

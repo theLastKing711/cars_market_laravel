@@ -4,7 +4,6 @@ namespace App\Models;
 
 use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Eloquent;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +17,7 @@ use Laravel\Scout\Searchable;
  * @property int $user_id
  * @property string $name_ar
  * @property int $is_new_car
- * @property string $model
+ * @property string $
  * @property string|null $year_manufactured
  * @property int|null $car_color
  * @property string|null $description
@@ -39,8 +38,6 @@ use Laravel\Scout\Searchable;
  * @property int $is_recommended
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Manufacturer $Manufacturer
- * @property-read \App\Models\User|null $Model
  * @property-read \App\Data\Shared\ModelwithPivotCollection<\App\Models\User,\Illuminate\Database\Eloquent\Relations\Pivot> $favourited_by_users
  * @property-read int|null $favourited_by_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Media> $medially
@@ -110,27 +107,9 @@ class Car extends Model
     /** @use HasFactory<\Database\Factories\CarFactory> */
     use HasFactory, MediaAlly, Searchable;
 
-    protected $guarded = ['id'];
-
     public function medially(): MorphMany
     {
         return $this->morphMany(Media::class, 'medially');
-    }
-
-    /**
-     * Get the User that owns the Car
-     */
-    public function Model(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the Manufacturer that owns the Car
-     */
-    public function Manufacturer(): BelongsTo
-    {
-        return $this->belongsTo(Manufacturer::class);
     }
 
     /**

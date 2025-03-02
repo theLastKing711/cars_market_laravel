@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User\Car;
 
 use App\Data\Shared\Swagger\Response\SuccessItemResponse;
-use App\Data\User\Car\CarOfferDetailsRespnseData;
+use App\Data\User\Car\CarOfferDetailsResponseData;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
@@ -12,7 +12,7 @@ use OpenApi\Attributes as OAT;
 class CarOfferDetailsController extends Controller
 {
     #[OAT\Get(path: '/users/cars/{id}', tags: ['usersCars'])]
-    #[SuccessItemResponse(CarOfferDetailsRespnseData::class)]
+    #[SuccessItemResponse(CarOfferDetailsResponseData::class)]
     public function __invoke(CarIdPathParameterData $request)
     {
 
@@ -37,7 +37,7 @@ class CarOfferDetailsController extends Controller
                 )
                 ->first();
 
-        return CarOfferDetailsRespnseData::from($car);
+        return CarOfferDetailsResponseData::from($car);
 
     }
 }
