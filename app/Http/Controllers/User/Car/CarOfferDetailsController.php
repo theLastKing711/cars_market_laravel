@@ -7,7 +7,6 @@ use App\Data\User\Car\CarOfferDetailsRespnseData;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
-use App\Models\User;
 use OpenApi\Attributes as OAT;
 
 class CarOfferDetailsController extends Controller

@@ -67,7 +67,7 @@ export type CarListData = {
 id: number;
 manufacturer_id: number | null;
 manufacturer_name_en: string | null;
-manufacturer_name_ar: string | null;
+name_ar: string | null;
 model: string | null;
 year_manufactured: number | null;
 car_price: number | null;
@@ -85,7 +85,7 @@ export type CarOfferDetailsRespnseData = {
 id: number;
 manufacturer_id: number | null;
 manufacturer_name_en: string | null;
-manufacturer_name_ar: string | null;
+name_ar: string | null;
 model: string | null;
 year_manufactured: number | null;
 car_price: number | null;
@@ -103,8 +103,8 @@ medially: Array<App.Data.Shared.Media.MediaData>;
 };
 export type CreateCarOfferRequestData = {
 manufacturer_id: number | null;
-manufacturer_name_ar: string | null;
-manufacturere_name_en: string | null;
+name_ar: string | null;
+name_en: string | null;
 model: string | null;
 is_new_car: boolean | null;
 car_price: number | null;

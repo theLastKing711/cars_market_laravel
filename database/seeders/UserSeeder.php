@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             ->has(
                 Car::factory()
                     ->state([
-                        'model' => 'ألانترا',
+                        'name_ar' => 'ألانترا',
                     ])
                     ->pick_random_shippable_syrian_cities()
                     ->count(1)
@@ -61,9 +61,9 @@ class UserSeeder extends Seeder
                 Car::factory()
                     ->state([
                         'manufacturer_id' => 1,
-                        'manufacturer_name_ar' => 'تويوتا',
+                        'name_ar' => 'تويوتا',
                         'manufacturer_name_en' => 'toyota',
-                        'model' => 'كورولا',
+                        'name_ar' => 'كورولا',
                     ])
                     ->pick_random_shippable_syrian_cities()
                     ->count(1)
@@ -76,7 +76,7 @@ class UserSeeder extends Seeder
             ->has(
                 Car::factory()
                     ->state([
-                        'model' => 'كيا ريو',
+                        'name_ar' => 'كيا ريو',
                     ])
                     ->count(1)
             )
@@ -84,9 +84,9 @@ class UserSeeder extends Seeder
                 Car::factory()
                     ->state([
                         'manufacturer_id' => 1,
-                        'manufacturer_name_ar' => 'تويوتا',
+                        'name_ar' => 'تويوتا',
                         'manufacturer_name_en' => 'toyota',
-                        'model' => 'كورولا',
+                        'name_ar' => 'كورولا',
                     ])
                     ->count(1)
             )
@@ -96,7 +96,7 @@ class UserSeeder extends Seeder
         //     ->has(
         //         Car::factory()
         //             ->state([
-        //                 'model' => 'النترا',
+        //                 'name_ar' => 'النترا',
         //             ])
         //             ->count(1)
         //     )

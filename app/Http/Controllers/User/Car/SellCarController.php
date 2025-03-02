@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User\Car;
 
 use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
-use App\Data\User\Car\CarIdPathParameterData;
+use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Support\Facades\Log;

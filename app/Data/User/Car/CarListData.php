@@ -23,13 +23,9 @@ class CarListData extends Data
         #[OAT\Property]
         public int $id,
         #[OAT\Property]
-        public ?int $manufacturer_id,
+        public ?string $name_ar,
         #[OAT\Property]
-        public ?string $manufacturer_name_en,
-        #[OAT\Property]
-        public ?string $manufacturer_name_ar,
-        #[OAT\Property]
-        public ?string $model,
+        public ?string $name_en,
         #[OAT\Property]
         public ?int $year_manufactured,
         #[OAT\Property]

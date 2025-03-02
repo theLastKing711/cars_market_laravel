@@ -673,7 +673,7 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "manufacturer_name_ar": {
+                    "name_ar": {
                         "type": "string",
                         "nullable": true
                     },
@@ -749,7 +749,7 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "manufacturer_name_ar": {
+                    "name_ar": {
                         "type": "string",
                         "nullable": true
                     },
@@ -834,11 +834,11 @@
                         "type": "integer",
                         "nullable": true
                     },
-                    "manufacturer_name_ar": {
+                    "name_ar": {
                         "type": "string",
                         "nullable": true
                     },
-                    "manufacturere_name_en": {
+                    "name_en": {
                         "type": "string",
                         "nullable": true
                     },

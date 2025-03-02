@@ -242,7 +242,7 @@ class CreateInvokableControllerWithData extends Command
                 $fileContents = <<<EOT
                 <?php
 
-                namespace App\Http\Controller\\$real_path;
+                namespace App\Http\Controllers\\$real_path;
 
                 use App\Http\Controllers\Controller;
                 use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
@@ -301,7 +301,7 @@ class CreateInvokableControllerWithData extends Command
             $fileContents = <<<EOT
             <?php
 
-            namespace App\Http\Controller\\$real_path;
+            namespace App\Http\Controllers\\$real_path;
 
 
             use App\Http\Controllers\Controller;
@@ -339,7 +339,7 @@ class CreateInvokableControllerWithData extends Command
                 ->put('Http\Controllers'.'\\'.$this->argument('name').'Controller.php', $fileContents);
 
             Artisan::call('make:data', [
-                'name' => $post_option,
+                'name' => $patch_option,
             ]);
 
             return;

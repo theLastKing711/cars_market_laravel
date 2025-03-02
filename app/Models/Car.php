@@ -17,7 +17,7 @@ use Laravel\Scout\Searchable;
  * @property int $id
  * @property int $manufacturer_id
  * @property int $user_id
- * @property string $manufacturer_name_ar
+ * @property string $name_ar
  * @property string $manufacturer_name_en
  * @property int $is_new_car
  * @property string $model
@@ -156,11 +156,8 @@ class Car extends Model
     {
 
         $index_attributes_array = [
-            'model' => $this->model,
-            'manufacturer_id' => $this->manufacturer_id,
-            'description' => $this->name,
-            'manufacturer_ar' => $this->manufacturer_name_ar,
-            'manufacturer_en' => $this->manufacturer_name_en,
+            'name_ar' => $this->name_ar,
+            'name_en' => $this->name_en,
             'car_price' => $this->car_price,
             'year_manufactured' => $this->year_manufactured,
             'fuel_type' => $this->fuel_type,
@@ -175,8 +172,8 @@ class Car extends Model
             'car_import_type' => $this->car_import_type,
         ];
 
-        $index_attributes_array['manufacturer_id'] =
-            $this->Manufacturer->id;
+        // $index_attributes_array['manufacturer_id'] =
+        //     $this->Manufacturer->id; // foriegn key, it works but its not needed here
 
         //load shippable city to this remote table(cars) index
         $index_attributes_array['city'] =

@@ -10,13 +10,13 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
 #[Oat\Schema()]
-class CreateCarOfferRequestData extends Data
+class UpdateCarOfferRequestData extends Data
 {
     public function __construct(
         #[OAT\Property]
-        public ?string $name_en,
-        #[OAT\Property]
         public ?string $name_ar,
+        #[OAT\Property]
+        public ?string $name_en,
         #[OAT\Property]
         public ?bool $is_new_car,
         #[OAT\Property]

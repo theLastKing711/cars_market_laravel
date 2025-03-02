@@ -7,6 +7,7 @@ use App\Data\Shared\Swagger\Property\ArrayProperty;
 use App\Enum\FuelType;
 use App\Enum\ImportType;
 use App\Enum\SyrianCity;
+use App\Enum\TransmissionType;
 use Illuminate\Support\Collection;
 use OpenApi\Attributes as OAT;
 use Spatie\LaravelData\Attributes\MapOutputName;
@@ -25,11 +26,9 @@ class CarOfferDetailsRespnseData extends Data
         #[OAT\Property]
         public int $id,
         #[OAT\Property]
-        public ?int $manufacturer_id,
+        public ?string $name_ar,
         #[OAT\Property]
-        public ?string $manufacturer_name_en,
-        #[OAT\Property]
-        public ?string $manufacturer_name_ar,
+        public ?string $name_en,
         #[OAT\Property]
         public ?string $model,
         #[OAT\Property]
@@ -48,6 +47,8 @@ class CarOfferDetailsRespnseData extends Data
         public ?FuelType $fuel_type,
         #[OAT\Property]
         public ?SyrianCity $car_sell_location,
+        #[OAT\Property]
+        public ?TransmissionType $transmission,
         #[OAT\Property]
         public ?bool $is_kassah,
         #[OAT\Property]

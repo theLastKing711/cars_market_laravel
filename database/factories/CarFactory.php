@@ -8,7 +8,6 @@ use App\Enum\ImportType;
 use App\Enum\SyrianCity;
 use App\Enum\TransmissionType;
 use App\Models\Car;
-use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Log;
 
@@ -25,18 +24,10 @@ class CarFactory extends Factory
     public function definition(): array
     {
 
-        /** @var Manufacturer $var description */
-        $random_manufacturer =
-            Manufacturer::query()
-                ->inRandomOrder()
-                ->first();
-
         return [
-            'manufacturer_id' => $random_manufacturer->id,
-            'manufacturer_name_ar' => $random_manufacturer->name_ar,
-            'manufacturer_name_en' => $random_manufacturer->name_en,
+            'name_ar' => fake()->text(),
+            'name_en' => fake()->text(),
             'is_new_car' => fake()->boolean(),
-            'model' => fake()->text('10'),
             'year_manufactured' => fake()->year(),
             'car_color' => fake()->numberBetween(0, 10),
             'description' => fake()->text(),
@@ -62,7 +53,7 @@ class CarFactory extends Factory
     {
         return $this->
             state([
-                'model' => 'سانتافيه',
+                'name_ar' => 'سانتافيه',
             ]);
     }
 
@@ -70,14 +61,14 @@ class CarFactory extends Factory
     {
         return $this->
             state([
-                'model' => 'سنتافيه',
+                'name_ar' => 'سنتافيه',
             ]);
     }
 
     public function santaFeThrid()
     {
         return $this->state([
-            'model' => 'سانتفيه',
+            'name_ar' => 'سانتفيه',
         ]);
     }
 
