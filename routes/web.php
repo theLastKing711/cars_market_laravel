@@ -11,6 +11,7 @@ use App\Http\Controllers\User\Car\SearchCarOfferController;
 use App\Http\Controllers\User\Car\SearchMyCarController;
 use App\Http\Controllers\User\Car\SellCarController;
 use App\Http\Controllers\User\Car\UpdateCarOfferController;
+use App\Http\Controllers\User\Car\UpdateCarOfferImagesController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('files')
@@ -66,12 +67,13 @@ Route::prefix('users')
             Route::get('updateDetails/{id}', getUpdateCarOfferController::class);
 
             Route::post('', CreateCarOfferController::class);
+            Route::post('{id}/images', UpdateCarOfferImagesController::class);
             Route::get('searchMyCars', SearchMyCarController::class);
             Route::get('', SearchCarOfferController::class);
             Route::post('favourite/{id}', FavouriteCarController::class);
-            Route::get('/{id}', CarOfferDetailsController::class);
-            Route::patch('/{id}', UpdateCarOfferController::class);
-            Route::patch('users/cars/sell/{id}', SellCarController::class);
+            Route::get('{id}', CarOfferDetailsController::class);
+            Route::patch('{id}', UpdateCarOfferController::class);
+            Route::patch('sell/{id}', SellCarController::class);
 
         });
 

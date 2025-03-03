@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
-            $table->boolean('is_new_car')->default(false);
+            $table->boolean('is_new_car')->nullable()->default(false);
             $table->year('year_manufactured')->nullable();
             $table->integer('car_color')->nullable(); // Car Enum
             $table->text('description')->nullable();
@@ -33,8 +33,8 @@ return new class extends Migration
             $table->boolean('user_has_legal_car_papers')->nullable(); //   أوراق السيارة(نظامية) موجودة عند المالك
             // الفراغة جاهزة https://www.facebook.com/permalink.php/?story_fbid=3604791969565535&id=1909195695791846
             $table->boolean('is_faragha_jahzeh')->nullable()->default(false);
-            $table->boolean('is_kassah'); //سيارة بدون قيود جمركية  https://www.suwar-magazine.org/articles/2079_%D8%B3%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D9%82-%D8%B5%D8%A9-%D8%AA%D8%BA%D8%B2%D9%88-%D8%A3%D8%B3%D9%88%D8%A7%D9%82-%D8%B4%D9%85%D8%A7%D9%84%D9%8A-%D8%B3%D9%88%D8%B1%D9%8A%D8%A7
-            $table->boolean('is_khalyeh');
+            $table->boolean('is_kassah')->nullable(); //سيارة بدون قيود جمركية  https://www.suwar-magazine.org/articles/2079_%D8%B3%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D9%82-%D8%B5%D8%A9-%D8%AA%D8%BA%D8%B2%D9%88-%D8%A3%D8%B3%D9%88%D8%A7%D9%82-%D8%B4%D9%85%D8%A7%D9%84%D9%8A-%D8%B3%D9%88%D8%B1%D9%8A%D8%A7
+            $table->boolean('is_khalyeh')->nullable();
             $table->boolean('is_tajrobeh')->nullable();
             $table->boolean('is_sold')->default(false);
             $table->boolean('is_recommended')->default(false);

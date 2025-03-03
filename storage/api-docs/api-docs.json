@@ -31,6 +31,32 @@
                     }
                 }
             },
+            "patch": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "a1d7c6a61d75bbea94e96f6a2b5c2a87",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCarOfferRequestData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
             "parameters": [
                 {
                     "$ref": "#/components/parameters/usersCarIdPathParameterData"
