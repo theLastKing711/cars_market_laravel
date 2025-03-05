@@ -381,33 +381,18 @@ class SearchCarOfferController extends Controller
                             $request_import_type
                         )
                 )
-        //queryFn({paramPage}) pageParam parameter will be of this type (number | null), otherwise undefined and errors
         // gets called on client side after remote query success
                 ->query(
                     fn (EloquentBuilder $query) => $query
                         ->with([
                             'medially' => fn ($comments) => $comments->take(1),
+                            // 'favourited_by_users'
                         ])
                 )
                 ->paginate(2);
 
-        // Storage::disk('app')->put('text2.php', json_encode($remote_cars_search->items()));
-
-        // Storage::disk('app')->put('text2.php', 'latest');
-
         return CarListData::collect($remote_cars_search);
 
-        // /** @var Collection<int, Manufacturer> $manufacturers_with_car_offers */
-        // $manufacturers_with_car_offers =
-        //     Manufacturer::query()
-        //         ->powerJoinHas('cars')
-        //         ->get();
-
-        // return SearchCarOfferResponseData::from([
-        //     'paginated_cars_search_result' => CarListData::collect($remote_cars_search),
-        //     'user_city_cars' => collect([]),
-        //     // CarListData::collect($manufacturers_with_car_offers),
-        // ]);
 
     }
 }

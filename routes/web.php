@@ -9,6 +9,7 @@ use App\Http\Controllers\User\Car\FavouriteCarController;
 use App\Http\Controllers\User\Car\getUpdateCarOfferController;
 use App\Http\Controllers\User\Car\SearchCarOfferController;
 use App\Http\Controllers\User\Car\SearchMyCarController;
+use App\Http\Controllers\User\Car\SearchMyFavouriteCarsController;
 use App\Http\Controllers\User\Car\SellCarController;
 use App\Http\Controllers\User\Car\UpdateCarOfferController;
 use App\Http\Controllers\User\Car\UpdateCarOfferImagesController;
@@ -64,13 +65,13 @@ Route::prefix('users')
         // // });
 
         Route::prefix('cars')->group(function () {
+            Route::get('searchMyFavouriteCars', SearchMyFavouriteCarsController::class);
             Route::get('updateDetails/{id}', getUpdateCarOfferController::class);
-
+            Route::patch('{id}/favourite', FavouriteCarController::class);
             Route::post('', CreateCarOfferController::class);
             Route::post('{id}/images', UpdateCarOfferImagesController::class);
             Route::get('searchMyCars', SearchMyCarController::class);
             Route::get('', SearchCarOfferController::class);
-            Route::post('favourite/{id}', FavouriteCarController::class);
             Route::get('{id}', CarOfferDetailsController::class);
             Route::patch('{id}', UpdateCarOfferController::class);
             Route::patch('sell/{id}', SellCarController::class);

@@ -63,6 +63,44 @@
                 }
             ]
         },
+        "/users/cars/{id}/images": {
+            "patch": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "235b0b12aa9935ca041070d954141b47",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UploadFileListData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Files uploaded successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/DeletableMediaData"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/usersCarIdPathParameterData"
+                }
+            ]
+        },
         "/users/cars/updateDetails/{id}": {
             "get": {
                 "tags": [
@@ -490,8 +528,37 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/SearchMyCarData"
+                                        "$ref": "#/components/schemas/CarListData"
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/cars/searchMyFavouriteCars": {
+            "get": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "c075b1434ffd65c81d30b97c22042456",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Item fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchCarOfferPaginationResultData"
                                 }
                             }
                         }

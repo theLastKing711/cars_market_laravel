@@ -159,6 +159,12 @@ class Car extends Model
                     return $data['city'];
                 });
 
+        $index_attributes_array['favourited_by_users'] =
+            $this->favourited_by_users
+                ->map(function ($data) {
+                    return $data['id'];
+                });
+
         return $index_attributes_array;
     }
 

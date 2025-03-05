@@ -15,6 +15,8 @@ class CarOfferDetailsController extends Controller
     #[SuccessItemResponse(CarOfferDetailsResponseData::class)]
     public function __invoke(CarIdPathParameterData $request)
     {
+        $request_car_id = $request->id;
+
 
         $logged_user_id =
             5;
@@ -24,11 +26,11 @@ class CarOfferDetailsController extends Controller
 
         $car =
             Car::query()
-                // ->selectRaw(
-                //     '*, (select exists (select 1 from user_favourites_cars where cars.id = user_favourites_cars.car_id AND user_favourites_cars.user_id = ? ) ) as is_car_favourited_by_user',
-                //     [$logged_user_id]
-                // )
                 ->whereId($request->id)
+                 ->selectRaw(
+                        '*, (select exists (select 1 from user_favourites_cars where user_id=? AND car_id=?)) as is_favourite',
+                        [$logged_user_id, $request_car_id]
+                    )
                 ->with(
                     [
                         'medially',

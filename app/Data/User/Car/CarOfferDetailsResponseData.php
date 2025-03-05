@@ -55,6 +55,8 @@ class CarOfferDetailsResponseData extends Data
         public ?bool $is_khalyeh,
         #[OAT\Property]
         public ?bool $is_faragha_jahzeh,
+        #[OAT\Property]
+        public ?bool $is_favourite,
         #[ArrayProperty(ShippableToCityData::class)]
         /** @var ShippableToCityData[] */
         public Collection $shippable_to,
