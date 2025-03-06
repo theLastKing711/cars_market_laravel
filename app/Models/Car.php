@@ -168,6 +168,11 @@ class Car extends Model
         return $index_attributes_array;
     }
 
+    public function scopeIsNotSold()
+    {
+        return $this->where('is_sold', '!=', true);
+    }
+
     // /**
     //  * Modify the collection of models being made searchable.
     //  */

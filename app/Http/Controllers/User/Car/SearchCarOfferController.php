@@ -244,7 +244,6 @@ class SearchCarOfferController extends Controller
 
             return CarListData::collect($local_cars_search);
         }
-        // Storage::disk('app')->put('text2.php', 'before remote call');
 
         // $cars_in_user_current_city =
         //     Car::query()
@@ -293,12 +292,6 @@ class SearchCarOfferController extends Controller
         //         'car_price <=' . $request_price_to
         //         :
         //         '';
-
-        // if ($request->page) {
-        // Storage::disk('app')->put('text2.php', $request->page);
-        // }
-
-        // Storage::disk('app')->put('text2.php', 'before remote call');
 
         $remote_cars_search =
             Car::search(

@@ -34,6 +34,7 @@ class SearchMyCarController extends Controller
                         '*, (select exists (select 1 from user_favourites_cars where user_id=? AND car_id=cars.id)) as is_favourite',
                         [$logged_user_id]
                     )
+                    ->isNotSold()
                     ->with([
                         'medially' => fn ($comments) => $comments->take(1),
                     ])

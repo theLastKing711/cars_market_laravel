@@ -5,6 +5,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\Car\CarOfferDetailsController;
 use App\Http\Controllers\User\Car\CreateCarOfferController;
+use App\Http\Controllers\User\Car\DeleteCarOfferController;
 use App\Http\Controllers\User\Car\FavouriteCarController;
 use App\Http\Controllers\User\Car\getUpdateCarOfferController;
 use App\Http\Controllers\User\Car\SearchCarOfferController;
@@ -67,6 +68,7 @@ Route::prefix('users')
         Route::prefix('cars')->group(function () {
             Route::get('searchMyFavouriteCars', SearchMyFavouriteCarsController::class);
             Route::get('updateDetails/{id}', getUpdateCarOfferController::class);
+            Route::patch('sell/{id}', SellCarController::class);
             Route::patch('{id}/favourite', FavouriteCarController::class);
             Route::post('', CreateCarOfferController::class);
             Route::post('{id}/images', UpdateCarOfferImagesController::class);
@@ -74,7 +76,7 @@ Route::prefix('users')
             Route::get('', SearchCarOfferController::class);
             Route::get('{id}', CarOfferDetailsController::class);
             Route::patch('{id}', UpdateCarOfferController::class);
-            Route::patch('sell/{id}', SellCarController::class);
+            Route::delete('{id}', DeleteCarOfferController::class);
 
         });
 

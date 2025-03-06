@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('shippable_to_cities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('car_id')->constrained();
+            $table->foreignId('car_id')->constrained()->cascadeOnDelete();
             $table->integer('city');
             $table->timestamps();
         });

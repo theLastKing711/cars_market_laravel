@@ -222,14 +222,6 @@ class FileController extends Controller
                 $session_uploaded_media
             );
 
-        \Storage::disk('app')
-            ->put(
-                'Test.php',
-                $request
-                    ->session()
-                    ->get($upload_cars_images_session_key)
-            );
-
         return $uploaded_medias_data;
 
     }
@@ -282,19 +274,8 @@ class FileController extends Controller
     #[SuccessNoContentResponse]
     public function delete(FilePublicIdPathParameterData $deleteFileData)
     {
-        \Storage::disk('app')
-            ->put(
-                'Test.php',
-                $deleteFileData->public_id
-            );
 
         Cloudinary::destroy($deleteFileData->public_id);
-
-        \Storage::disk('app')
-            ->put(
-                'Test2.php',
-                $deleteFileData->public_id
-            );
 
         return 1;
     }

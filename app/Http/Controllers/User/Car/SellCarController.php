@@ -26,10 +26,6 @@ class SellCarController extends Controller
     public function __invoke(CarIdPathParameterData $carIdPathParameterData)
     {
 
-        Log::info('hello world');
-
-        return true;
-
         $car_id =
             $carIdPathParameterData
                 ->id;

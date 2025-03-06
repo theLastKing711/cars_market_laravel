@@ -31,6 +31,22 @@
                     }
                 }
             },
+            "delete": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "1f176efc486db1934888a5a524c454f2",
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
             "patch": {
                 "tags": [
                     "usersCars"
@@ -46,6 +62,29 @@
                         }
                     }
                 },
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/usersCarIdPathParameterData"
+                }
+            ]
+        },
+        "/user/cars/{id}/favourite": {
+            "post": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "6e99bbabf20cf5bcfd5fe2c3d00b18ac",
                 "responses": {
                     "204": {
                         "description": "",
@@ -473,24 +512,6 @@
                 }
             }
         },
-        "/user/cars/favourite/{id}": {
-            "post": {
-                "tags": [
-                    "usersCars"
-                ],
-                "operationId": "1dd5f4e22564023603ced8aa7859a330",
-                "responses": {
-                    "204": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/users/cars/searchMyCars": {
             "get": {
                 "tags": [
@@ -839,6 +860,18 @@
                     "is_faragha_jahzeh": {
                         "type": "boolean",
                         "nullable": true
+                    },
+                    "is_favourite": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "image": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/MediaData"
+                            }
+                        ],
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -921,6 +954,10 @@
                         "nullable": true
                     },
                     "is_faragha_jahzeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_favourite": {
                         "type": "boolean",
                         "nullable": true
                     },
@@ -1483,6 +1520,16 @@
                     1,
                     2
                 ]
+            }
+        },
+        "responses": {
+            "204": {
+                "description": "",
+                "content": {
+                    "application/json": {
+                        "schema": {}
+                    }
+                }
             }
         },
         "parameters": {
