@@ -53,8 +53,8 @@ class CarListData extends Data
         // /** @var ShippableToCityData[] */
         // public Collection $shippable_to,
         // #[WithCast(MediallyToSingleMediaCast::class)]
-        // #[MapOutputName('image')]
         // public ?MediaData $medially,
+        // #[MapOutputName('image')]
         #[OAT\Property]
         public ?MediaData $image,
 
@@ -72,6 +72,37 @@ class CarListData extends Data
     //     );
     // }
 
+    public static function fromModelLocal(Car $car)
+    {
+
+        $media = $car->medially->first();
+
+        $single_media_data =
+            isset($media)
+            ?
+            new MediaData(id: $media->id, file_url: $media->file_url)
+            :
+            null;
+
+        return new CarListData(
+            id: $car->id,
+            name_ar: $car->name_ar,
+            name_en: $car->name_en,
+            year_manufactured: $car->year_manufactured,
+            car_price: $car->car_price,
+            car_import_type: null,
+            miles_travelled_in_km: $car->miles_travelled_in_km,
+            is_new_car: $car->is_new_car,
+            fuel_type: FuelType::from($car->fuel_type),
+            car_sell_location: SyrianCity::from($car->car_sell_location),
+            is_kassah: $car->is_kassah,
+            is_khalyeh: $car->is_khalyeh,
+            is_faragha_jahzeh: $car->is_faragha_jahzeh,
+            is_favourite: $car->is_favourite,
+            image: $single_media_data
+        );
+    }
+
     public static function fromModel(Car $car, int $user_id)
     {
 
@@ -84,18 +115,13 @@ class CarListData extends Data
             :
             null;
 
-        if (! isset($media)) {
-
-        }
-
-
         return new CarListData(
             id: $car->id,
             name_ar: $car->name_ar,
             name_en: $car->name_en,
             year_manufactured: $car->year_manufactured,
             car_price: $car->car_price,
-            car_import_type: ImportType::from($car->car_import_type),
+            car_import_type: null,
             miles_travelled_in_km: $car->miles_travelled_in_km,
             is_new_car: $car->is_new_car,
             fuel_type: FuelType::from($car->fuel_type),

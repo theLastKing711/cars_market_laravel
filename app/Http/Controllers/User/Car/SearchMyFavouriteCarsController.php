@@ -46,7 +46,7 @@ class SearchMyFavouriteCarsController extends Controller
                     ->with([
                         'medially' => fn ($comments) => $comments->take(1),
                     ])
-                    ->simplePaginate(3);
+                    ->simplePaginate(2);
 
 
             return CarListData::collect($local_car_search_result);
