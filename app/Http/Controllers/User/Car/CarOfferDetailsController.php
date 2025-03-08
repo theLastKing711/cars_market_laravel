@@ -7,6 +7,7 @@ use App\Data\User\Car\CarOfferDetailsResponseData;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use OpenApi\Attributes as OAT;
 
 class CarOfferDetailsController extends Controller
@@ -35,6 +36,8 @@ class CarOfferDetailsController extends Controller
                     [
                         'medially',
                         'shippable_to',
+                        'user' => fn (Builder $query) =>
+                            $query->select('id','phone_number')
                     ]
                 )
                 ->first();

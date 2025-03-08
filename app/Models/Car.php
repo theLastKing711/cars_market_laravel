@@ -113,6 +113,17 @@ class Car extends Model
     }
 
     /**
+     * Get the user that owns the Car
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    /**
      * Get all of the shippable_to for the Car
      */
     public function shippable_to(): HasMany
