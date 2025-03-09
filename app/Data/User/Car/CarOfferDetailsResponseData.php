@@ -77,7 +77,7 @@ class CarOfferDetailsResponseData extends Data
             car_import_type: null,
             miles_travelled_in_km: $car->miles_travelled_in_km,
             is_new_car: $car->is_new_car,
-            fuel_type: FuelType::from($car->fuel_type),
+            fuel_type: FuelType::tryFrom($car->fuel_type),
             car_sell_location: SyrianCity::tryFrom($car->car_sell_location),
             transmission: TransmissionType::tryFrom($car->transmission),
             is_kassah: $car->is_kassah,

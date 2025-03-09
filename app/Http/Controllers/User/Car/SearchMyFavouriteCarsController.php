@@ -46,7 +46,7 @@ class SearchMyFavouriteCarsController extends Controller
                     ->with([
                         'medially' => fn ($comments) => $comments->take(1),
                     ])
-                    ->simplePaginate(2);
+                    ->paginate(2);
 
 
             return CarListData::collect($local_car_search_result);
@@ -63,7 +63,7 @@ class SearchMyFavouriteCarsController extends Controller
                             'medially' => fn ($comments) => $comments->take(1),
                         ])
                 )
-                ->simplePaginate(3);
+                ->paginate(3);
 
         $paginator = tap($remote_car_search_result, function($paginatedInstance) use ($logged_user_id) {
             return $paginatedInstance->getCollection()->transform(function ($model) use ($logged_user_id) {

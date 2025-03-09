@@ -27,6 +27,8 @@ class DeleteCarOfferController extends CarController
         DB::transaction(function() use ($car){
 
             defer(fn () => $car->detachMedia());
+            // $car->detachMedia();
+
 
             $car->delete();
         });

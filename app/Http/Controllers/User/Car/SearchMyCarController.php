@@ -38,7 +38,7 @@ class SearchMyCarController extends Controller
                     ->with([
                         'medially' => fn ($comments) => $comments->take(1),
                     ])
-                    ->simplePaginate(2);
+                    ->paginate(2);
 
             return CarListData::collect($remote_car_search_result);
         }
@@ -51,7 +51,7 @@ class SearchMyCarController extends Controller
                             'medially' => fn ($comments) => $comments->take(1),
                         ])
                 )
-                ->simplePaginate(2);
+                ->paginate(2);
 
         return CarListData::collect($remote_car_search_result);
 
