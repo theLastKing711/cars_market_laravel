@@ -17,7 +17,6 @@ class CarOfferDetailsController extends Controller
     {
         $request_car_id = $request->id;
 
-
         $logged_user_id =
             5;
         // Auth::User()->id

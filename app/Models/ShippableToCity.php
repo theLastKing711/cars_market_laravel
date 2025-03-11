@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $car_id
@@ -49,7 +49,7 @@ class ShippableToCity extends Model
     /**
      * The cars that belong to the ShippableToCity
      */
-    public function cars(): BelongsTo
+    public function car(): BelongsTo
     {
         return $this->belongsTo(Car::class);
     }

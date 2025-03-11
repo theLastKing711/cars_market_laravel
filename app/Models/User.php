@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use PHPUnit\TextUI\Configuration\Php;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -126,3 +127,4 @@ class User extends Authenticatable
         ];
     }
 }
+
