@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('country_code')->nullable();
             $table->string('phone_number')->unique();
+            $table->integer('max_number_of_car_upload')->nullable();
             $table->foreignId('subscription_id')->constrained()->nullable();
             // $table->string('name');
             // $table->string('email')->unique();

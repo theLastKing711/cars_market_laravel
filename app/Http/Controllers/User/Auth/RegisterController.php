@@ -25,6 +25,8 @@ class RegisterController extends Controller
                 ->create([
                     'country_code' => '963',
                     'phone_number' => $request_phone_number,
+                    'max_number_of_car_upload' => 0,
+                    'subscription_id' => 1,
                 ])
                 ->createToken($request_phone_number);
 

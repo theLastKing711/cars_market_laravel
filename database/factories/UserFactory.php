@@ -32,6 +32,7 @@ class UserFactory extends Factory
             'country_code' => fake()->numberBetween('900', '963'),
             'subscription_id' => Subscription::first(),
             'phone_number' => fake()->phoneNumber(),
+            'max_number_of_car_upload' => fake()->numberBetween(0, 3),
             'remember_token' => Str::random(10),
         ];
     }

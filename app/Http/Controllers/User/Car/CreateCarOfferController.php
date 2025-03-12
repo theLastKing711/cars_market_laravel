@@ -7,7 +7,9 @@ use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
 use App\Data\User\Car\CreateCarOfferRequestData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
@@ -56,6 +58,19 @@ class CreateCarOfferController extends Controller
             $car
                 ->medially()
                 ->saveMany($user_car_medias);
+
+            $logged_user_id = 5;
+
+            User::query()
+                ->firstWhere(
+                    'id',
+                    $logged_user_id
+                )
+                ->decrement('max_number_of_car_upload');
+
+            // Auth::User()
+            //     ->increment('max_number_of_car_upload');
+
         });
 
         $request

@@ -17,25 +17,21 @@ class CarOfferDetailsController extends Controller
     {
         $request_car_id = $request->id;
 
-        $logged_user_id =
-            5;
-        // Auth::User()->id
-
-        // return
+        $logged_user_id = 5;
 
         $car =
             Car::query()
                 ->whereId($request->id)
-                 ->selectRaw(
-                        '*, (select exists (select 1 from user_favourites_cars where user_id=? AND car_id=?)) as is_favourite',
-                        [$logged_user_id, $request_car_id]
-                    )
+                ->selectRaw(
+                    '*, (select exists (select 1 from user_favourites_cars where user_id=? AND car_id=?)) as is_favourite',
+                    [$logged_user_id, $request_car_id]
+                )
                 ->with(
                     [
                         'medially',
                         'shippable_to',
-                        'user' => fn ( $query) =>
-                            $query->select('id','phone_number')
+                        'user' => fn ($query) => $query
+                            ->select('id', 'phone_number', 'max_number_of_car_upload'),
                     ]
                 )
                 ->first();

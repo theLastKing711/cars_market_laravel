@@ -512,6 +512,26 @@
                 }
             }
         },
+        "/users/cars/maxCarUpload": {
+            "get": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "5cfb397fdd900feb57a83ac94a233aff",
+                "responses": {
+                    "200": {
+                        "description": "Item fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetUserMaxCarUploadResponseData"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/users/cars/searchMyCars": {
             "get": {
                 "tags": [
@@ -889,19 +909,7 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "model": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "year_manufactured": {
-                        "type": "integer",
-                        "nullable": true
-                    },
                     "car_price": {
-                        "type": "integer",
-                        "nullable": true
-                    },
-                    "car_label_origin": {
                         "type": "integer",
                         "nullable": true
                     },
@@ -967,11 +975,18 @@
                             "$ref": "#/components/schemas/ShippableToCityData"
                         }
                     },
-                    "medially": {
+                    "images": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/MediaData"
                         }
+                    },
+                    "phone_number": {
+                        "type": "string"
+                    },
+                    "max_number_of_car_upload": {
+                        "type": "integer",
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -1025,6 +1040,14 @@
                     "is_khalyeh": {
                         "type": "boolean",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "GetUserMaxCarUploadResponseData": {
+                "properties": {
+                    "max_number_of_car_upload": {
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -1435,12 +1458,6 @@
                     4,
                     5,
                     6
-                ]
-            },
-            "Latest": {
-                "type": "string",
-                "enum": [
-                    "TestCase"
                 ]
             },
             "SyrianCity": {
