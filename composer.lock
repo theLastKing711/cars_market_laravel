@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d304ef7a477136fa9f56419cab7aa12a",
+    "content-hash": "a52784139a103b0e26ed6f53bdfff707",
     "packages": [
         {
             "name": "ajcastro/eager-load-pivot-relations",
@@ -1340,6 +1340,65 @@
                 }
             ],
             "time": "2025-02-06T14:54:32+00:00"
+        },
+        {
+            "name": "datlechin/laravel-google-translate",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/datlechin/laravel-google-translate.git",
+                "reference": "1cd31738ee52f85d94da219842be1333842a4fd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/datlechin/laravel-google-translate/zipball/1cd31738ee52f85d94da219842be1333842a4fd2",
+                "reference": "1cd31738ee52f85d94da219842be1333842a4fd2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^10.0|^11.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "GoogleTranslate": "Datlechin\\GoogleTranslate\\Facades\\GoogleTranslate"
+                    },
+                    "providers": [
+                        "Datlechin\\GoogleTranslate\\GoogleTranslateServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Datlechin\\GoogleTranslate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ngo Quoc Dat",
+                    "email": "datlechin@gmail.com",
+                    "homepage": "https://ngoquocdat.dev"
+                }
+            ],
+            "description": "Free Google Translate API for Laravel application.",
+            "homepage": "https://github.com/datlechin/laravel-google-translate",
+            "keywords": [
+                "Google Translate API",
+                "google translate",
+                "laravel google translate",
+                "translate"
+            ],
+            "support": {
+                "issues": "https://github.com/datlechin/laravel-google-translate/issues",
+                "source": "https://github.com/datlechin/laravel-google-translate/tree/v0.2.0"
+            },
+            "time": "2024-09-08T09:24:31+00:00"
         },
         {
             "name": "daverandom/libdns",

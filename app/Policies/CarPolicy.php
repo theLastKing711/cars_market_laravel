@@ -73,5 +73,4 @@ class CarPolicy
     // public function forceDelete(User $user, Car $car): bool
     // {
     //     return false;
-    }
 }

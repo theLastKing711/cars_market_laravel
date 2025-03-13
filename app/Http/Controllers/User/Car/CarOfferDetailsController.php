@@ -15,6 +15,7 @@ class CarOfferDetailsController extends Controller
     #[SuccessItemResponse(CarOfferDetailsResponseData::class)]
     public function __invoke(CarIdPathParameterData $request)
     {
+
         $request_car_id = $request->id;
 
         $logged_user_id = 5;

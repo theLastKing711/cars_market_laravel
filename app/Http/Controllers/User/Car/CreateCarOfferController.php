@@ -8,6 +8,7 @@ use App\Data\User\Car\CreateCarOfferRequestData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\User;
+use App\Services\Api\TranslationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +36,7 @@ class CreateCarOfferController extends Controller
 
         // $logged_user_id = Auth::User()->id;
 
-        DB::transaction(function () use ($createCarOfferRequestData, $user_car_medias) {
+        DB::transaction(function () use ($createCarOfferRequestData) {
 
             $car_manufacturer_name_en = config('constants.cars');
 
@@ -43,8 +44,8 @@ class CreateCarOfferController extends Controller
                 ->create([
                     // 'user_id' => $logged_user_id,
                     'user_id' => 1,
-                    'name_ar' => $createCarOfferRequestData->name_ar,
-                    // 'manufacturer_name_en' => $createCarOfferRequestData->name_en,
+                    'name_ar' => $createCarOfferRequestData->name_ar ?? new TranslationService()->translateFromEnglishToArabic($createCarOfferRequestData->name_en),
+                    'name_en' => $createCarOfferRequestData->name_en ?? new TranslationService()->translateFromArabicToEnglish($createCarOfferRequestData->name_ar),
                     'is_new_car' => $createCarOfferRequestData->is_new_car,
                     'car_price' => $createCarOfferRequestData->car_price,
                     'fuel_type' => $createCarOfferRequestData->fuel_type,
@@ -55,9 +56,9 @@ class CreateCarOfferController extends Controller
                     'is_khalyeh' => $createCarOfferRequestData->is_khalyeh,
                 ]);
 
-            $car
-                ->medially()
-                ->saveMany($user_car_medias);
+            // $car
+            //     ->medially()
+            //     ->saveMany($user_car_medias);
 
             $logged_user_id = 5;
 
