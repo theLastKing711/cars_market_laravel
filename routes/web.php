@@ -73,8 +73,8 @@ Route::prefix('users')
             Route::get('updateDetails/{id}', getUpdateCarOfferController::class);
             Route::patch('sell/{id}', SellCarController::class);
             Route::patch('{id}/favourite', FavouriteCarController::class);
-            Route::post('', CreateCarOfferController::class)
-                ->can('upload', Car::class);
+            Route::post('', CreateCarOfferController::class);
+            // ->can('upload', Car::class);
             Route::post('{id}/images', UpdateCarOfferImagesController::class);
             Route::get('searchMyCars', SearchMyCarController::class);
             Route::get('', SearchCarOfferController::class);

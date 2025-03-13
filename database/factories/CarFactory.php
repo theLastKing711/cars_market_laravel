@@ -26,7 +26,7 @@ class CarFactory extends Factory
 
         return [
             'name_ar' => fake()->text(),
-            'name_en' => fake()->text(),
+            'name_en' => fake()->text(6),
             'is_new_car' => fake()->boolean(),
             'year_manufactured' => fake()->year(),
             'car_color' => fake()->numberBetween(0, 10),
