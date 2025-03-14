@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enum\Language;
 use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Eloquent;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -114,14 +116,11 @@ class Car extends Model
 
     /**
      * Get the user that owns the Car
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
 
     /**
      * Get all of the shippable_to for the Car
@@ -137,6 +136,22 @@ class Car extends Model
     public function favourited_by_users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_favourites_cars');
+    }
+
+    protected function nameArs(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $attributes['car_name_language_when_uploaded'] === Language::EN
+                 ?
+                 $attributes['name_ar']
+                 :
+                 $attributes['name_en']
+        );
+    }
+
+    public function scopeIsNotSold()
+    {
+        return $this->where('is_sold', '!=', true);
     }
 
     // #[SearchUsingFullText(['model', 'description'])]
@@ -163,7 +178,7 @@ class Car extends Model
         // $index_attributes_array['manufacturer_id'] =
         //     $this->Manufacturer->id; // foriegn key, it works but its not needed here
 
-        //load shippable city to this remote table(cars) index
+        // load shippable city to this remote table(cars) index
         $index_attributes_array['city'] =
             $this->shippable_to
                 ->map(function ($data) {
@@ -177,11 +192,6 @@ class Car extends Model
                 });
 
         return $index_attributes_array;
-    }
-
-    public function scopeIsNotSold()
-    {
-        return $this->where('is_sold', '!=', true);
     }
 
     // /**

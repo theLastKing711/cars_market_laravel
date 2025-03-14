@@ -20,7 +20,7 @@ class CreateCarOfferController extends Controller
     #[OAT\Post(path: '/users/cars', tags: ['usersCars'])]
     #[JsonRequestBody(CreateCarOfferRequestData::class)]
     #[SuccessNoContentResponse]
-    public function __invoke(CreateCarOfferRequestData $createCarOfferRequestData, Request $request)
+    public function __invoke(CreateCarOfferRequestData $createCarOfferRequestData, Request $request, TranslationService $translationService)
     {
 
         Log::info('request {request}', ['request' => $createCarOfferRequestData]);
@@ -28,7 +28,7 @@ class CreateCarOfferController extends Controller
         $uploaded_car_images_session_key =
             config('constants.session.upload_car_images');
 
-        /** @var string[] $user_uploaded_car_images */
+        /** @var string[] $user_car_medias */
         $user_car_medias =
             $request
                 ->session()
@@ -36,16 +36,21 @@ class CreateCarOfferController extends Controller
 
         // $logged_user_id = Auth::User()->id;
 
-        DB::transaction(function () use ($createCarOfferRequestData) {
+        DB::transaction(function () use ($createCarOfferRequestData, $translationService) {
 
-            $car_manufacturer_name_en = config('constants.cars');
+            $car_translation_set =
+                $translationService
+                    ->translate($createCarOfferRequestData->name_ar);
 
             $car = Car::query()
                 ->create([
                     // 'user_id' => $logged_user_id,
+                    'car_upload_start_date' => now(),
+                    'car_upload_expiration_date' => now()->addYear(1),
                     'user_id' => 1,
-                    'name_ar' => $createCarOfferRequestData->name_ar ?? new TranslationService()->translateFromEnglishToArabic($createCarOfferRequestData->name_en),
-                    'name_en' => $createCarOfferRequestData->name_en ?? new TranslationService()->translateFromArabicToEnglish($createCarOfferRequestData->name_ar),
+                    'car_name_language_when_uploaded' => $car_translation_set->upload_language,
+                    'name_ar' => $car_translation_set->name_ar,
+                    'name_en' => $car_translation_set->name_en,
                     'is_new_car' => $createCarOfferRequestData->is_new_car,
                     'car_price' => $createCarOfferRequestData->car_price,
                     'fuel_type' => $createCarOfferRequestData->fuel_type,
@@ -68,9 +73,6 @@ class CreateCarOfferController extends Controller
                     $logged_user_id
                 )
                 ->decrement('max_number_of_car_upload');
-
-            // Auth::User()
-            //     ->increment('max_number_of_car_upload');
 
         });
 

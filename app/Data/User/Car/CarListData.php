@@ -57,10 +57,7 @@ class CarListData extends Data
         // #[MapOutputName('image')]
         #[OAT\Property]
         public ?MediaData $image,
-
-
     ) {}
-
 
     // public static function collectArray($items, int $user_id): CarListCollection
     // {
@@ -133,5 +130,4 @@ class CarListData extends Data
             image: $single_media_data
         );
     }
-
 }

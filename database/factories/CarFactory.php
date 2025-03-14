@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Enum\Currency;
 use App\Enum\FuelType;
 use App\Enum\ImportType;
+use App\Enum\Language;
 use App\Enum\SyrianCity;
 use App\Enum\TransmissionType;
 use App\Models\Car;
@@ -25,6 +26,7 @@ class CarFactory extends Factory
     {
 
         return [
+            'car_name_language_when_uploaded' => fake()->randomElement(Language::cases()),
             'name_ar' => fake()->text(),
             'name_en' => fake()->text(6),
             'is_new_car' => fake()->boolean(),
@@ -46,6 +48,8 @@ class CarFactory extends Factory
             'is_kassah' => fake()->boolean(),
             'is_khalyeh' => fake()->boolean(),
             'is_tajrobeh' => fake()->boolean(),
+            'car_upload_start_date' => now(),
+            'car_upload_expiration_date' => now()->addYear(1),
         ];
     }
 
