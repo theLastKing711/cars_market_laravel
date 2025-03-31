@@ -2,7 +2,9 @@
 
 use App\Enum\Auth\RolesEnum;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\User\Auth\CreatePasswordController;
 use App\Http\Controllers\User\Auth\RegisterController;
+use App\Http\Controllers\User\Auth\VerifyPasswordController;
 use App\Http\Controllers\User\Car\CarOfferDetailsController;
 use App\Http\Controllers\User\Car\CreateCarOfferController;
 use App\Http\Controllers\User\Car\DeleteCarOfferController;
@@ -27,21 +29,21 @@ Route::prefix('files')
         Route::delete('{public_id}', [FileController::class, 'delete']);
     });
 
-Route::prefix('admin')
-    ->middleware(['api'])
-    ->group(function () {
-        $adminRole = RolesEnum::ADMIN->value;
+// Route::prefix('admin')
+//     ->middleware(['api'])
+//     ->group(function () {
+//         $adminRole = RolesEnum::ADMIN->value;
 
-        Route::middleware(['auth:sanctum', "role:{$adminRole}"])
-            // auth:sanctum check if user is logged in (middleware('auth')),
-            ->group(function () {
+//         Route::middleware(['auth:sanctum', "role:{$adminRole}"])
+//             // auth:sanctum check if user is logged in (middleware('auth')),
+//             ->group(function () {
 
-                Route::prefix('tests')
-                    ->group(function () {});
+//                 Route::prefix('tests')
+//                     ->group(function () {});
 
-            });
+//             });
 
-    });
+//     });
 
 Route::prefix('users')
     ->middleware(['api'])
@@ -49,6 +51,9 @@ Route::prefix('users')
 
         Route::prefix('auth')->group(function () {
             Route::post('register', RegisterController::class);
+            Route::post('create-password', CreatePasswordController::class);
+            Route::post('verify-password', VerifyPasswordController::class);
+
             // Route::post('login', UserLoginController::class);
             // Route::post('logout', UserLogoutController::class);
         });

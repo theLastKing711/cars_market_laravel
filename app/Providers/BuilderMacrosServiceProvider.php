@@ -23,7 +23,7 @@ class BuilderMacrosServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-        //need fix too few argument when passing first two only
+        // need fix too few argument when passing first two only
         // Builder::macro('whereBetween', function (\Illuminate\Contracts\Database\Query\Expression|string $column, iterable $values, string $boolean, bool $not): Model|static|null {
 
         //     /** @var Builder $this */
@@ -72,14 +72,12 @@ class BuilderMacrosServiceProvider extends ServiceProvider
             return $this->whereAny(
                 $fields,
                 'LIKE',
-                '%'.$searchTerm.'%',
             );
         });
 
         Builder::macro('whereIdIn', function (Collection|array $ids): Builder {
 
             /** @var Builder $this */
-
             return $this->whereIn(
                 'id',
                 $ids
@@ -89,7 +87,6 @@ class BuilderMacrosServiceProvider extends ServiceProvider
         Collection::macro('whereIdIn', function (Collection|array $ids): Collection {
 
             /** @var Collection $this */
-
             return $this->whereIn(
                 'id',
                 $ids

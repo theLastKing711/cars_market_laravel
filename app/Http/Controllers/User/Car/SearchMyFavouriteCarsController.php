@@ -10,13 +10,10 @@ use App\Data\User\Car\SearchCarOfferPaginationResultData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Support\Facades\DB;
 use OpenApi\Attributes as OAT;
 
 class SearchMyFavouriteCarsController extends Controller
 {
-
     #[OAT\Get(path: '/users/cars/searchMyFavouriteCars', tags: ['usersCars'])]
     #[QueryParameter('search')]
     #[SuccessItemResponse(SearchCarOfferPaginationResultData::class)]
@@ -29,8 +26,7 @@ class SearchMyFavouriteCarsController extends Controller
         // $logged_user_id =
         //     Auth::User()->id;
 
-
-         $logged_user_id = 5;
+        $logged_user_id = 5;
 
         if (! $request_search) {
             $local_car_search_result =
@@ -42,16 +38,14 @@ class SearchMyFavouriteCarsController extends Controller
                     // )
                     ::selectRaw('*, true as is_favourite')
                     // ->whereUserId($logged_user_id)
-                    ->has('favourited_by_users')
-                    ->with([
-                        'medially' => fn ($comments) => $comments->take(1),
-                    ])
-                    ->paginate(2);
-
+                        ->has('favourited_by_users')
+                        ->with([
+                            'medially' => fn ($comments) => $comments->take(1),
+                        ])
+                        ->paginate(2);
 
             return CarListData::collect($local_car_search_result);
         }
-
 
         $remote_car_search_result =
             Car::search($request_search)
@@ -65,7 +59,7 @@ class SearchMyFavouriteCarsController extends Controller
                 )
                 ->paginate(3);
 
-        $paginator = tap($remote_car_search_result, function($paginatedInstance) use ($logged_user_id) {
+        $paginator = tap($remote_car_search_result, function ($paginatedInstance) use ($logged_user_id) {
             return $paginatedInstance->getCollection()->transform(function ($model) use ($logged_user_id) {
                 return CarListData::fromModel($model, $logged_user_id);
             });

@@ -128,9 +128,16 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereIsKassah($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereIsKhalyeh($value)
  * @mixin Eloquent
+ * @property string $car_upload_start_date
+ * @property string $car_upload_expiration_date
+ * @property int $car_name_language_when_uploaded
  * @property string|null $name_en
+ * @property-read mixed $name_ars
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car isNotSold()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarNameLanguageWhenUploaded($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarUploadExpirationDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarUploadStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereNameAr($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereNameEn($value)
  */

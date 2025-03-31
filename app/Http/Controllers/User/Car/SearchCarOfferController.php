@@ -8,13 +8,10 @@ use App\Data\Shared\Swagger\Response\SuccessItemResponse;
 use App\Data\User\Car\CarListData;
 use App\Data\User\Car\QueryParameters\SearchCarOfferQueryParameterData;
 use App\Data\User\Car\SearchCarOfferPaginationResultData;
-use App\Data\User\Car\SearchCarOfferResponseData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Scout\Builder as ScoutBuilder;
 use OpenApi\Attributes as OAT;
 
@@ -94,6 +91,12 @@ class SearchCarOfferController extends Controller
                 ->is_faragha_jahzeh;
 
         $request_is_new_car =
+            str_contains($request->search, 'مستعملة')
+            ||
+            str_contains($request->search, 'مستعمل')
+            ?
+            true
+            :
             $request
                 ->is_new_car;
 
@@ -115,19 +118,18 @@ class SearchCarOfferController extends Controller
 
         $is_request_search_set = $request_search != null;
 
-            // $logged_user_id = Auth::User()->id;
+        // $logged_user_id = Auth::User()->id;
 
-            $logged_user_id = 5;
+        $logged_user_id = 5;
 
         if (! $is_request_search_set) {
 
             $local_cars_search =
-                Car
-                    ::selectRaw(
+                Car::selectRaw(
 
-                        '*, (select exists (select 1 from user_favourites_cars where user_id=? AND car_id=cars.id)) as is_favourite',
-                        [$logged_user_id]
-                    )
+                    '*, (select exists (select 1 from user_favourites_cars where user_id=? AND car_id=cars.id)) as is_favourite',
+                    [$logged_user_id]
+                )
                     ->when(
                         $request_shippable_to,
                         fn (EloquentBuilder $query) => $query
@@ -238,7 +240,7 @@ class SearchCarOfferController extends Controller
                     // gets called on client side after remote query success
                     ->with([
                         'medially' => fn ($comments) => $comments->take(1),
-                        'favourited_by_users'
+                        'favourited_by_users',
                     ])
                     ->paginate(10);
 
@@ -279,7 +281,7 @@ class SearchCarOfferController extends Controller
             :
             '';
 
-        //get applied on remote side in addtion to when filters
+        // get applied on remote side in addtion to when filters
         $query_filters =
             $car_price_from_query && $car_travelled_in_km_query
             ?
@@ -297,115 +299,114 @@ class SearchCarOfferController extends Controller
             Car::search(
                 $request_search
             )
-            ->options([
-                'filters' => $query_filters, // used for where between or where greater or where smaller, because they are not avaialble in api nativley, gets merged with other filters below
-                // 'restrictSearchableAttributes' => [ // potinal performance imporvment, in dashboad configuration -> add tosearchable attributes for it to work
-                //     'manufacturer_ar',
-                // ],
-            ])
-            ->when(
-                $request_shippable_to,
-                fn (ScoutBuilder $query) => $query->whereIn('city', $request_shippable_to)
-            )
-            ->when(
-                $request_car_sell_location,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'car_sell_location',
-                        $request_car_sell_location
-                    )
-            )
-            ->when(
-                $request_year_manufactured,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'year_manufactured',
-                        $request_year_manufactured
-                    )
-            )
-            ->when(
-                $request_fuel_type,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'fuel_type',
-                        enum_value($request_fuel_type)
-                    )
-            )
-            ->when(
-                $request_car_label_origin,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'car_label_origin',
-                        $request_car_label_origin
-                    )
-            )
-            ->when(
-                $request_user_has_legal_car_papers,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'user_has_legal_car_papers',
-                        true
-                    )
-            )
-            ->when(
-                $request_is_faragha_jahzeh,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'is_faragha_jahzeh',
-                        $request_is_faragha_jahzeh
-                    )
-            )
-            ->when(
-                $request_is_new_car,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'is_new_car',
-                        $request_is_new_car
-                    )
-            )
-            ->when(
-                $request_is_khalyeh,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'is_khalyeh',
-                        $request_is_khalyeh
-                    )
-            )
-            ->when(
-                $request_is_kassah,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'is_kassah',
-                        $request_is_kassah
-                    )
-            )
-            ->when(
-                $request_import_type,
-                fn (ScoutBuilder $query) => $query
-                    ->where(
-                        'car_import_type',
-                        $request_import_type
-                    )
-            )
+                ->options([
+                    'filters' => $query_filters, // used for where between or where greater or where smaller, because they are not avaialble in api nativley, gets merged with other filters below
+                    // 'restrictSearchableAttributes' => [ // potinal performance imporvment, in dashboad configuration -> add tosearchable attributes for it to work
+                    //     'manufacturer_ar',
+                    // ],
+                ])
+                ->when(
+                    $request_shippable_to,
+                    fn (ScoutBuilder $query) => $query->whereIn('city', $request_shippable_to)
+                )
+                ->when(
+                    $request_car_sell_location,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'car_sell_location',
+                            $request_car_sell_location
+                        )
+                )
+                ->when(
+                    $request_year_manufactured,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'year_manufactured',
+                            $request_year_manufactured
+                        )
+                )
+                ->when(
+                    $request_fuel_type,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'fuel_type',
+                            enum_value($request_fuel_type)
+                        )
+                )
+                ->when(
+                    $request_car_label_origin,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'car_label_origin',
+                            $request_car_label_origin
+                        )
+                )
+                ->when(
+                    $request_user_has_legal_car_papers,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'user_has_legal_car_papers',
+                            true
+                        )
+                )
+                ->when(
+                    $request_is_faragha_jahzeh,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'is_faragha_jahzeh',
+                            $request_is_faragha_jahzeh
+                        )
+                )
+                ->when(
+                    $request_is_new_car,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'is_new_car',
+                            $request_is_new_car
+                        )
+                )
+                ->when(
+                    $request_is_khalyeh,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'is_khalyeh',
+                            $request_is_khalyeh
+                        )
+                )
+                ->when(
+                    $request_is_kassah,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'is_kassah',
+                            $request_is_kassah
+                        )
+                )
+                ->when(
+                    $request_import_type,
+                    fn (ScoutBuilder $query) => $query
+                        ->where(
+                            'car_import_type',
+                            $request_import_type
+                        )
+                )
     // gets called on client side after remote query success
-            ->query(
-                fn (EloquentBuilder $query) => $query
-                    ->with([
-                        'medially' => fn ($comments) => $comments->take(1),
-                        'favourited_by_users'
-                    ])
-            )
-            ->paginate(5);
+                ->query(
+                    fn (EloquentBuilder $query) => $query
+                        ->with([
+                            'medially' => fn ($comments) => $comments->take(1),
+                            'favourited_by_users',
+                        ])
+                )
+                ->paginate(5);
 
-    return $remote_cars_search;
-        $paginator = tap($remote_cars_search, function($paginatedInstance) use ($logged_user_id) {
+        return $remote_cars_search;
+        $paginator = tap($remote_cars_search, function ($paginatedInstance) use ($logged_user_id) {
             return $paginatedInstance->getCollection()->transform(function ($model) use ($logged_user_id) {
                 return CarListData::fromModel($model, $logged_user_id);
             });
         });
 
-    return $paginator;
-
+        return $paginator;
 
     }
 }

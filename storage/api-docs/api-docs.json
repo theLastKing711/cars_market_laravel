@@ -285,6 +285,34 @@
                 }
             }
         },
+        "/users/auth/create-password": {
+            "post": {
+                "tags": [
+                    "usersAuth"
+                ],
+                "operationId": "52770526f6ced090fbab7fe7390f4ce5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePasswordRequestData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/users/auth/login": {
             "post": {
                 "tags": [
@@ -329,6 +357,34 @@
                                 "schema": {
                                     "$ref": "#/components/schemas/RegisterResponseData"
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/auth/verify-password": {
+            "post": {
+                "tags": [
+                    "usersAuth"
+                ],
+                "operationId": "a5fe76865af7b8049ca67b069bdd7f7a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/VerifyPasswordRequestData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }
@@ -799,6 +855,17 @@
                 },
                 "type": "object"
             },
+            "CreatePasswordRequestData": {
+                "properties": {
+                    "phone_number": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "LoginRequestData": {},
             "RegisterRequestData": {
                 "properties": {
@@ -811,6 +878,17 @@
             "RegisterResponseData": {
                 "properties": {
                     "token": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "VerifyPasswordRequestData": {
+                "properties": {
+                    "phone_number": {
+                        "type": "string"
+                    },
+                    "password": {
                         "type": "string"
                     }
                 },

@@ -8,6 +8,8 @@ use App\Data\User\Auth\RegisterRequestData;
 use App\Data\User\Auth\RegisterResponseData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Cloudinary\Api\HttpStatusCode;
+use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
 class RegisterController extends Controller
@@ -20,17 +22,45 @@ class RegisterController extends Controller
 
         $request_phone_number = $request->phone_number;
 
-        $token =
-            User::query()
-                ->create([
-                    'country_code' => '963',
-                    'phone_number' => $request_phone_number,
-                    'max_number_of_car_upload' => 0,
-                    'subscription_id' => 1,
-                ])
-                ->createToken($request_phone_number);
+        $is_phone_number_duplicated =
+                User::where('phone_number', $request_phone_number)
+                    ->exists();
 
-        return new RegisterResponseData($token->plainTextToken);
+        Log::info('phone number {phone_number}', ['phone_number' => $is_phone_number_duplicated]);
+
+        if ($is_phone_number_duplicated) {
+            return response(
+                [
+                    'message' => 'The phone number has already been taken.',
+                    'errors' => [
+                        'phone_number' => [
+                            'The phone number has already been taken.',
+                        ],
+                    ],
+                ],
+                HttpStatusCode::CONFLICT
+            );
+        }
+
+        // $user_has_phone_number_but_not_password_yet =
+        //     User::query()
+        //         ->firstWhere(
+        //             [
+        //                 'password' => null,
+        //                 'phone_number' => $request_phone_number,
+        //             ]
+        //         )
+        //         ->exists();
+
+        // if ($user_has_phone_number_but_not_password_yet) {
+
+        return response(
+            [
+                'message' => 'Success',
+            ],
+            HttpStatusCode::OK
+        );
+        // }
 
     }
 }

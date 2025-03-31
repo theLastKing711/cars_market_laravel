@@ -9,11 +9,13 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
 #[Oat\Schema()]
-class RegisterRequestData extends Data
+class CreatePasswordRequestData extends Data
 {
     public function __construct(
-        // #[Unique('users', 'phone_number')]
+        #[Unique('users', 'phone_number')]
         #[OAT\Property]
         public string $phone_number,
+        #[OAT\Property]
+        public string $password,
     ) {}
 }
