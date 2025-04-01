@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Cloudinary\Api\HttpStatusCode;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
 class VerifyPasswordController extends Controller
@@ -20,9 +19,6 @@ class VerifyPasswordController extends Controller
     #[SuccessItemResponse(RegisterResponseData::class)]
     public function __invoke(VerifyPasswordRequestData $verifyPasswordRequestData)
     {
-        Log::info('hello world');
-
-        Log::info('request {request}', ['request' => $verifyPasswordRequestData]);
 
         $request_phone_number =
             $verifyPasswordRequestData->phone_number;

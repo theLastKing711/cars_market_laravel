@@ -52,22 +52,22 @@ class FileController extends Controller
         Log::info($uploadFileData);
         $file_path = $file->getRealPath();
 
-        //https://cloudinary.com/documentation/image_upload_api_reference#upload_method
-        //https://cloudinary.com/documentation/image_upload_api_reference
-        //https://cloudinary.com/documentation/transformation_reference
-        //https://cloudinary.com/documentation/image_optimization
-        //https://cloudinary.com/documentation/eager_and_incoming_transformations#eager_transformations
-        ///eager which apply multiple transformations on the fly during upload
+        // https://cloudinary.com/documentation/image_upload_api_reference#upload_method
+        // https://cloudinary.com/documentation/image_upload_api_reference
+        // https://cloudinary.com/documentation/transformation_reference
+        // https://cloudinary.com/documentation/image_optimization
+        // https://cloudinary.com/documentation/eager_and_incoming_transformations#eager_transformations
+        // /eager which apply multiple transformations on the fly during upload
         // and return multiple transformed images, as opposed the transformation
-        //which works only on the main image and return it
+        // which works only on the main image and return it
         // alternative to eager is eager_async,
-        //which apply transformation after upload request is done
+        // which apply transformation after upload request is done
         // when first visited by user i.e end-user using front end
-        //https://cloudinary.com/documentation/transformation_reference
+        // https://cloudinary.com/documentation/transformation_reference
         // if width => value used with quality => auto will be the same as width => value alone
         // 'effect' => ['bgremoval|make_transparent'] to remove background  is bad and doesn't work
         $result = Cloudinary::upload($file_path, [
-            'eager' => [ //list of transformation objects -> https://cloudinary.com/documentation/transformation_reference
+            'eager' => [ // list of transformation objects -> https://cloudinary.com/documentation/transformation_reference
                 [
                     'width' => 500,
                     // 'height' => 500,
@@ -123,7 +123,7 @@ class FileController extends Controller
         );
 
         // the url of the uploaded image -> real image on usage
-        //example result: https:cloudinary$pathToImage
+        // example result: https:cloudinary$pathToImage
         $cloudinary_image_path = $result->getSecurePath();
 
         // unique identifer for the image can
@@ -162,23 +162,23 @@ class FileController extends Controller
 
                 $file_path = $file->getRealPath();
 
-                //https://cloudinary.com/documentation/image_upload_api_reference
-                //https://cloudinary.com/documentation/transformation_reference
-                //https://cloudinary.com/documentation/image_optimization
-                //https://cloudinary.com/documentation/eager_and_incoming_transformations#eager_transformations
-                ///eager which apply multiple transformations on the fly during upload
+                // https://cloudinary.com/documentation/image_upload_api_reference
+                // https://cloudinary.com/documentation/transformation_reference
+                // https://cloudinary.com/documentation/image_optimization
+                // https://cloudinary.com/documentation/eager_and_incoming_transformations#eager_transformations
+                // /eager which apply multiple transformations on the fly during upload
                 // and return multiple transformed images, as opposed the transformation
-                //which works only on the main image and return it
+                // which works only on the main image and return it
                 // alternative to eager is eager_async,
-                //which apply transformation after upload request is done
+                // which apply transformation after upload request is done
                 // when first visited by user i.e end-user using front end
-                //https://cloudinary.com/documentation/transformation_reference
+                // https://cloudinary.com/documentation/transformation_reference
                 // if width => value used with quality => auto will be the same as width => value alone
                 // 'effect' => ['bgremoval|make_transparent'] to remove background  is bad and doesn't work
-                //return base image plus two images one with transformation of width 90 and auto height
+                // return base image plus two images one with transformation of width 90 and auto height
                 // and second is width 700 and height is 700 plus cropping
                 $response = Cloudinary::upload($file_path, [
-                    'eager' => [ //list of transformation objects -> https://cloudinary.com/documentation/transformation_reference
+                    'eager' => [ // list of transformation objects -> https://cloudinary.com/documentation/transformation_reference
                         [
                             'width' => 500,
                             // 'height' => 500,
@@ -194,7 +194,7 @@ class FileController extends Controller
                 // get request response object
                 // return $result->getResponse();
                 // the url of the uploaded image -> real image on usage
-                //example result: https:cloudinary$pathToImage
+                // example result: https:cloudinary$pathToImage
                 // $cloudinary_image_path = $response->getSecurePath();
 
                 // unique identifer for the image
@@ -226,7 +226,7 @@ class FileController extends Controller
 
     }
 
-    //eager upload with 2 transformation response
+    // eager upload with 2 transformation response
     // {
     //     "asset_id": "e993e6a01e81b12c360e4ce2757cd9b9",
     //     "public_id": "sg8oi7r0xr3cknbddbe7",
@@ -272,11 +272,34 @@ class FileController extends Controller
 
     #[OAT\Delete(path: '/files/{public_id}', tags: ['files'])]
     #[SuccessNoContentResponse]
-    public function delete(FilePublicIdPathParameterData $deleteFileData)
+    public function delete(FilePublicIdPathParameterData $deleteFileData, Request $request)
     {
+
+        $uploaded_car_images_session_key = config('constants.session.upload_car_images');
+
+        /** @var Collection<int, Media> $user_car_medias */
+        $user_car_medias =
+            $request
+                ->session()
+                ->get($uploaded_car_images_session_key);
+
+        $updated_user_car_medias =
+            $user_car_medias
+                ->filter(function ($item) use ($deleteFileData) {
+                    return $item->file_name != $deleteFileData->public_id;
+                });
+
+        $request->session()->forget($uploaded_car_images_session_key);
+
+        $request
+            ->session()
+            ->put(
+                $uploaded_car_images_session_key,
+                $updated_user_car_medias
+            );
 
         Cloudinary::destroy($deleteFileData->public_id);
 
-        return 1;
+        return $updated_user_car_medias;
     }
 }
