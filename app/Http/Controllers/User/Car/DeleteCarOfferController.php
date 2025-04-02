@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\User\Car;
 
-use App\Http\Controllers\Controller;
-;
 use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Models\Car;
 use Illuminate\Support\Facades\DB;
 use OpenApi\Attributes as OAT;
-
 
 class DeleteCarOfferController extends CarController
 {
@@ -22,17 +19,17 @@ class DeleteCarOfferController extends CarController
                 ->id;
 
         /** @var Car $car */
-        $car = Car::whereId($request_car_id)->first();
+        $car =
+            Car::whereId($request_car_id)
+                ->first();
 
-        DB::transaction(function() use ($car){
+        DB::transaction(function () use ($car) {
 
             defer(fn () => $car->detachMedia());
             // $car->detachMedia();
 
-
             $car->delete();
         });
-
 
     }
 }
