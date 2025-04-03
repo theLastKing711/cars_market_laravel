@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User\Car;
 
 use App\Data\Shared\File\UploadFileListData;
-use App\Data\Shared\File\UploadFileResponseData;
 use App\Data\Shared\Media\DeletableMediaData;
 use App\Data\Shared\Swagger\Request\FormDataRequestBody;
 use App\Data\Shared\Swagger\Response\SuccessListResponse;
@@ -13,9 +12,7 @@ use App\Models\Car;
 use App\Models\Media as ModelsMedia;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use CloudinaryLabs\CloudinaryLaravel\Model\Media;
-use Exception;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use OpenApi\Attributes as OAT;
 
 #[
@@ -30,7 +27,6 @@ use OpenApi\Attributes as OAT;
 ]
 class UpdateCarOfferImagesController extends Controller
 {
-
     #[OAT\Patch(path: '/users/cars/{id}/images', tags: ['usersCars'])]
     #[FormDataRequestBody(UploadFileListData::class)]
     #[SuccessListResponse(DeletableMediaData::class, 'Files uploaded successfully')]
@@ -43,13 +39,11 @@ class UpdateCarOfferImagesController extends Controller
 
         $car = Car::query()->firstWhere('id', $request_car_id);
 
-        Log::info('hello world');
-
         $files = $uploadFileData->files;
 
         $car->detachMedia();
 
-        /** @var Collection<int, Media> $new_media_to_add*/
+        /** @var Collection<int, Media> $new_media_to_add */
         $new_media_to_add = collect([]);
 
         /** @var Collection<int, Media> $uploaded_medias */
@@ -64,7 +58,7 @@ class UpdateCarOfferImagesController extends Controller
                 $file_path = $file->getRealPath();
 
                 $response = Cloudinary::upload($file_path, [
-                    'eager' => [ //list of transformation objects -> https://cloudinary.com/documentation/transformation_reference
+                    'eager' => [ // list of transformation objects -> https://cloudinary.com/documentation/transformation_reference
                         [
                             'width' => 500,
                             // 'height' => 500,

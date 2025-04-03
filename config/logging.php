@@ -54,7 +54,8 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            // 'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => ['single', 'slack'], // https://api.slack.com/apps/A08LBCY9F8D/incoming-webhooks?success=1
             'ignore_exceptions' => false,
         ],
 

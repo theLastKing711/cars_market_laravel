@@ -48,7 +48,6 @@ class FileController extends Controller
             ['files' => $file]
         );
         //        abort(404);
-        Log::info('hello world');
         Log::info($uploadFileData);
         $file_path = $file->getRealPath();
 

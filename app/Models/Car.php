@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enum\Language;
 use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Eloquent;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -149,9 +150,9 @@ class Car extends Model
         );
     }
 
-    public function scopeIsNotSold()
+    public function scopeIsNotSold($query): Builder
     {
-        return $this->where('is_sold', '!=', true);
+        return $query->where('is_sold', false);
     }
 
     // #[SearchUsingFullText(['model', 'description'])]
