@@ -313,6 +313,26 @@
                 }
             }
         },
+        "/users/auth/get-user-phone-number": {
+            "get": {
+                "tags": [
+                    "usersAuth"
+                ],
+                "operationId": "2a243712b221a1e18407249addacf1f8",
+                "responses": {
+                    "200": {
+                        "description": "Item fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetUserPhoneNumberResponseData"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/users/auth/login": {
             "post": {
                 "tags": [
@@ -375,6 +395,64 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/VerifyPasswordRequestData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Item fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RegisterResponseData"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/auth/change-password": {
+            "patch": {
+                "tags": [
+                    "usersAuth"
+                ],
+                "operationId": "d9e1a6743d18fa67f090751dc4b4fec9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChangePasswordRequestData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/auth/change-phone-number": {
+            "patch": {
+                "tags": [
+                    "usersAuth"
+                ],
+                "operationId": "0e469aad7346a35b8215a2e5fdcecbfc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChangePhoneNumberRequestData"
                             }
                         }
                     }
@@ -866,6 +944,14 @@
                 },
                 "type": "object"
             },
+            "GetUserPhoneNumberResponseData": {
+                "properties": {
+                    "phone_number": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "LoginRequestData": {},
             "RegisterRequestData": {
                 "properties": {
@@ -1065,6 +1151,22 @@
                     "max_number_of_car_upload": {
                         "type": "integer",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "ChangePasswordRequestData": {
+                "properties": {
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ChangePhoneNumberRequestData": {
+                "properties": {
+                    "phone_number": {
+                        "type": "string"
                     }
                 },
                 "type": "object"

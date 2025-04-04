@@ -3,9 +3,12 @@
 use App\Enum\Auth\RolesEnum;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\User\Auth\CreatePasswordController;
+use App\Http\Controllers\User\Auth\GetUserPhoneNumberController;
 use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\Auth\VerifyPasswordController;
 use App\Http\Controllers\User\Car\CarOfferDetailsController;
+use App\Http\Controllers\User\Car\ChangePasswordController;
+use App\Http\Controllers\User\Car\ChangePhoneNumberController;
 use App\Http\Controllers\User\Car\CreateCarOfferController;
 use App\Http\Controllers\User\Car\DeleteCarOfferController;
 use App\Http\Controllers\User\Car\FavouriteCarController;
@@ -50,9 +53,12 @@ Route::prefix('users')
     ->group(function () {
 
         Route::prefix('auth')->group(function () {
+            Route::get('get-user-phone-number', GetUserPhoneNumberController::class);
             Route::post('register', RegisterController::class);
             Route::post('create-password', CreatePasswordController::class);
             Route::post('verify-password', VerifyPasswordController::class);
+            Route::patch('change-password', ChangePasswordController::class);
+            Route::patch('change-phone-number', ChangePhoneNumberController::class);
 
             // Route::post('login', UserLoginController::class);
             // Route::post('logout', UserLogoutController::class);
