@@ -10,6 +10,7 @@ use App\Data\User\Car\SearchCarOfferPaginationResultData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
 class SearchMyFavouriteCarsController extends Controller
@@ -20,13 +21,10 @@ class SearchMyFavouriteCarsController extends Controller
     public function __invoke(SearchMyCarQueryParameterData $request)
     {
         $request_search =
-        $request
-            ->search;
+            $request
+                ->search;
 
-        // $logged_user_id =
-        //     Auth::User()->id;
-
-        $logged_user_id = 5;
+        $logged_user_id = Auth::User()?->id;
 
         if (! $request_search) {
             $local_car_search_result =
@@ -49,7 +47,6 @@ class SearchMyFavouriteCarsController extends Controller
 
         $remote_car_search_result =
             Car::search($request_search)
-                // ->where('user_id', $logged_user_id)
                 ->whereIn('favourited_by_users', [$logged_user_id])
                 ->query(
                     fn (Builder $query) => $query

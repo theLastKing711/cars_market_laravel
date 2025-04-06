@@ -6,6 +6,7 @@ use App\Data\Shared\Swagger\Response\SuccessItemResponse;
 use App\Data\User\Car\getUpdateCarOfferResponseData;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Models\Car;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
 #[
@@ -20,13 +21,11 @@ use OpenApi\Attributes as OAT;
 ]
 class getUpdateCarOfferController extends CarController
 {
-
     #[OAT\Get(path: '/users/cars/updateDetails/{id}', tags: ['usersCars'])]
     #[SuccessItemResponse(getUpdateCarOfferResponseData::class)]
     public function __invoke(CarIdPathParameterData $request_path_data)
     {
-        $logged_user_id =
-        5;
+        $logged_user_id = Auth::User()->id;
         // Auth::User()->id
 
         // return

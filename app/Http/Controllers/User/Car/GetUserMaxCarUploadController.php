@@ -6,6 +6,7 @@ use App\Data\Shared\Swagger\Response\SuccessItemResponse;
 use App\Data\User\Car\GetUserMaxCarUploadResponseData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
 class GetUserMaxCarUploadController extends Controller
@@ -15,8 +16,7 @@ class GetUserMaxCarUploadController extends Controller
     public function __invoke()
     {
 
-        // $logged_user_id = Auth::User()->id;
-        $logged_user_id = 5;
+        $logged_user_id = Auth::User()->id;
 
         $user_max_allowed_car_upload =
             User::query()

@@ -8,6 +8,7 @@ use App\Data\User\Car\ChangePhoneNumberRequestData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Cloudinary\Api\HttpStatusCode;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
 class ChangePhoneNumberController extends Controller
@@ -17,7 +18,7 @@ class ChangePhoneNumberController extends Controller
     #[SuccessNoContentResponse]
     public function __invoke(ChangePhoneNumberRequestData $changephoneNumberRequestData)
     {
-        $logged_user_id = 5;
+        $logged_user_id = Auth::User()->id;
 
         $phone_number_is_already_taken =
             User::query()

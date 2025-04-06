@@ -7,6 +7,7 @@ use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
 use App\Data\User\Car\ChangePasswordRequestData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
 class ChangePasswordController extends Controller
@@ -17,7 +18,7 @@ class ChangePasswordController extends Controller
     public function __invoke(ChangePasswordRequestData $changePasswordRequestData)
     {
 
-        $logged_user_id = 5;
+        $logged_user_id = Auth::User()->id;
 
         User::query()
             ->firstWhere(

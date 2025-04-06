@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Builder as ScoutBuilder;
 use OpenApi\Attributes as OAT;
 
@@ -120,16 +121,26 @@ class SearchCarOfferController extends Controller
 
         // $logged_user_id = Auth::User()->id;
 
-        $logged_user_id = 5;
+        $logged_user_id = Auth::User()?->id;
 
         if (! $is_request_search_set) {
 
             $local_cars_search =
-                Car::selectRaw(
-
-                    '*, (select exists (select 1 from user_favourites_cars where user_id=? AND car_id=cars.id)) as is_favourite',
-                    [$logged_user_id]
-                )
+                Car::query()
+                    ->when(
+                        ! $logged_user_id,
+                        fn (EloquentBuilder $query) => $query->selectRaw(
+                            '*, false as is_favourite'
+                        )
+                    )
+                    ->when(
+                        $logged_user_id,
+                        fn (EloquentBuilder $query) => $query
+                            ->selectRaw(
+                                '*,(select exists (select 1 from user_favourites_cars where user_id=? AND car_id=cars.id)) as is_favourite',
+                                [$logged_user_id]
+                            )
+                    )
                     ->when(
                         $request_shippable_to,
                         fn (EloquentBuilder $query) => $query

@@ -65,7 +65,7 @@ class CreateCarOfferController extends Controller
                 ->medially()
                 ->saveMany($user_car_medias);
 
-            $logged_user_id = 5;
+            $logged_user_id = Auth::User()->id;
 
             User::query()
                 ->firstWhere(

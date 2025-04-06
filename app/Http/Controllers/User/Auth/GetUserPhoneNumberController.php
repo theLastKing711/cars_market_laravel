@@ -6,6 +6,7 @@ use App\Data\Shared\Swagger\Response\SuccessItemResponse;
 use App\Data\User\Auth\GetUserPhoneNumberResponseData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
 class GetUserPhoneNumberController extends Controller
@@ -14,7 +15,7 @@ class GetUserPhoneNumberController extends Controller
     #[SuccessItemResponse(GetUserPhoneNumberResponseData::class)]
     public function __invoke()
     {
-        $logged_user_id = 5;
+        $logged_user_id = Auth::User()->id;
 
         return GetUserPhoneNumberResponseData::from(
             User::query()

@@ -9,6 +9,7 @@ use App\Data\User\Car\QueryParameters\SearchMyCarQueryParameterData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
 class SearchMyCarController extends Controller
@@ -23,7 +24,8 @@ class SearchMyCarController extends Controller
         $request_search =
             $request
                 ->search;
-        $logged_user_id = 5;
+
+        $logged_user_id = Auth::User()->id;
 
         if (! $request_search) {
 
