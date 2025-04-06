@@ -7,6 +7,7 @@ use App\Data\User\Car\CarOfferDetailsResponseData;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
 // messente
