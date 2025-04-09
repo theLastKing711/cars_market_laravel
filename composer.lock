@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53fcedd481051f856f33f8a6d9436685",
+    "content-hash": "f3e69af44e1cb6b4b1848afdffad42d2",
     "packages": [
         {
             "name": "ajcastro/eager-load-pivot-relations",
@@ -4240,71 +4240,6 @@
                 }
             ],
             "time": "2024-11-21T10:39:51+00:00"
-        },
-        {
-            "name": "omaralalwi/laravel-deployer",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/omaralalwi/laravel-deployer.git",
-                "reference": "67ca1e0a921bfd6bd9aefcb5acd466b9cf71a191"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/omaralalwi/laravel-deployer/zipball/67ca1e0a921bfd6bd9aefcb5acd466b9cf71a191",
-                "reference": "67ca1e0a921bfd6bd9aefcb5acd466b9cf71a191",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4|^8.0|^8.1|^8.2|^8.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5.3|^9.3.3|^10.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Omaralalwi\\LaravelDeployer\\LaravelDeployerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Omaralalwi\\LaravelDeployer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "omar alalwi",
-                    "email": "omaralwi2010@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel Deployer: Streamlined Deployment for Laravel and Node.js, with Zero-Downtime and various environments and branches, deploying your Laravel apps become simple and stress-free endeavor.",
-            "homepage": "https://github.com/omaralalwi/laravel-deployer",
-            "keywords": [
-                "automation",
-                "continuous integration",
-                "deployer",
-                "deployment",
-                "deployment tool",
-                "laravel",
-                "laravel package",
-                "laravel-deployer",
-                "omaralalwi",
-                "open source",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/omaralalwi/laravel-deployer/issues",
-                "source": "https://github.com/omaralalwi/laravel-deployer"
-            },
-            "time": "2024-03-03T00:58:54+00:00"
         },
         {
             "name": "phpdocumentor/reflection",

@@ -21,6 +21,8 @@ host('68.183.76.49')
 // ->set('remote_user', 'lastking711')
 // ->set('deploy_path', '~/cars_market_laravel');
 
+// tasks
+
 // Hooks
 
 after('deploy:failed', 'deploy:unlock');
