@@ -24,8 +24,6 @@ class CreateCarOfferController extends Controller
     {
         Log::info('TESTING');
 
-        Log::info('TESTING');
-
         Log::info('request {request}', ['request' => $createCarOfferRequestData]);
 
         $uploaded_car_images_session_key =
