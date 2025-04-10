@@ -22,7 +22,7 @@ class CreateCarOfferController extends Controller
     #[SuccessNoContentResponse]
     public function __invoke(CreateCarOfferRequestData $createCarOfferRequestData, Request $request, TranslationService $translationService)
     {
-        Log::info('hello world');
+        Log::info('TESTING');
 
         Log::info('request {request}', ['request' => $createCarOfferRequestData]);
 

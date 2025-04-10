@@ -33,7 +33,7 @@ jobs:
       - name: RUN Remote/Artisan Commands
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets.VPS_USER }}
+          host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER}}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
