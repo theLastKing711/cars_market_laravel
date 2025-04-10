@@ -12,6 +12,7 @@
         "cloudinary-labs/cloudinary-laravel": "^2.2",
         "darkaonline/l5-swagger": "^8.6",
         "datlechin/laravel-google-translate": "^0.2.0",
+        "deployer/deployer": "^7.5",
         "kirschbaum-development/eloquent-power-joins": "^4.0",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
@@ -26,7 +27,6 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
         "barryvdh/laravel-ide-helper": "^3.0",
-        "deployer/deployer": "^7.5",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^2.0",
         "laravel/pint": "^1.13",
