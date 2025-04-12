@@ -22,7 +22,8 @@ class CreateCarOfferController extends Controller
     #[SuccessNoContentResponse]
     public function __invoke(CreateCarOfferRequestData $createCarOfferRequestData, Request $request, TranslationService $translationService)
     {
-        Log::info('TESTING');
+
+        // Log::info('createCarOfferController  {data}', ['data' => $createCarOfferRequestData]);
 
         $uploaded_car_images_session_key =
             config('constants.session.upload_car_images');
@@ -33,9 +34,9 @@ class CreateCarOfferController extends Controller
                 ->session()
                 ->get($uploaded_car_images_session_key);
 
-        // $logged_user_id = Auth::User()->id;
+        $logged_user_id = Auth::User()->id;
 
-        DB::transaction(function () use ($createCarOfferRequestData, $translationService, $user_car_medias) {
+        DB::transaction(function () use ($createCarOfferRequestData, $translationService, $user_car_medias, $logged_user_id) {
 
             $car_translation_set =
                 $translationService
@@ -43,7 +44,7 @@ class CreateCarOfferController extends Controller
 
             $car = Car::query()
                 ->create([
-                    // 'user_id' => $logged_user_id,
+                    'user_id' => $logged_user_id,
                     'car_upload_start_date' => now(),
                     'car_upload_expiration_date' => now()->addYear(1),
                     'user_id' => 1,
@@ -64,8 +65,6 @@ class CreateCarOfferController extends Controller
                 ->medially()
                 ->saveMany($user_car_medias);
 
-            $logged_user_id = Auth::User()->id;
-
             User::query()
                 ->firstWhere(
                     'id',
@@ -78,6 +77,14 @@ class CreateCarOfferController extends Controller
         $request
             ->session()
             ->remove($uploaded_car_images_session_key);
+
+        // Log::info('logged user id {logged_user_id}', ['logged_user_id' => ]);
+
+        // $request
+        //     ->session()
+        //     ->remove($uploaded_car_images_session_key);
+
+        // Log::info('logged user id {logged_user_id}', ['logged_user_id' => $logged_user_id]);
 
         return 1;
     }

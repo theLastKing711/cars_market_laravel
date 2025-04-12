@@ -29,10 +29,11 @@ class CreatePasswordController extends Controller
                     'max_number_of_car_upload' => 0,
                     'subscription_id' => 1,
                 ])
-                ->createToken($request_phone_number);
+                ->createToken($request_phone_number)
+                ->plainTextToken;
 
         return response(
-            new RegisterResponseData($token->plainTextToken),
+            new RegisterResponseData($token),
             201
         );
 

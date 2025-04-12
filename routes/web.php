@@ -79,19 +79,24 @@ Route::prefix('users')
         // // });
 
         Route::prefix('cars')->group(function () {
-            Route::get('maxCarUpload', GetUserMaxCarUploadController::class);
-            Route::get('searchMyFavouriteCars', SearchMyFavouriteCarsController::class);
-            Route::get('updateDetails/{id}', getUpdateCarOfferController::class);
-            Route::patch('sell/{id}', SellCarController::class);
-            Route::patch('{id}/favourite', FavouriteCarController::class);
-            Route::post('', CreateCarOfferController::class);
-            // ->can('upload', Car::class);
-            Route::post('{id}/images', UpdateCarOfferImagesController::class);
-            Route::get('searchMyCars', SearchMyCarController::class);
+
+            Route::middleware('auth:sanctum')->group(function () {
+                Route::get('maxCarUpload', GetUserMaxCarUploadController::class);
+                Route::get('updateDetails/{id}', getUpdateCarOfferController::class);
+                Route::patch('sell/{id}', SellCarController::class);
+                Route::patch('{id}/favourite', FavouriteCarController::class);
+                Route::post('', CreateCarOfferController::class);
+                // ->can('upload', Car::class);
+                Route::post('{id}/images', UpdateCarOfferImagesController::class);
+                Route::get('searchMyCars', SearchMyCarController::class);
+                Route::patch('{id}', UpdateCarOfferController::class);
+                Route::delete('{id}', DeleteCarOfferController::class);
+
+            });
+
             Route::get('', SearchCarOfferController::class);
+            Route::get('searchMyFavouriteCars', SearchMyFavouriteCarsController::class);
             Route::get('{id}', CarOfferDetailsController::class);
-            Route::patch('{id}', UpdateCarOfferController::class);
-            Route::delete('{id}', DeleteCarOfferController::class);
 
         });
 

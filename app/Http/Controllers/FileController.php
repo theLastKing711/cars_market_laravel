@@ -274,31 +274,38 @@ class FileController extends Controller
     public function delete(FilePublicIdPathParameterData $deleteFileData, Request $request)
     {
 
-        $uploaded_car_images_session_key = config('constants.session.upload_car_images');
+        Log::info('file public id  {data}', ['data' => $deleteFileData->public_id]);
 
+        $uploaded_car_images_session_key = config('constants.session.upload_car_images');
         /** @var Collection<int, Media> $user_car_medias */
         $user_car_medias =
+           $request
+               ->session()
+               ->get($uploaded_car_images_session_key);
+
+        if ($user_car_medias) {
+
+            Log::info('session data {session_data}', ['session_data' => $user_car_medias]);
+
+            $updated_user_car_medias =
+                $user_car_medias
+                    ->filter(function ($item) use ($deleteFileData) {
+                        return $item->file_name != $deleteFileData->public_id;
+                    });
+
+            $request->session()->forget($uploaded_car_images_session_key);
+
             $request
                 ->session()
-                ->get($uploaded_car_images_session_key);
+                ->put(
+                    $uploaded_car_images_session_key,
+                    $updated_user_car_medias
+                );
 
-        $updated_user_car_medias =
-            $user_car_medias
-                ->filter(function ($item) use ($deleteFileData) {
-                    return $item->file_name != $deleteFileData->public_id;
-                });
-
-        $request->session()->forget($uploaded_car_images_session_key);
-
-        $request
-            ->session()
-            ->put(
-                $uploaded_car_images_session_key,
-                $updated_user_car_medias
-            );
+        }
 
         Cloudinary::destroy($deleteFileData->public_id);
 
-        return $updated_user_car_medias;
+        return true;
     }
 }

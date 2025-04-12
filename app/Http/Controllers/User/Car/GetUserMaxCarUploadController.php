@@ -7,6 +7,7 @@ use App\Data\User\Car\GetUserMaxCarUploadResponseData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
 class GetUserMaxCarUploadController extends Controller
@@ -25,6 +26,8 @@ class GetUserMaxCarUploadController extends Controller
                     $logged_user_id
                 )
                 ->max_number_of_car_upload;
+
+        Log::info(Auth::User());
 
         return new GetUserMaxCarUploadResponseData(max_number_of_car_upload: $user_max_allowed_car_upload);
 

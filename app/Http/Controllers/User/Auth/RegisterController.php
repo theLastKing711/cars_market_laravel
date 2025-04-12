@@ -9,7 +9,6 @@ use App\Data\User\Auth\RegisterResponseData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Cloudinary\Api\HttpStatusCode;
-use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
 class RegisterController extends Controller
@@ -25,8 +24,6 @@ class RegisterController extends Controller
         $is_phone_number_duplicated =
                 User::where('phone_number', $request_phone_number)
                     ->exists();
-
-        Log::info('phone number {phone_number}', ['phone_number' => $is_phone_number_duplicated]);
 
         if ($is_phone_number_duplicated) {
             return response(

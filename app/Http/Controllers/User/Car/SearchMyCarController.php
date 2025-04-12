@@ -31,6 +31,7 @@ class SearchMyCarController extends Controller
 
             $remote_car_search_result =
                 Car::query()
+                    ->where('user_id', $logged_user_id)
                     ->selectRaw(
                         '
                             *,
@@ -49,6 +50,7 @@ class SearchMyCarController extends Controller
 
         $remote_car_search_result =
             Car::search($request_search)
+                ->where('user_id', $logged_user_id)
                 ->query(
                     fn (Builder $query) => $query
                         ->with([
