@@ -49,7 +49,6 @@ class CreateCarOfferController extends Controller
                     'user_id' => $logged_user_id,
                     'car_upload_start_date' => now(),
                     'car_upload_expiration_date' => now()->addYear(1),
-                    'user_id' => 1,
                     'car_name_language_when_uploaded' => $car_translation_set->upload_language,
                     'name_ar' => $car_translation_set->name_ar,
                     'name_en' => $car_translation_set->name_en,
