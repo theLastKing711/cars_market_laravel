@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
 
         // $this->call([]);
-        // Log::info(config('app.env'));
+        Log::info(config('app.env'));
 
         // if (config('app.env') === 'production') {
 
