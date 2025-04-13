@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
                 array_push($callable_seeders, SubscriptionSeeder::class);
             }
 
-            if (! $roles_has_records) {
+            if (! empty($callable_seeders)) {
 
                 $this->call($callable_seeders);
             }
