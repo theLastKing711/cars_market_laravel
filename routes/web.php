@@ -53,12 +53,18 @@ Route::prefix('users')
     ->group(function () {
 
         Route::prefix('auth')->group(function () {
-            Route::get('get-user-phone-number', GetUserPhoneNumberController::class);
+
+            Route::middleware('auth:sanctum')->group(function () {
+
+                Route::get('get-user-phone-number', GetUserPhoneNumberController::class);
+                Route::patch('change-password', ChangePasswordController::class);
+                Route::patch('change-phone-number', ChangePhoneNumberController::class);
+
+            });
+
             Route::post('register', RegisterController::class);
             Route::post('create-password', CreatePasswordController::class);
             Route::post('verify-password', VerifyPasswordController::class);
-            Route::patch('change-password', ChangePasswordController::class);
-            Route::patch('change-phone-number', ChangePhoneNumberController::class);
 
             // Route::post('login', UserLoginController::class);
             // Route::post('logout', UserLogoutController::class);

@@ -21,7 +21,8 @@ class VerifyPasswordController extends Controller
     {
 
         $request_phone_number =
-            $verifyPasswordRequestData->phone_number;
+            $verifyPasswordRequestData
+                ->phone_number;
 
         $authenticated_user =
             User::query()
