@@ -15,8 +15,6 @@ class DatabaseSeeder extends Seeder
 
         if (env('APP_ENV') === 'production') {
 
-            Log::info('running production');
-
             $roles_count = DB::table('roles')->count();
 
             $roles_has_records = $roles_count > 0;
@@ -43,11 +41,11 @@ class DatabaseSeeder extends Seeder
             return;
         }
 
-        $this->call([
-            RolesAndPermissionsSeeder::class,
-            // ManufacturerSeeder::class,
-            SubscriptionSeeder::class,
-            // UserSeeder::class,
-        ]);
+        // $this->call([
+        //     RolesAndPermissionsSeeder::class,
+        //     // ManufacturerSeeder::class,
+        //     SubscriptionSeeder::class,
+        //     // UserSeeder::class,
+        // ]);
     }
 }
