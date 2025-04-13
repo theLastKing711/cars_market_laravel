@@ -18,30 +18,32 @@ class DatabaseSeeder extends Seeder
 
         if (config('app.env') === 'production') {
 
-            $roles_count = DB::table('roles')->count();
+            Log::info(config('app.env'));
 
-            $callable_seeders = [];
+            // $roles_count = DB::table('roles')->count();
 
-            $roles_has_records = $roles_count > 0;
+            // $callable_seeders = [];
 
-            if (! $roles_has_records) {
-                array_push($callable_seeders, RolesAndPermissionsSeeder::class);
-            }
+            // $roles_has_records = $roles_count > 0;
 
-            $subscriptions_count = DB::table('subscriptions')->count();
+            // if (! $roles_has_records) {
+            //     array_push($callable_seeders, RolesAndPermissionsSeeder::class);
+            // }
 
-            $subscriptions_has_records = $subscriptions_count > 0;
+            // $subscriptions_count = DB::table('subscriptions')->count();
 
-            if (! $subscriptions_has_records) {
-                array_push($callable_seeders, SubscriptionSeeder::class);
-            }
+            // $subscriptions_has_records = $subscriptions_count > 0;
 
-            if (! empty($callable_seeders)) {
+            // if (! $subscriptions_has_records) {
+            //     array_push($callable_seeders, SubscriptionSeeder::class);
+            // }
 
-                $this->call($callable_seeders);
-            }
+            // if (! empty($callable_seeders)) {
 
-            return;
+            //     $this->call($callable_seeders);
+            // }
+
+            // return;
         }
         // $this->call([
         //     RolesAndPermissionsSeeder::class,
