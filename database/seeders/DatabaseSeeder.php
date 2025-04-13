@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $this->call([]);
+        // $this->call([]);
         // Log::info(config('app.env'));
 
         // if (config('app.env') === 'production') {
