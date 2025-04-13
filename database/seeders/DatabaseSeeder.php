@@ -43,7 +43,6 @@ class DatabaseSeeder extends Seeder
 
             return;
         }
-        Log::info('production');
         // $this->call([
         //     RolesAndPermissionsSeeder::class,
         //     // ManufacturerSeeder::class,
