@@ -40,4 +40,4 @@ jobs:
             cd /var/www/html/cars_market_laravel
             php artisan migrate --force
             php artisan optimize
-            # php artisan db:seed
+            php artisan db:seed

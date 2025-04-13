@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        // $this->call([]);
-        Log::info('hello world');
+        // Log::info('hello world');
 
-        Log::info(config('app.env'));
+        // Log::info(config('app.env'));
+        $this->call([]);
 
         // if (config('app.env') === 'production') {
 
