@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,45 +13,39 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        Log::info('hello world');
+        if (env('APP_ENV') === 'production') {
 
-        Log::info(config('app.env'));
-        // $this->call([]);
+            $roles_count = DB::table('roles')->count();
 
-        // if (config('app.env') === 'production') {
+            $roles_has_records = $roles_count > 0;
 
-        // Log::info(config('app.env'));
+            $callable_seeders = [];
 
-        // $roles_count = DB::table('roles')->count();
+            if (! $roles_has_records) {
+                array_push($callable_seeders, RolesAndPermissionsSeeder::class);
+            }
 
-        // $callable_seeders = [];
+            $subscriptions_count = DB::table('subscriptions')->count();
 
-        // $roles_has_records = $roles_count > 0;
+            $subscriptions_has_records = $subscriptions_count > 0;
 
-        // if (! $roles_has_records) {
-        //     array_push($callable_seeders, RolesAndPermissionsSeeder::class);
-        // }
+            if (! $subscriptions_has_records) {
+                array_push($callable_seeders, SubscriptionSeeder::class);
+            }
 
-        // $subscriptions_count = DB::table('subscriptions')->count();
+            if (! empty($callable_seeders)) {
 
-        // $subscriptions_has_records = $subscriptions_count > 0;
+                $this->call($callable_seeders);
+            }
 
-        // if (! $subscriptions_has_records) {
-        //     array_push($callable_seeders, SubscriptionSeeder::class);
-        // }
+            return;
+        }
 
-        // if (! empty($callable_seeders)) {
-
-        //     $this->call($callable_seeders);
-        // }
-
-        // return;
-        // }
-        // $this->call([
-        //     RolesAndPermissionsSeeder::class,
-        //     // ManufacturerSeeder::class,
-        //     SubscriptionSeeder::class,
-        //     // UserSeeder::class,
-        // ]);
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+            // ManufacturerSeeder::class,
+            SubscriptionSeeder::class,
+            // UserSeeder::class,
+        ]);
     }
 }
