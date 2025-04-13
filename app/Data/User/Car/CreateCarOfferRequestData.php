@@ -18,15 +18,15 @@ class CreateCarOfferRequestData extends Data
         #[OAT\Property]
         public ?string $name_ar,
         #[OAT\Property]
-        public ?bool $is_new_car,
-        #[OAT\Property]
         public ?int $car_price,
+        #[OAT\Property]
+        public ?int $miles_travelled_in_km,
         #[OAT\Property]
         public ?FuelType $fuel_type,
         #[OAT\Property]
         public ?TransmissionType $transmission,
         #[OAT\Property]
-        public ?int $miles_travelled_in_km,
+        public ?bool $is_new_car,
         #[OAT\Property]
         public ?bool $is_faragha_jahzeh,
         #[OAT\Property]

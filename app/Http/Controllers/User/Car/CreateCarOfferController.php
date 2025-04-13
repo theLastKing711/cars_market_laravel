@@ -42,6 +42,8 @@ class CreateCarOfferController extends Controller
                 $translationService
                     ->translate($createCarOfferRequestData->name_ar);
 
+            Log::info($createCarOfferRequestData);
+
             $car = Car::query()
                 ->create([
                     'user_id' => $logged_user_id,
