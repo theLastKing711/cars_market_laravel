@@ -144,9 +144,9 @@ class Car extends Model
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => $attributes['car_name_language_when_uploaded'] === Language::EN
                  ?
-                 $attributes['name_ar']
-                 :
                  $attributes['name_en']
+                 :
+                 $attributes['name_ar']
         );
     }
 
