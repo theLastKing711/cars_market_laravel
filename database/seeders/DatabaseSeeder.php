@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,7 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        if (env('APP_ENV') === 'production') {
+        Log::info(config('app.env'));
+
+        if (config('app.env') === 'production') {
 
             $roles_count = DB::table('roles')->count();
 
