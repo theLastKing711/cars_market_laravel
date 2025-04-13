@@ -36,13 +36,13 @@ class CreateCarOfferController extends Controller
 
         $logged_user_id = Auth::User()->id;
 
-        Log::info($logged_user_id);
-
         DB::transaction(function () use ($createCarOfferRequestData, $translationService, $user_car_medias, $logged_user_id) {
 
             $car_translation_set =
                 $translationService
                     ->translate($createCarOfferRequestData->name_ar);
+
+            Log::info($car_translation_set);
 
             $car = Car::query()
                 ->create([
