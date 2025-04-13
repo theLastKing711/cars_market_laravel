@@ -142,7 +142,7 @@ class Car extends Model
     protected function nameAr(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $attributes['car_name_language_when_uploaded'] === Language::EN
+            get: fn (mixed $value, array $attributes) => $attributes['car_name_language_when_uploaded'] === Language::EN->value
                  ?
                  $attributes['name_en']
                  :
