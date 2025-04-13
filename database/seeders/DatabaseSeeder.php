@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        Log::info(env('APP_ENV'));
+        Log::info(config('app.env'));
 
-        if (env('APP_ENV') === 'production') {
+        if (config('app.env') === 'production') {
 
             $roles_count = DB::table('roles')->count();
 
