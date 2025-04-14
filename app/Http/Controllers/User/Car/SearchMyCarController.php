@@ -58,8 +58,13 @@ class SearchMyCarController extends Controller
                         ])
                 )
                 ->paginate(2);
+        $paginator = tap($remote_car_search_result, function ($paginatedInstance) use ($logged_user_id) {
+            return $paginatedInstance->getCollection()->transform(function ($model) use ($logged_user_id) {
+                return CarListData::fromModel($model, $logged_user_id);
+            });
+        });
 
-        return CarListData::collect($remote_car_search_result);
+        return $paginator;
 
     }
 }
