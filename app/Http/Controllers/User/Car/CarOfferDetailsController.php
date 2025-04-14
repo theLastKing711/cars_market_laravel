@@ -61,9 +61,7 @@ class CarOfferDetailsController extends Controller
                 ->when(
                     ! $logged_user_id,
                     fn ($query) => $query->selectRaw(
-                        '*, false as is_favourite',
-                        [$logged_user_id, $request_car_id]
-                    )
+                        '*, false as is_favourite')
                 )
                 ->with(
                     [
