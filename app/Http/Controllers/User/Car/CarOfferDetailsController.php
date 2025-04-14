@@ -46,14 +46,24 @@ class CarOfferDetailsController extends Controller
 
         $request_car_id = $request->id;
 
-        $logged_user_id = Auth::User()->id;
+        $logged_user_id = Auth::User()?->id;
 
         $car =
             Car::query()
                 ->whereId($request->id)
-                ->selectRaw(
-                    '*, (select exists (select 1 from user_favourites_cars where user_id=? AND car_id=?)) as is_favourite',
-                    [$logged_user_id, $request_car_id]
+                ->when(
+                    $logged_user_id,
+                    fn ($query) => $query->selectRaw(
+                        '*, (select exists (select 1 from user_favourites_cars where user_id=? AND car_id=?)) as is_favourite',
+                        [$logged_user_id, $request_car_id]
+                    )
+                )
+                ->when(
+                    ! $logged_user_id,
+                    fn ($query) => $query->selectRaw(
+                        '*, false as is_favourite',
+                        [$logged_user_id, $request_car_id]
+                    )
                 )
                 ->with(
                     [
