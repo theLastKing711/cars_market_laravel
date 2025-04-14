@@ -6,6 +6,7 @@ use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
 class FavouriteCarController extends Controller
@@ -25,14 +26,13 @@ class FavouriteCarController extends Controller
     public function __invoke(CarIdPathParameterData $carIdPathParameterData)
     {
 
-        // $user_id = Auth::User()->id;
+        $logged_user_id = Auth::User()->id;
 
         $logged_user =
             User::query()
                 ->firstWhere(
                     'id',
-                    // $user_id
-                    5
+                    $logged_user_id
                 );
 
         $car_id =
