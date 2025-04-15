@@ -256,25 +256,26 @@ class SearchCarOfferController extends Controller
         //             $user_current_city
         //         );
 
-        $is_request_price_from_available =
+        $is_request_price_available =
             $request_price_from !== null || $request_price_to !== null;
 
+        $price_to = $request_price_to !== null ? ((string) $request_price_to) : '100000';
         $car_price_from_query =
-            $is_request_price_from_available ?
+            $is_request_price_available ?
                 'car_price:'.
                 (string) $request_price_from || '0'.
                 ' TO '.
-                (string) $request_price_to || '100000'
+                $price_to
                 :
                 '';
 
         Log::info($car_price_from_query);
 
-        $is_request_car_travelled_from_km_available =
+        $is_request_miles_travelled_in_km_available =
             $request_miles_travelled_in_km_from !== null || $request_miles_travelled_in_km_to !== null;
 
         $car_travelled_in_km_query =
-            $is_request_car_travelled_from_km_available ?
+            $is_request_miles_travelled_in_km_available ?
             'miles_travelled_in_km:'.
             (string) $request_miles_travelled_in_km_from || '0'.
             ' TO '.
