@@ -9,7 +9,6 @@ use App\Data\User\Car\QueryParameters\SearchMyCarQueryParameterData;
 use App\Data\User\Car\SearchCarOfferPaginationResultData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
@@ -49,7 +48,7 @@ class SearchMyFavouriteCarsController extends Controller
             Car::search($request_search)
                 ->whereIn('favourited_by_users', [$logged_user_id])
                 ->query(
-                    fn (Builder $query) => $query
+                    fn ($query) => $query
                         ->with([
                             'medially' => fn ($comments) => $comments->take(1),
                         ])

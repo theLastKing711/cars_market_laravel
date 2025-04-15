@@ -13,6 +13,7 @@ use App\Models\Car;
 use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Laravel\Scout\Builder as ScoutBuilder;
 use OpenApi\Attributes as OAT;
 
@@ -42,6 +43,8 @@ class SearchCarOfferController extends Controller
     #[SuccessItemResponse(SearchCarOfferPaginationResultData::class)]
     public function __invoke(SearchCarOfferQueryParameterData $request)
     {
+
+        Log::info($request);
 
         $request_search =
             $request
@@ -131,10 +134,7 @@ class SearchCarOfferController extends Controller
                         ! $logged_user_id,
                         fn (EloquentBuilder $query) => $query->selectRaw(
                             '*, false as is_favourite'
-                        )
-                    )
-                    ->when(
-                        $logged_user_id,
+                        ),
                         fn (EloquentBuilder $query) => $query
                             ->selectRaw(
                                 '*,(select exists (select 1 from user_favourites_cars where user_id=? AND car_id=cars.id)) as is_favourite',
@@ -147,22 +147,6 @@ class SearchCarOfferController extends Controller
                             ->whereHas(
                                 'shippable_to',
                                 fn (EloquentBuilder $query) => $query->whereIn('id', $request_shippable_to)
-                            )
-                    )
-                    ->when(
-                        $request_car_sell_location,
-                        fn (EloquentBuilder $query) => $query
-                            ->where(
-                                'car_sell_location',
-                                $request_car_sell_location
-                            )
-                    )
-                    ->when(
-                        $request_year_manufactured,
-                        fn (EloquentBuilder $query) => $query
-                            ->where(
-                                'year_manufactured',
-                                $request_year_manufactured
                             )
                     )
                     ->when(
@@ -181,14 +165,6 @@ class SearchCarOfferController extends Controller
                                 $request_car_label_origin
                             )
                     )
-                    // ->when(
-                    //     $request_user_has_legal_car_papers,
-                    //     fn (EloquentBuilder $query) => $query
-                    //         ->where(
-                    //             'user_has_legal_car_papers',
-                    //             true
-                    //         )
-                    // )
                     ->when(
                         $request_is_faragha_jahzeh,
                         fn (EloquentBuilder $query) => $query
