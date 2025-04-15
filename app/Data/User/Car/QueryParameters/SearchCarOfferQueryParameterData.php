@@ -7,6 +7,7 @@ use App\Data\Shared\Swagger\Property\ArrayProperty;
 use App\Enum\FuelType;
 use App\Enum\ImportType;
 use App\Enum\SyrianCity;
+use App\Enum\TransmissionType;
 use OpenApi\Attributes as OAT;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -32,6 +33,8 @@ class SearchCarOfferQueryParameterData extends PaginationQueryParameterData
         public ?int $year_manufactured,
         #[OAT\Property]
         public ?FuelType $fuel_type,
+        #[OAT\Property]
+        public ?TransmissionType $transmission,
         #[OAT\Property]
         public ?int $car_label_origin,
         #[OAT\Property]

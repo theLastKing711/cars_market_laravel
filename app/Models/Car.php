@@ -168,6 +168,7 @@ class Car extends Model
             'fuel_type' => $this->fuel_type,
             'car_label_origin' => $this->car_label_origin,
             'fuel_type' => $this->fuel_type,
+            'transmission' => $this->transmission,
             'miles_travelled_in_km' => $this->miles_travelled_in_km,
             'user_has_legal_car_papers' => $this->user_has_legal_car_papers,
             'is_new_car' => $this->is_new_car,

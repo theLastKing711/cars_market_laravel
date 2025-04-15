@@ -30,6 +30,7 @@ class SearchCarOfferController extends Controller
     #[QueryParameter('car_sell_location')]
     #[QueryParameter('year_manufactured')]
     #[QueryParameter('fuel_type')]
+    #[QueryParameter('transmission')]
     #[QueryParameter('car_label_origin')]
     #[QueryParameter('miles_travelled_in_km_from')]
     #[QueryParameter('miles_travelled_in_km_to')]
@@ -72,6 +73,10 @@ class SearchCarOfferController extends Controller
         $request_fuel_type =
             $request
                 ->fuel_type;
+
+        $request_transmission =
+            $request
+                ->transmission;
 
         $request_car_label_origin =
             $request
@@ -155,6 +160,14 @@ class SearchCarOfferController extends Controller
                             ->where(
                                 'fuel_type',
                                 $request_fuel_type
+                            )
+                    )
+                    ->when(
+                        $request_transmission,
+                        fn (EloquentBuilder $query) => $query
+                            ->where(
+                                'transmission',
+                                $request_transmission
                             )
                     )
                     ->when(
@@ -321,11 +334,11 @@ class SearchCarOfferController extends Controller
                         )
                 )
                 ->when(
-                    $request_car_label_origin,
+                    $request_fuel_type,
                     fn (ScoutBuilder $query) => $query
                         ->where(
-                            'car_label_origin',
-                            $request_car_label_origin
+                            'transmission',
+                            enum_value($request_transmission)
                         )
                 )
                 ->when(
