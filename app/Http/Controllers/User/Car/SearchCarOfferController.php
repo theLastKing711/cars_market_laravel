@@ -217,7 +217,7 @@ class SearchCarOfferController extends Controller
                         fn (EloquentBuilder $query) => $query
                             ->whereBetween(
                                 'car_price',
-                                [$request_price_from || 0, $request_price_to ?? 100000]
+                                [$request_price_from ?? 0, $request_price_to ?? 100000]
                             )
                     )
                     ->when(
@@ -226,8 +226,8 @@ class SearchCarOfferController extends Controller
                             ->whereBetween(
                                 'miles_travelled_in_km',
                                 [
-                                    $request_miles_travelled_in_km_from,
-                                    $request_miles_travelled_in_km_to,
+                                    $request_miles_travelled_in_km_from ?? 0,
+                                    $request_miles_travelled_in_km_to ?? 1000000,
                                 ]
                             )
                     )
@@ -254,9 +254,9 @@ class SearchCarOfferController extends Controller
         $car_price_from_query =
             $is_request_price_available ?
                 'car_price:'.
-                (string) $request_price_from || '0'.
+                (string) $request_price_from ?? '0'.
                 ' TO '.
-                (string) $request_price_to || '100000'
+                (string) $request_price_to ?? '100000'
                 :
                 '';
 
@@ -268,9 +268,9 @@ class SearchCarOfferController extends Controller
         $car_travelled_in_km_query =
             $is_request_miles_travelled_in_km_available ?
             'miles_travelled_in_km:'.
-            (string) $request_miles_travelled_in_km_from || '0'.
+            (string) $request_miles_travelled_in_km_from ?? '0'.
             ' TO '.
-            (string) $request_miles_travelled_in_km_to || '1000000'
+            (string) $request_miles_travelled_in_km_to ?? '1000000'
             :
             '';
 
