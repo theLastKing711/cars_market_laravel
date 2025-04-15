@@ -103,6 +103,8 @@ class SearchCarOfferController extends Controller
             str_contains($request->search, 'مستعملة')
             ||
             str_contains($request->search, 'مستعمل')
+            ||
+            $request->is_new_car
             ?
             true
             :
