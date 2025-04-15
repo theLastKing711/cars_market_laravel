@@ -533,6 +533,13 @@
                         }
                     },
                     {
+                        "name": "transmission",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "car_label_origin",
                         "in": "query",
                         "schema": {
@@ -1181,11 +1188,11 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "is_new_car": {
-                        "type": "boolean",
+                    "car_price": {
+                        "type": "integer",
                         "nullable": true
                     },
-                    "car_price": {
+                    "miles_travelled_in_km": {
                         "type": "integer",
                         "nullable": true
                     },
@@ -1205,8 +1212,8 @@
                         ],
                         "nullable": true
                     },
-                    "miles_travelled_in_km": {
-                        "type": "integer",
+                    "is_new_car": {
+                        "type": "boolean",
                         "nullable": true
                     },
                     "is_faragha_jahzeh": {
@@ -1280,6 +1287,14 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/FuelType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "transmission": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/TransmissionType"
                             }
                         ],
                         "nullable": true

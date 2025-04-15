@@ -334,7 +334,7 @@ class SearchCarOfferController extends Controller
                         )
                 )
                 ->when(
-                    $request_fuel_type,
+                    $request_transmission,
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'transmission',
@@ -393,7 +393,7 @@ class SearchCarOfferController extends Controller
                 ->query(
                     fn (EloquentBuilder $query) => $query
                         ->with([
-                            'medially' => fn ($comments) => $comments->take(1),
+                            '   ' => fn ($comments) => $comments->take(1),
                             'favourited_by_users',
                         ])
                 )
