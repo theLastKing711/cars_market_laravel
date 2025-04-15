@@ -217,7 +217,7 @@ class SearchCarOfferController extends Controller
                         fn (EloquentBuilder $query) => $query
                             ->whereBetween(
                                 'car_price',
-                                [$request_price_from || 0,  100000]
+                                [$request_price_from || 0, $request_price_to ?? 100000]
                             )
                     )
                     ->when(
