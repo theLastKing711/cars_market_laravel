@@ -161,7 +161,7 @@ class Car extends Model
 
         $index_attributes_array = [
             'user_id' => $this->user_id,
-            'name_ar' => $this->getOriginal('name_ar'),
+            'name_ar' => 'hello world',
             'name_en' => $this->name_en,
             'car_price' => $this->car_price,
             'year_manufactured' => $this->year_manufactured,
