@@ -139,16 +139,16 @@ class Car extends Model
         return $this->belongsToMany(User::class, 'user_favourites_cars');
     }
 
-    protected function nameAr(): Attribute
-    {
-        return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $attributes['car_name_language_when_uploaded'] === Language::EN->value
-                 ?
-                 $attributes['name_en']
-                 :
-                 $attributes['name_ar']
-        );
-    }
+    // protected function nameAr(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn (mixed $value, array $attributes) => $attributes['car_name_language_when_uploaded'] === Language::EN->value
+    //              ?
+    //              $attributes['name_en']
+    //              :
+    //              $attributes['name_ar']
+    //     );
+    // }
 
     public function scopeIsNotSold($query): Builder
     {
