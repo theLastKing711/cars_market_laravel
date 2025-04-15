@@ -346,15 +346,7 @@ class SearchCarOfferController extends Controller
                         )
                 )
                 ->when(
-                    $request_user_has_legal_car_papers,
-                    fn (ScoutBuilder $query) => $query
-                        ->where(
-                            'user_has_legal_car_papers',
-                            true
-                        )
-                )
-                ->when(
-                    $request_is_faragha_jahzeh,
+                    $request_is_faragha_jahzeh !== null,
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'is_faragha_jahzeh',
@@ -362,7 +354,7 @@ class SearchCarOfferController extends Controller
                         )
                 )
                 ->when(
-                    $request_is_new_car,
+                    $request_is_new_car !== null,
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'is_new_car',
@@ -370,7 +362,7 @@ class SearchCarOfferController extends Controller
                         )
                 )
                 ->when(
-                    $request_is_khalyeh,
+                    $request_is_khalyeh !== null,
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'is_khalyeh',
@@ -378,7 +370,7 @@ class SearchCarOfferController extends Controller
                         )
                 )
                 ->when(
-                    $request_is_kassah,
+                    $request_is_kassah !== null,
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'is_kassah',
