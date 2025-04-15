@@ -399,9 +399,6 @@ class SearchCarOfferController extends Controller
                 )
                 ->paginate(5);
 
-        Log::info($remote_cars_search);
-
-        return $remote_cars_search;
         $paginator = tap($remote_cars_search, function ($paginatedInstance) use ($logged_user_id) {
             return $paginatedInstance->getCollection()->transform(function ($model) use ($logged_user_id) {
                 return CarListData::fromModel($model, $logged_user_id);
