@@ -213,19 +213,11 @@ class SearchCarOfferController extends Controller
                             )
                     )
                     ->when(
-                        $request_import_type,
-                        fn (EloquentBuilder $query) => $query
-                            ->where(
-                                'car_import_type',
-                                $request_import_type
-                            )
-                    )
-                    ->when(
                         $request_price_from || $request_price_to,
                         fn (EloquentBuilder $query) => $query
                             ->whereBetween(
                                 'car_price',
-                                [$request_price_from || 0, $request_price_to || 100000]
+                                [$request_price_from || 0,  100000]
                             )
                     )
                     ->when(
