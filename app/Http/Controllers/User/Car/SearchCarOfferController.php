@@ -229,13 +229,13 @@ class SearchCarOfferController extends Controller
                             )
                     )
                     ->when(
-                        $request_miles_travelled_in_km_from || $request_miles_travelled_in_km_to,
+                        $request_miles_travelled_in_km_from,
                         fn (EloquentBuilder $query) => $query
                             ->whereBetween(
                                 'miles_travelled_in_km',
                                 [
-                                    $request_miles_travelled_in_km_from || 0,
-                                    $request_miles_travelled_in_km_to || 1000000,
+                                    $request_miles_travelled_in_km_from,
+                                    $request_miles_travelled_in_km_to,
                                 ]
                             )
                     )
