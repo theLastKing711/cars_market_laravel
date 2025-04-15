@@ -221,21 +221,21 @@ class SearchCarOfferController extends Controller
                             )
                     )
                     ->when(
-                        $request_price_from,
+                        $request_price_from || $request_price_to,
                         fn (EloquentBuilder $query) => $query
                             ->whereBetween(
                                 'car_price',
-                                [$request_price_from, $request_price_to]
+                                [$request_price_from || 0, $request_price_to || 100000]
                             )
                     )
                     ->when(
-                        $request_miles_travelled_in_km_from,
+                        $request_miles_travelled_in_km_from || $request_miles_travelled_in_km_to,
                         fn (EloquentBuilder $query) => $query
                             ->whereBetween(
                                 'miles_travelled_in_km',
                                 [
-                                    $request_miles_travelled_in_km_from,
-                                    $request_miles_travelled_in_km_to,
+                                    $request_miles_travelled_in_km_from || 0,
+                                    $request_miles_travelled_in_km_to || 1000000,
                                 ]
                             )
                     )
@@ -259,13 +259,12 @@ class SearchCarOfferController extends Controller
         $is_request_price_available =
             $request_price_from !== null || $request_price_to !== null;
 
-        $price_to = $request_price_to !== null ? ((string) $request_price_to) : '100000';
         $car_price_from_query =
             $is_request_price_available ?
                 'car_price:'.
                 (string) $request_price_from || '0'.
                 ' TO '.
-                $price_to
+                (string) $request_price_to || '100000'
                 :
                 '';
 
