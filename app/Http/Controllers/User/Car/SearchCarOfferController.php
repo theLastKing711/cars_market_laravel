@@ -257,14 +257,14 @@ class SearchCarOfferController extends Controller
         //         );
 
         $is_request_price_from_available =
-            $request_price_from !== null;
+            $request_price_from !== null || $request_price_to !== null;
 
         $car_price_from_query =
             $is_request_price_from_available ?
                 'car_price:'.
-                (string) $request_price_from.
+                (string) $request_price_from || '0'.
                 ' TO '.
-                (string) $request_price_to
+                (string) $request_price_to || '100000'
                 :
                 '';
 
@@ -272,14 +272,14 @@ class SearchCarOfferController extends Controller
             $request_price_to != null;
 
         $is_request_car_travelled_from_km_available =
-            $request_miles_travelled_in_km_from !== null;
+            $request_miles_travelled_in_km_from !== null || $request_miles_travelled_in_km_to !== null;
 
         $car_travelled_in_km_query =
             $is_request_car_travelled_from_km_available ?
             'miles_travelled_in_km:'.
-            (string) $request_miles_travelled_in_km_from.
+            (string) $request_miles_travelled_in_km_from || '0'.
             ' TO '.
-            (string) $request_miles_travelled_in_km_to
+            (string) $request_miles_travelled_in_km_to || '1000000'
             :
             '';
 
