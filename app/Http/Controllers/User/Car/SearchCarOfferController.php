@@ -268,8 +268,7 @@ class SearchCarOfferController extends Controller
                 :
                 '';
 
-        $is_request_price_to_available =
-            $request_price_to != null;
+        Log::info($car_price_from_query);
 
         $is_request_car_travelled_from_km_available =
             $request_miles_travelled_in_km_from !== null || $request_miles_travelled_in_km_to !== null;
@@ -290,12 +289,6 @@ class SearchCarOfferController extends Controller
             $car_price_from_query.' AND '.$car_travelled_in_km_query
             :
             $car_price_from_query.$car_travelled_in_km_query;
-
-        // $car_price_to_query =
-        //     $is_request_price_to_available ?
-        //         'car_price <=' . $request_price_to
-        //         :
-        //         '';
 
         $remote_cars_search =
             Car::search(
