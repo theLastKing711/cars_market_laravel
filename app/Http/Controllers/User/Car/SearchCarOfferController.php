@@ -254,9 +254,9 @@ class SearchCarOfferController extends Controller
         $car_price_from_query =
             $is_request_price_available ?
                 'car_price:'.
-                (string) $request_price_from ?? '0'.
+                (string) ($request_price_from ?? '0').
                 ' TO '.
-                (string) $request_price_to ?? '100000'
+                (string) ($request_price_to ?? '100000')
                 :
                 '';
 
