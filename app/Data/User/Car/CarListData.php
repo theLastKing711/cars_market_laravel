@@ -100,7 +100,7 @@ class CarListData extends Data
         );
     }
 
-    public static function fromModel(Car $car, int? $user_id)
+    public static function fromModel(Car $car, ?int $user_id)
     {
 
         $media = $car->medially->first();
