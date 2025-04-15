@@ -126,7 +126,7 @@ class CarListData extends Data
             is_kassah: $car->is_kassah,
             is_khalyeh: $car->is_khalyeh,
             is_faragha_jahzeh: $car->is_faragha_jahzeh,
-            is_favourite: $car->favourited_by_users->pluck('id')->contains($user_id),
+            is_favourite: $user_id ? $car->favourited_by_users->pluck('id')->contains($user_id) : false,
             image: $single_media_data
         );
     }
