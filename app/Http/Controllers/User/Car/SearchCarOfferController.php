@@ -45,7 +45,7 @@ class SearchCarOfferController extends Controller
     public function __invoke(SearchCarOfferQueryParameterData $request)
     {
 
-        // Log::info($request);
+        Log::info($request);
 
         $request_search =
             $request
