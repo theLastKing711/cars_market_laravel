@@ -393,7 +393,7 @@ class SearchCarOfferController extends Controller
                 ->query(
                     fn (EloquentBuilder $query) => $query
                         ->with([
-                            '   ' => fn ($comments) => $comments->take(1),
+                            'medially' => fn ($comments) => $comments->take(1),
                             'favourited_by_users',
                         ])
                 )
