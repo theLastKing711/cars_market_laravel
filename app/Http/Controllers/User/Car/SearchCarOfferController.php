@@ -109,6 +109,8 @@ class SearchCarOfferController extends Controller
             $request
                 ->is_new_car;
 
+        Log::info($request_is_new_car);
+
         $request_is_khalyeh =
             $request
                 ->is_khalyeh;
