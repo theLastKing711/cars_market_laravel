@@ -27,20 +27,15 @@ class SearchCarOfferController extends Controller
     #[QueryParameter('search')]
     #[QueryParameter('price_from')]
     #[QueryParameter('price_to')]
-    #[QueryParameter('car_sell_location')]
-    #[QueryParameter('year_manufactured')]
     #[QueryParameter('fuel_type')]
     #[QueryParameter('transmission')]
-    #[QueryParameter('car_label_origin')]
     #[QueryParameter('miles_travelled_in_km_from')]
     #[QueryParameter('miles_travelled_in_km_to')]
-    #[QueryParameter('user_has_legal_car_papers')]
     #[QueryParameter('is_faragha_jahzeh')]
     #[QueryParameter('is_new_car')]
     #[QueryParameter('is_khalyeh')]
     #[QueryParameter('is_kassah')]
-    #[QueryParameter('car_import_type')]
-    #[ListQueryParameter('shippable_to')]
+    // #[ListQueryParameter('shippable_to')]
     #[SuccessItemResponse(SearchCarOfferPaginationResultData::class)]
     public function __invoke(SearchCarOfferQueryParameterData $request)
     {
@@ -202,6 +197,8 @@ class SearchCarOfferController extends Controller
                         'favourited_by_users',
                     ])
                     ->paginate(10);
+
+            Log::info($local_cars_search);
 
             return CarListData::collect($local_cars_search);
         }
