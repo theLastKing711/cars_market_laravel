@@ -100,7 +100,7 @@ Route::prefix('users')
 
             });
 
-            Route::middleware(['auth:basic'])->group(function () {
+            Route::middleware(['optional_auth'])->group(function () {
                 Route::get('', SearchCarOfferController::class);
             });
 
