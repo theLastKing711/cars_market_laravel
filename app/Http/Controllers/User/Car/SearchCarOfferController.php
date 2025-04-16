@@ -13,7 +13,6 @@ use App\Models\Car;
 use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Laravel\Scout\Builder as ScoutBuilder;
 use OpenApi\Attributes as OAT;
 
@@ -95,13 +94,9 @@ class SearchCarOfferController extends Controller
 
         $is_request_search_set = $request_search != null;
 
-        // $logged_user_id = Auth::User()->id;
-
         $logged_user_id = Auth::User()?->id;
 
         if (! $is_request_search_set) {
-
-            Log::info($logged_user_id);
 
             $local_cars_search =
                 Car::query()
