@@ -87,7 +87,6 @@ Route::prefix('users')
         Route::prefix('cars')->group(function () {
 
             Route::middleware('auth:sanctum')->group(function () {
-                Route::get('', SearchCarOfferController::class);
                 Route::get('maxCarUpload', GetUserMaxCarUploadController::class);
                 Route::get('updateDetails/{id}', getUpdateCarOfferController::class);
                 Route::patch('sell/{id}', SellCarController::class);
@@ -101,7 +100,10 @@ Route::prefix('users')
 
             });
 
-            Route::get('', SearchCarOfferController::class);
+            Route::middleware(['auth:sanctum', 'guest'])->group(function () {
+                Route::get('', SearchCarOfferController::class);
+            });
+
             Route::get('searchMyFavouriteCars', SearchMyFavouriteCarsController::class);
             Route::get('{id}', CarOfferDetailsController::class);
 
