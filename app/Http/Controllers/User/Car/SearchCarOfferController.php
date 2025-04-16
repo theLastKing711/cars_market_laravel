@@ -40,8 +40,6 @@ class SearchCarOfferController extends Controller
     public function __invoke(SearchCarOfferQueryParameterData $request)
     {
 
-        Log::info($request);
-
         $request_search =
             $request
                 ->search;
@@ -211,8 +209,6 @@ class SearchCarOfferController extends Controller
                         'favourited_by_users',
                     ])
                     ->paginate(10);
-
-            Log::info($local_cars_search);
 
             return CarListData::collect($local_cars_search);
         }
