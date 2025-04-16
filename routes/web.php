@@ -98,15 +98,13 @@ Route::prefix('users')
                 Route::patch('{id}', UpdateCarOfferController::class);
                 Route::delete('{id}', DeleteCarOfferController::class);
 
-                Route::get('', SearchCarOfferController::class)->middleware('guest');
-
             });
 
             // logged and non logged users can view page
             // and Auth::User() return user (using sanctum auth) when logged, and null when not
-            // Route::middleware(['optional_auth'])->group(function () {
-            //     Route::get('', SearchCarOfferController::class);
-            // });
+            Route::middleware(['optional_auth'])->group(function () {
+                Route::get('', SearchCarOfferController::class);
+            });
 
             Route::get('searchMyFavouriteCars', SearchMyFavouriteCarsController::class);
             Route::get('{id}', CarOfferDetailsController::class);
