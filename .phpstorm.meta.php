@@ -591,7 +591,7 @@ namespace PHPSTORM_META {
             'logging.channels.daily.days' => 'integer',
             'logging.channels.daily.replace_placeholders' => 'boolean',
             'logging.channels.slack.driver' => 'string',
-            'logging.channels.slack.url' => 'NULL',
+            'logging.channels.slack.url' => 'string',
             'logging.channels.slack.username' => 'string',
             'logging.channels.slack.emoji' => 'string',
             'logging.channels.slack.level' => 'string',
@@ -1302,7 +1302,7 @@ namespace PHPSTORM_META {
             'logging.channels.daily.days' => 'integer',
             'logging.channels.daily.replace_placeholders' => 'boolean',
             'logging.channels.slack.driver' => 'string',
-            'logging.channels.slack.url' => 'NULL',
+            'logging.channels.slack.url' => 'string',
             'logging.channels.slack.username' => 'string',
             'logging.channels.slack.emoji' => 'string',
             'logging.channels.slack.level' => 'string',
@@ -2013,7 +2013,7 @@ namespace PHPSTORM_META {
             'logging.channels.daily.days' => 'integer',
             'logging.channels.daily.replace_placeholders' => 'boolean',
             'logging.channels.slack.driver' => 'string',
-            'logging.channels.slack.url' => 'NULL',
+            'logging.channels.slack.url' => 'string',
             'logging.channels.slack.username' => 'string',
             'logging.channels.slack.emoji' => 'string',
             'logging.channels.slack.level' => 'string',
@@ -2590,7 +2590,7 @@ namespace PHPSTORM_META {
         registerArgumentsSet('middleware', 
 'web','api','auth','auth.basic','auth.session',
 'cache.headers','can','guest','password.confirm','precognitive',
-'signed','throttle','verified',);
+'signed','throttle','verified','optional_auth',);
         registerArgumentsSet('routes', 
 'debugbar.openhandler','debugbar.clockwork','debugbar.assets.css','debugbar.assets.js','debugbar.cache.delete',
 'debugbar.queries.explain','l5-swagger.default.api','l5-swagger.default.docs','l5-swagger.default.asset','l5-swagger.default.oauth2_callback',
@@ -2635,8 +2635,7 @@ namespace PHPSTORM_META {
 'validation.required_without','validation.required_without_all','validation.same','validation.size.array','validation.size.file',
 'validation.size.numeric','validation.size.string','validation.starts_with','validation.string','validation.timezone',
 'validation.unique','validation.uploaded','validation.uppercase','validation.url','validation.ulid',
-'validation.uuid','validation.custom.attribute-name.rule-name','OTP::otp.otp_token','OTP::otp.otp_subject','OTP::otp.token_has_been_expired_or_invalid',
-'OTP::otp.user_not_found_by_mobile','OTP::otp.otp_has_already_been_sent_for_this_mobile','enum::validation.enum','enum::validation.enum_index','enum::validation.enum_name',
+'validation.uuid','validation.custom.attribute-name.rule-name','enum::validation.enum','enum::validation.enum_index','enum::validation.enum_name',
 'enum::validation.enum_value','enum::validation.enums.Spatie\\Enum\\Enumerable.slugged_name','enum::validation.enums.Spatie\\Enum\\Enumerable.slugged_other_name',);
         registerArgumentsSet('env', 
 'APP_NAME','APP_ENV','APP_KEY','APP_DEBUG','APP_TIMEZONE',
@@ -2649,10 +2648,10 @@ namespace PHPSTORM_META {
 'REDIS_PASSWORD','REDIS_PORT','MAIL_MAILER','MAIL_SCHEME','MAIL_HOST',
 'MAIL_PORT','MAIL_USERNAME','MAIL_PASSWORD','MAIL_FROM_ADDRESS','MAIL_FROM_NAME',
 'AWS_ACCESS_KEY_ID','AWS_SECRET_ACCESS_KEY','AWS_DEFAULT_REGION','AWS_BUCKET','AWS_USE_PATH_STYLE_ENDPOINT',
-'CLOUDINARY_CLOUD_NAME','CLOUDINARY_API_KEY','CLOUDINARY_API_SECRET','CLOUDINARY_SECURE_URL','CLOUDINARY_URL',
-'VITE_APP_NAME','ALGOLIA_APP_ID','ALGOLIA_API_KEY','MTN_USERNAME','MTN_PASSWORD',
-'MTN_FROM','INFOBIP_FROM','INFOBIP_USERNAME','INFOBIP_PASSWORD','TWILIO_SID',
-'TWILIO_AUTH_TOKEN','TWILIO_NUMBER',);
+'VITE_APP_NAME','CLOUDINARY_CLOUD_NAME','CLOUDINARY_API_KEY','CLOUDINARY_API_SECRET','CLOUDINARY_SECURE_URL',
+'CLOUDINARY_URL','VITE_APP_NAME','ALGOLIA_APP_ID','ALGOLIA_API_KEY','LOG_SLACK_USERNAME',
+'LOG_SLACK_WEBHOOK_URL','DEPLOY_BRANCH','DEPLOY_PATH','DEPLOY_RESTART_PHP_FPM','DEPLOY_RESTART_PHP_FPM_COMMAND',
+'DEPLOY_SUDO_USER','DEPLOY_SUDO_USER_PASSWORD',);
         
                 expectedArguments(\Illuminate\Support\Facades\Gate::has(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::allows(), 0, argumentsSet('auth'));

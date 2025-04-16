@@ -132,7 +132,6 @@ namespace App\Models{
  * @property string $car_upload_expiration_date
  * @property int $car_name_language_when_uploaded
  * @property string|null $name_en
- * @property-read mixed $name_ars
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car isNotSold()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarNameLanguageWhenUploaded($value)
@@ -350,10 +349,12 @@ namespace App\Models{
  * @mixin \Eloquent
  * @property int|null $max_number_of_car_upload
  * @property int $subscription_id
+ * @property string|null $password
  * @property-read \App\Models\Subscription $subscription
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereMaxNumberOfCarUpload($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereSubscriptionId($value)
  */
 	class User extends \Eloquent {}

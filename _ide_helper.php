@@ -14,7 +14,7 @@
  */
 namespace Barryvdh\Debugbar\Facades {
     /**
-     *
+     * 
      *
      * @method static void alert(mixed $message)
      * @method static void critical(mixed $message)
@@ -30,11 +30,11 @@ namespace Barryvdh\Debugbar\Facades {
     class Debugbar {
         /**
          * Returns the HTTP driver
-         *
+         * 
          * If no http driver where defined, a PhpHttpDriver is automatically created
          *
-         * @return \DebugBar\HttpDriverInterface
-         * @static
+         * @return \DebugBar\HttpDriverInterface 
+         * @static 
          */
         public static function getHttpDriver()
         {
@@ -45,7 +45,7 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Enable the Debugbar and boot, if not already booted.
          *
-         * @static
+         * @static 
          */
         public static function enable()
         {
@@ -56,7 +56,7 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Boot the debugbar (add collectors, renderer and listener)
          *
-         * @static
+         * @static 
          */
         public static function boot()
         {
@@ -65,9 +65,9 @@ namespace Barryvdh\Debugbar\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function shouldCollect($name, $default = false)
         {
@@ -80,8 +80,8 @@ namespace Barryvdh\Debugbar\Facades {
          *
          * @param \DebugBar\DataCollector\DataCollectorInterface $collector
          * @throws DebugBarException
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
          */
         public static function addCollector($collector)
         {
@@ -98,7 +98,7 @@ namespace Barryvdh\Debugbar\Facades {
          * @param int $line
          * @param array $context
          * @throws \ErrorException
-         * @static
+         * @static 
          */
         public static function handleError($level, $message, $file = '', $line = 0, $context = [])
         {
@@ -112,7 +112,7 @@ namespace Barryvdh\Debugbar\Facades {
          * @param string $name Internal name, used to stop the measure
          * @param string $label Public name
          * @param string|null $collector
-         * @static
+         * @static 
          */
         public static function startMeasure($name, $label = null, $collector = null)
         {
@@ -124,7 +124,7 @@ namespace Barryvdh\Debugbar\Facades {
          * Stops a measure
          *
          * @param string $name
-         * @static
+         * @static 
          */
         public static function stopMeasure($name)
         {
@@ -137,7 +137,7 @@ namespace Barryvdh\Debugbar\Facades {
          *
          * @param \Exception $e
          * @deprecated in favor of addThrowable
-         * @static
+         * @static 
          */
         public static function addException($e)
         {
@@ -149,7 +149,7 @@ namespace Barryvdh\Debugbar\Facades {
          * Adds an exception to be profiled in the debug bar
          *
          * @param \Throwable $e
-         * @static
+         * @static 
          */
         public static function addThrowable($e)
         {
@@ -162,8 +162,8 @@ namespace Barryvdh\Debugbar\Facades {
          *
          * @param string $baseUrl
          * @param string $basePath
-         * @return \Barryvdh\Debugbar\JavascriptRenderer
-         * @static
+         * @return \Barryvdh\Debugbar\JavascriptRenderer 
+         * @static 
          */
         public static function getJavascriptRenderer($baseUrl = null, $basePath = null)
         {
@@ -176,8 +176,8 @@ namespace Barryvdh\Debugbar\Facades {
          *
          * @param \Symfony\Component\HttpFoundation\Request $request
          * @param \Symfony\Component\HttpFoundation\Response $response
-         * @return \Symfony\Component\HttpFoundation\Response
-         * @static
+         * @return \Symfony\Component\HttpFoundation\Response 
+         * @static 
          */
         public static function modifyResponse($request, $response)
         {
@@ -188,8 +188,8 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Check if the Debugbar is enabled
          *
-         * @return boolean
-         * @static
+         * @return boolean 
+         * @static 
          */
         public static function isEnabled()
         {
@@ -200,8 +200,8 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Collects the data from the collectors
          *
-         * @return array
-         * @static
+         * @return array 
+         * @static 
          */
         public static function collect()
         {
@@ -214,7 +214,7 @@ namespace Barryvdh\Debugbar\Facades {
          *
          * @param \Symfony\Component\HttpFoundation\Response $response A Response instance
          * Based on https://github.com/symfony/WebProfilerBundle/blob/master/EventListener/WebDebugToolbarListener.php
-         * @static
+         * @static 
          */
         public static function injectDebugbar($response)
         {
@@ -225,8 +225,8 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Checks if there is stacked data in the session
          *
-         * @return boolean
-         * @static
+         * @return boolean 
+         * @static 
          */
         public static function hasStackedData()
         {
@@ -238,8 +238,8 @@ namespace Barryvdh\Debugbar\Facades {
          * Returns the data stacked in the session
          *
          * @param boolean $delete Whether to delete the data in the session
-         * @return array
-         * @static
+         * @return array 
+         * @static 
          */
         public static function getStackedData($delete = true)
         {
@@ -250,7 +250,7 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Disable the Debugbar
          *
-         * @static
+         * @static 
          */
         public static function disable()
         {
@@ -266,7 +266,7 @@ namespace Barryvdh\Debugbar\Facades {
          * @param float $end
          * @param array|null $params
          * @param string|null $collector
-         * @static
+         * @static 
          */
         public static function addMeasure($label, $start, $end, $params = [], $collector = null)
         {
@@ -280,8 +280,8 @@ namespace Barryvdh\Debugbar\Facades {
          * @param string $label
          * @param \Closure $closure
          * @param string|null $collector
-         * @return mixed
-         * @static
+         * @return mixed 
+         * @static 
          */
         public static function measure($label, $closure, $collector = null)
         {
@@ -292,8 +292,8 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Collect data in a CLI request
          *
-         * @return array
-         * @static
+         * @return array 
+         * @static 
          */
         public static function collectConsole()
         {
@@ -303,12 +303,12 @@ namespace Barryvdh\Debugbar\Facades {
 
         /**
          * Adds a message to the MessagesCollector
-         *
+         * 
          * A message can be anything from an object to a string
          *
          * @param mixed $message
          * @param string $label
-         * @static
+         * @static 
          */
         public static function addMessage($message, $label = 'info')
         {
@@ -320,12 +320,12 @@ namespace Barryvdh\Debugbar\Facades {
          * Checks if a data collector has been added
          *
          * @param string $name
-         * @return boolean
-         * @static
+         * @return boolean 
+         * @static 
          */
         public static function hasCollector($name)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->hasCollector($name);
         }
@@ -334,13 +334,13 @@ namespace Barryvdh\Debugbar\Facades {
          * Returns a data collector
          *
          * @param string $name
-         * @return \DebugBar\DataCollector\DataCollectorInterface
+         * @return \DebugBar\DataCollector\DataCollectorInterface 
          * @throws DebugBarException
-         * @static
+         * @static 
          */
         public static function getCollector($name)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->getCollector($name);
         }
@@ -348,12 +348,12 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Returns an array of all data collectors
          *
-         * @return array[DataCollectorInterface]
-         * @static
+         * @return array[DataCollectorInterface] 
+         * @static 
          */
         public static function getCollectors()
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->getCollectors();
         }
@@ -362,25 +362,25 @@ namespace Barryvdh\Debugbar\Facades {
          * Sets the request id generator
          *
          * @param \DebugBar\RequestIdGeneratorInterface $generator
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
          */
         public static function setRequestIdGenerator($generator)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->setRequestIdGenerator($generator);
         }
 
         /**
+         * 
          *
-         *
-         * @return \DebugBar\RequestIdGeneratorInterface
-         * @static
+         * @return \DebugBar\RequestIdGeneratorInterface 
+         * @static 
          */
         public static function getRequestIdGenerator()
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->getRequestIdGenerator();
         }
@@ -388,12 +388,12 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Returns the id of the current request
          *
-         * @return string
-         * @static
+         * @return string 
+         * @static 
          */
         public static function getCurrentRequestId()
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->getCurrentRequestId();
         }
@@ -402,25 +402,25 @@ namespace Barryvdh\Debugbar\Facades {
          * Sets the storage backend to use to store the collected data
          *
          * @param \DebugBar\StorageInterface $storage
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
          */
         public static function setStorage($storage = null)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->setStorage($storage);
         }
 
         /**
+         * 
          *
-         *
-         * @return \DebugBar\StorageInterface
-         * @static
+         * @return \DebugBar\StorageInterface 
+         * @static 
          */
         public static function getStorage()
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->getStorage();
         }
@@ -428,12 +428,12 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Checks if the data will be persisted
          *
-         * @return boolean
-         * @static
+         * @return boolean 
+         * @static 
          */
         public static function isDataPersisted()
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->isDataPersisted();
         }
@@ -442,27 +442,27 @@ namespace Barryvdh\Debugbar\Facades {
          * Sets the HTTP driver
          *
          * @param \DebugBar\HttpDriverInterface $driver
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
          */
         public static function setHttpDriver($driver)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->setHttpDriver($driver);
         }
 
         /**
          * Returns collected data
-         *
+         * 
          * Will collect the data if none have been collected yet
          *
-         * @return array
-         * @static
+         * @return array 
+         * @static 
          */
         public static function getData()
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->getData();
         }
@@ -472,12 +472,12 @@ namespace Barryvdh\Debugbar\Facades {
          *
          * @param string $headerName
          * @param integer $maxHeaderLength
-         * @return array
-         * @static
+         * @return array 
+         * @static 
          */
         public static function getDataAsHeaders($headerName = 'phpdebugbar', $maxHeaderLength = 4096, $maxTotalHeaderLength = 250000)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->getDataAsHeaders($headerName, $maxHeaderLength, $maxTotalHeaderLength);
         }
@@ -488,12 +488,12 @@ namespace Barryvdh\Debugbar\Facades {
          * @param bool $useOpenHandler
          * @param string $headerName
          * @param integer $maxHeaderLength
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
          */
         public static function sendDataInHeaders($useOpenHandler = null, $headerName = 'phpdebugbar', $maxHeaderLength = 4096)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->sendDataInHeaders($useOpenHandler, $headerName, $maxHeaderLength);
         }
@@ -501,11 +501,11 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Stacks the data in the session for later rendering
          *
-         * @static
+         * @static 
          */
         public static function stackData()
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->stackData();
         }
@@ -514,12 +514,12 @@ namespace Barryvdh\Debugbar\Facades {
          * Sets the key to use in the $_SESSION array
          *
          * @param string $ns
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
          */
         public static function setStackDataSessionNamespace($ns)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->setStackDataSessionNamespace($ns);
         }
@@ -527,12 +527,12 @@ namespace Barryvdh\Debugbar\Facades {
         /**
          * Returns the key used in the $_SESSION array
          *
-         * @return string
-         * @static
+         * @return string 
+         * @static 
          */
         public static function getStackDataSessionNamespace()
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->getStackDataSessionNamespace();
         }
@@ -542,12 +542,12 @@ namespace Barryvdh\Debugbar\Facades {
          * if a storage is enabled
          *
          * @param boolean $enabled
-         * @return \Barryvdh\Debugbar\LaravelDebugbar
-         * @static
+         * @return \Barryvdh\Debugbar\LaravelDebugbar 
+         * @static 
          */
         public static function setStackAlwaysUseSessionStorage($enabled = true)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->setStackAlwaysUseSessionStorage($enabled);
         }
@@ -556,60 +556,60 @@ namespace Barryvdh\Debugbar\Facades {
          * Checks if the session is always used to store stacked data
          * even if a storage is enabled
          *
-         * @return boolean
-         * @static
+         * @return boolean 
+         * @static 
          */
         public static function isStackAlwaysUseSessionStorage()
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->isStackAlwaysUseSessionStorage();
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function offsetSet($key, $value)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->offsetSet($key, $value);
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function offsetGet($key)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->offsetGet($key);
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function offsetExists($key)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->offsetExists($key);
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function offsetUnset($key)
         {
-            //Method inherited from \DebugBar\DebugBar
+            //Method inherited from \DebugBar\DebugBar 
             /** @var \Barryvdh\Debugbar\LaravelDebugbar $instance */
             return $instance->offsetUnset($key);
         }
@@ -626,7 +626,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Create a Cloudinary Config Instance
          *
-         * @static
+         * @static 
          */
         public static function setCloudinaryConfig()
         {
@@ -637,7 +637,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Set User Agent and Platform
          *
-         * @static
+         * @static 
          */
         public static function setUserPlatform()
         {
@@ -648,7 +648,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Set Analytics
          *
-         * @static
+         * @static 
          */
         public static function setAnalytics()
         {
@@ -659,7 +659,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Create a Cloudinary Instance
          *
-         * @static
+         * @static 
          */
         public static function bootCloudinary()
         {
@@ -670,7 +670,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Expose the Cloudinary Admin Functionality
          *
-         * @static
+         * @static 
          */
         public static function admin()
         {
@@ -681,7 +681,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Expose the Cloudinary Search Functionality
          *
-         * @static
+         * @static 
          */
         public static function search()
         {
@@ -691,7 +691,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Uploads an asset to a Cloudinary account.
-         *
+         * 
          * The asset can be:
          * * a local file path
          * * the actual data (byte array buffer)
@@ -701,10 +701,10 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          *
          * @param string $file The asset to upload.
          * @param array $options The optional parameters. See the upload API documentation.
-         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine
+         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine 
          * @throws ApiError
          * @see https://cloudinary.com/documentation/image_upload_api_reference#upload_method
-         * @static
+         * @static 
          */
         public static function upload($file, $options = [])
         {
@@ -715,7 +715,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Expose the Cloudinary Upload Functionality
          *
-         * @static
+         * @static 
          */
         public static function uploadApi()
         {
@@ -725,16 +725,16 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Uploads an asset to a Cloudinary account.
-         *
+         * 
          * The upload is not signed so an upload preset is required.
          *
          * @param string $file The asset to upload.
          * @param string $uploadPreset The name of an upload preset.
          * @param array $options The optional parameters. See the upload API documentation.
-         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine
+         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine 
          * @throws ApiError
          * @see https://cloudinary.com/documentation/image_upload_api_reference#unsigned_upload_syntax
-         * @static
+         * @static 
          */
         public static function unsignedUpload($file, $uploadPreset, $options = [])
         {
@@ -744,13 +744,13 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Uploads an asset to a Cloudinary account.
-         *
+         * 
          * The upload is not signed so an upload preset is required.
-         *
+         * 
          * This is asynchronous
          *
          * @throws ApiError
-         * @static
+         * @static 
          */
         public static function unsignedUploadAsync($file, $uploadPreset, $options = [])
         {
@@ -759,11 +759,11 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine
+         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine 
          * @throws ApiError
-         * @static
+         * @static 
          */
         public static function uploadFile($file, $options = [])
         {
@@ -772,11 +772,11 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine
+         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine 
          * @throws ApiError
-         * @static
+         * @static 
          */
         public static function uploadVideo($file, $options = [])
         {
@@ -785,9 +785,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getResponse()
         {
@@ -796,9 +796,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getAssetId()
         {
@@ -809,7 +809,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Get the name of the file after it has been uploaded to Cloudinary
          *
-         * @static
+         * @static 
          */
         public static function getFileName()
         {
@@ -820,7 +820,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Get the public id of the file (also known as the name of the file) after it has been uploaded to Cloudinary
          *
-         * @static
+         * @static 
          */
         public static function getPublicId()
         {
@@ -831,7 +831,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Get the name of the file before it was uploaded to Cloudinary
          *
-         * @static
+         * @static 
          */
         public static function getOriginalFileName()
         {
@@ -840,9 +840,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getVersion()
         {
@@ -851,9 +851,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getVersionId()
         {
@@ -862,9 +862,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getSignature()
         {
@@ -873,9 +873,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getWidth()
         {
@@ -884,9 +884,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getHeight()
         {
@@ -895,9 +895,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getExtension()
         {
@@ -906,9 +906,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getFileType()
         {
@@ -917,9 +917,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getTimeUploaded()
         {
@@ -928,9 +928,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getTags()
         {
@@ -939,9 +939,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getPages()
         {
@@ -950,9 +950,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getReadableSize()
         {
@@ -964,7 +964,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          * Formats filesize in the way every human understands
          *
          * @return string Formatted Filesize, e.g. "113.24 MB".
-         * @static
+         * @static 
          */
         public static function getHumanReadableSize($sizeInBytes)
         {
@@ -973,9 +973,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getSize()
         {
@@ -984,9 +984,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getPlaceHolder()
         {
@@ -995,9 +995,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getPath()
         {
@@ -1006,9 +1006,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getSecurePath()
         {
@@ -1017,9 +1017,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getPhash()
         {
@@ -1028,9 +1028,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getEtag()
         {
@@ -1042,7 +1042,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          * Fetches a new Image with current instance configuration.
          *
          * @param string $publicId The public ID of the image.
-         * @static
+         * @static 
          */
         public static function getImage($publicId)
         {
@@ -1054,7 +1054,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          * Fetches a new Video with current instance configuration.
          *
          * @param string|mixed $publicId The public ID of the video.
-         * @static
+         * @static 
          */
         public static function getVideo($publicId)
         {
@@ -1066,7 +1066,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          * Fetches a raw file with current instance configuration.
          *
          * @param string|mixed $publicId The public ID of the file.
-         * @static
+         * @static 
          */
         public static function getFile($publicId)
         {
@@ -1075,9 +1075,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getImageTag($publicId)
         {
@@ -1086,9 +1086,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function getVideoTag($publicId)
         {
@@ -1103,7 +1103,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          * @param array $publicIds The public IDs of the assets to add the tag to.
          * @param array $options The optional parameters. See the upload API documentation.
          * @see https://cloudinary.com/documentation/image_upload_api_reference#tags_method
-         * @static
+         * @static 
          */
         public static function addTag($tag, $publicIds = [], $options = [])
         {
@@ -1113,10 +1113,10 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Adds a tag to the assets specified.
-         *
+         * 
          * This is an asynchronous function.
          *
-         * @static
+         * @static 
          */
         public static function addTagAsync($tag, $publicIds = [], $options = [])
         {
@@ -1131,7 +1131,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          * @param array|string $publicIds The public IDs of the assets to remove the tags from.
          * @param array $options The optional parameters. See the upload API documentation.
          * @see https://cloudinary.com/documentation/image_upload_api_reference#tags_method
-         * @static
+         * @static 
          */
         public static function removeTag($tag, $publicIds = [], $options = [])
         {
@@ -1141,10 +1141,10 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Removes a tag from the assets specified.
-         *
+         * 
          * This is an asynchronous function.
          *
-         * @static
+         * @static 
          */
         public static function removeTagAsync($tag, $publicIds = [], $options = [])
         {
@@ -1158,7 +1158,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          * @param array $publicIds The public IDs of the assets to remove all tags from.
          * @param array $options The optional parameters. See the upload API documentation.
          * @see https://cloudinary.com/documentation/image_upload_api_reference#tags_method
-         * @static
+         * @static 
          */
         public static function removeAllTags($publicIds = [], $options = [])
         {
@@ -1168,10 +1168,10 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Removes all tags from the assets specified.
-         *
+         * 
          * This is an asynchronous function.
          *
-         * @static
+         * @static 
          */
         public static function removeAllTagsAsync($publicIds = [], $options = [])
         {
@@ -1186,7 +1186,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          * @param array|string $publicIds The public IDs of the assets to replace the tags of.
          * @param array $options The optional parameters. See the upload API documentation.
          * @see https://cloudinary.com/documentation/image_upload_api_reference#tags_method
-         * @static
+         * @static 
          */
         public static function replaceTag($tag, $publicIds = [], $options = [])
         {
@@ -1196,10 +1196,10 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Replaces all existing tags on the assets specified with the tag specified.
-         *
+         * 
          * This is an asynchronous function.
          *
-         * @static
+         * @static 
          */
         public static function replaceTagAsync($tag, $publicIds = [], $options = [])
         {
@@ -1209,7 +1209,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Creates a sprite from all images that have been assigned a specified tag.
-         *
+         * 
          * The process produces two files:
          * * A single image file containing all the images with the specified tag (PNG by default).
          * * A CSS file that includes the style class names and the location of the individual images in the sprite.
@@ -1217,7 +1217,7 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          * @param string $tag The tag that indicates which images to include in the sprite.
          * @param array $options The optional parameters. See the upload API documentation.
          * @see https://cloudinary.com/documentation/image_upload_api_reference#sprite_method
-         * @static
+         * @static 
          */
         public static function generateSprite($tag, $options = [])
         {
@@ -1227,10 +1227,10 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Creates a sprite from all images that have been assigned a specified tag.
-         *
+         * 
          * This is an asynchronous function.
          *
-         * @static
+         * @static 
          */
         public static function generateSpriteAsync($tag, $options = [])
         {
@@ -1240,14 +1240,14 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
         /**
          * Creates a PDF file from images in your media library that have been assigned a specific tag.
-         *
+         * 
          * Important note for free accounts:
          * By default, while you can use this method to generate PDF files, free Cloudinary accounts are blocked from delivering
          * files in PDF format for security reasons.
          * For details or to request that this limitation be removed for your free account, see Media delivery.
          *
          * @see https://cloudinary.com/documentation/paged_and_layered_media#creating_pdf_files_from_images
-         * @static
+         * @static 
          */
         public static function generatePDF($tag, $options = [])
         {
@@ -1256,9 +1256,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generatePDFAsync($tag, $options = [])
         {
@@ -1267,9 +1267,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateAnimatedGIF($tag, $options = [])
         {
@@ -1278,9 +1278,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateAnimatedPNG($tag, $options = [])
         {
@@ -1289,9 +1289,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateAnimatedPNGAsync($tag, $options = [])
         {
@@ -1300,9 +1300,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateAnimatedWEBP($tag, $options = [])
         {
@@ -1311,9 +1311,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateAnimatedWEBPAsync($tag, $options = [])
         {
@@ -1322,9 +1322,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateAnimatedMP4($tag, $options = [])
         {
@@ -1333,9 +1333,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateAnimatedMP4Async($tag, $options = [])
         {
@@ -1344,9 +1344,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateAnimatedWEBM($tag, $options = [])
         {
@@ -1355,9 +1355,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateAnimatedWEBMAsync($tag, $options = [])
         {
@@ -1366,9 +1366,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function multi($tag, $options = [])
         {
@@ -1377,9 +1377,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function multiAsync($tag, $options = [])
         {
@@ -1388,9 +1388,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function explode($publicId, $options = [])
         {
@@ -1399,9 +1399,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function explodeAsync($publicId, $options = [])
         {
@@ -1414,9 +1414,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
          *
          * @param string $text The text string to generate an image for.
          * @param array $options The optional parameters.  See the upload API documentation.
-         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine
+         * @return \CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine 
          * @see https://cloudinary.com/documentation/image_upload_api_reference#text_method
-         * @static
+         * @static 
          */
         public static function generateImageFromText($text, $options = [])
         {
@@ -1425,9 +1425,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function generateImageFromTextAsync($text, $options = [])
         {
@@ -1436,10 +1436,10 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
-         *
+         * 
          *
          * @param null $targetFormat
-         * @static
+         * @static 
          */
         public static function createArchive($options = [], $targetFormat = null)
         {
@@ -1448,10 +1448,10 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
-         *
+         * 
          *
          * @param null $targetFormat
-         * @static
+         * @static 
          */
         public static function createArchiveAsync($options = [], $targetFormat = null)
         {
@@ -1460,9 +1460,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function createZip($options = [])
         {
@@ -1471,9 +1471,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function createZipAsync($options = [])
         {
@@ -1482,9 +1482,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function downloadZipUrl($options = [])
         {
@@ -1493,9 +1493,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function downloadArchiveUrl($options = [])
         {
@@ -1504,9 +1504,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function addContext($context, $publicIds = [], $options = [])
         {
@@ -1515,9 +1515,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function addContextAsync($context, $publicIds = [], $options = [])
         {
@@ -1526,9 +1526,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function removeAllContext($publicIds = [], $options = [])
         {
@@ -1537,9 +1537,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function removeAllContextAsync($publicIds = [], $options = [])
         {
@@ -1548,9 +1548,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function destroy($publicId, $options = [])
         {
@@ -1559,9 +1559,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function destroyAsync($publicId, $options = [])
         {
@@ -1570,9 +1570,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function rename($from, $to, $options = [])
         {
@@ -1581,9 +1581,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function renameAsync($from, $to, $options = [])
         {
@@ -1592,9 +1592,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function explicit($publicId, $options = [])
         {
@@ -1603,9 +1603,9 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function explicitAsync($publicId, $options = [])
         {
@@ -1616,8 +1616,8 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Get Resource data
          *
-         * @return \Cloudinary\Api\ApiResponse|\CloudinaryLabs\CloudinaryLaravel\string;
-         * @static
+         * @return \Cloudinary\Api\ApiResponse|\CloudinaryLabs\CloudinaryLaravel\string; 
+         * @static 
          */
         public static function getResource($path)
         {
@@ -1628,8 +1628,8 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
         /**
          * Get the url of a file
          *
-         * @return string|false
-         * @static
+         * @return string|false 
+         * @static 
          */
         public static function getUrl($publicId)
         {
@@ -1642,15 +1642,15 @@ namespace CloudinaryLabs\CloudinaryLaravel\Facades {
 
 namespace L5Swagger {
     /**
-     *
+     * 
      *
      */
     class L5SwaggerFacade {
         /**
-         *
+         * 
          *
          * @throws L5SwaggerException
-         * @static
+         * @static 
          */
         public static function generateDocs()
         {
@@ -1663,15 +1663,15 @@ namespace L5Swagger {
 
 namespace Datlechin\GoogleTranslate\Facades {
     /**
-     *
+     * 
      *
      * @see \Datlechin\GoogleTranslate\GoogleTranslate
      */
     class GoogleTranslate {
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function source($source)
         {
@@ -1680,9 +1680,9 @@ namespace Datlechin\GoogleTranslate\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function target($target)
         {
@@ -1691,10 +1691,10 @@ namespace Datlechin\GoogleTranslate\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @deprecated
-         * @static
+         * @deprecated 
+         * @static 
          */
         public static function withSource($source)
         {
@@ -1703,10 +1703,10 @@ namespace Datlechin\GoogleTranslate\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @deprecated
-         * @static
+         * @deprecated 
+         * @static 
          */
         public static function withTarget($target)
         {
@@ -1715,9 +1715,9 @@ namespace Datlechin\GoogleTranslate\Facades {
         }
 
         /**
+         * 
          *
-         *
-         * @static
+         * @static 
          */
         public static function translate($text, $source = null, $target = null)
         {
@@ -1728,33 +1728,9 @@ namespace Datlechin\GoogleTranslate\Facades {
             }
     }
 
-namespace Pnlinh\InfobipSms\Facades {
-    /**
-     *
-     *
-     */
-    class InfobipSms {
-        /**
-         * Do send sms.
-         *
-         * @see https://www.infobip.com/en/blog/step-by-step-sms-api-php-tutorial-create-your-new-web-app
-         * @param $to
-         * @param $text
-         * @return array
-         * @static
-         */
-        public static function send($to, $text)
-        {
-            /** @var \Pnlinh\InfobipSms\InfobipSmsService $instance */
-            return $instance->send($to, $text);
-        }
-
-            }
-    }
-
 namespace Illuminate\Support {
     /**
-     *
+     * 
      *
      * @template TKey of array-key
      * @template-covariant TValue
@@ -1763,10 +1739,10 @@ namespace Illuminate\Support {
      */
     class Collection {
         /**
-         *
+         * 
          *
          * @see \Barryvdh\Debugbar\ServiceProvider::register()
-         * @static
+         * @static 
          */
         public static function debug()
         {
@@ -1774,12 +1750,12 @@ namespace Illuminate\Support {
         }
 
         /**
-         *
+         * 
          *
          * @see \App\Providers\BuilderMacrosServiceProvider::boot()
          * @param string|int $id
-         * @return \Illuminate\Database\Eloquent\Model|static|null
-         * @static
+         * @return \Illuminate\Database\Eloquent\Model|static|null 
+         * @static 
          */
         public static function firstWhereId($id)
         {
@@ -1787,12 +1763,12 @@ namespace Illuminate\Support {
         }
 
         /**
-         *
+         * 
          *
          * @see \App\Providers\BuilderMacrosServiceProvider::boot()
          * @param \Illuminate\Support\Collection|array $ids
-         * @return \Illuminate\Support\Collection
-         * @static
+         * @return \Illuminate\Support\Collection 
+         * @static 
          */
         public static function whereIdIn($ids)
         {
@@ -1800,12 +1776,12 @@ namespace Illuminate\Support {
         }
 
         /**
-         *
+         * 
          *
          * @see \App\Providers\BuilderMacrosServiceProvider::boot()
          * @param string $relation
-         * @return \Illuminate\Support\Collection
-         * @static
+         * @return \Illuminate\Support\Collection 
+         * @static 
          */
         public static function selectMany($relation)
         {
@@ -1817,17 +1793,17 @@ namespace Illuminate\Support {
 
 namespace Illuminate\Http {
     /**
-     *
+     * 
      *
      */
     class Request {
         /**
-         *
+         * 
          *
          * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestValidation()
          * @param array $rules
          * @param mixed $params
-         * @static
+         * @static 
          */
         public static function validate($rules, ...$params)
         {
@@ -1835,13 +1811,13 @@ namespace Illuminate\Http {
         }
 
         /**
-         *
+         * 
          *
          * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestValidation()
          * @param string $errorBag
          * @param array $rules
          * @param mixed $params
-         * @static
+         * @static 
          */
         public static function validateWithBag($errorBag, $rules, ...$params)
         {
@@ -1849,11 +1825,11 @@ namespace Illuminate\Http {
         }
 
         /**
-         *
+         * 
          *
          * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestSignatureValidation()
          * @param mixed $absolute
-         * @static
+         * @static 
          */
         public static function hasValidSignature($absolute = true)
         {
@@ -1861,10 +1837,10 @@ namespace Illuminate\Http {
         }
 
         /**
-         *
+         * 
          *
          * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestSignatureValidation()
-         * @static
+         * @static 
          */
         public static function hasValidRelativeSignature()
         {
@@ -1872,12 +1848,12 @@ namespace Illuminate\Http {
         }
 
         /**
-         *
+         * 
          *
          * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestSignatureValidation()
          * @param mixed $ignoreQuery
          * @param mixed $absolute
-         * @static
+         * @static 
          */
         public static function hasValidSignatureWhileIgnoring($ignoreQuery = [], $absolute = true)
         {
@@ -1885,11 +1861,11 @@ namespace Illuminate\Http {
         }
 
         /**
-         *
+         * 
          *
          * @see \Illuminate\Foundation\Providers\FoundationServiceProvider::registerRequestSignatureValidation()
          * @param mixed $ignoreQuery
-         * @static
+         * @static 
          */
         public static function hasValidRelativeSignatureWhileIgnoring($ignoreQuery = [])
         {
@@ -1897,12 +1873,12 @@ namespace Illuminate\Http {
         }
 
         /**
-         *
+         * 
          *
          * @see \Spatie\Enum\Laravel\Http\EnumRequest::transformEnums()
          * @param array $transformations
-         * @return void
-         * @static
+         * @return void 
+         * @static 
          */
         public static function transformEnums($transformations)
         {
@@ -1911,16 +1887,16 @@ namespace Illuminate\Http {
 
             }
     /**
-     *
+     * 
      *
      */
     class UploadedFile {
         /**
-         *
+         * 
          *
          * @see \CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::bootMacros()
          * @param mixed $folder
-         * @static
+         * @static 
          */
         public static function storeOnCloudinary($folder = null)
         {
@@ -1928,12 +1904,12 @@ namespace Illuminate\Http {
         }
 
         /**
-         *
+         * 
          *
          * @see \CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::bootMacros()
          * @param mixed $folder
          * @param mixed $publicId
-         * @static
+         * @static 
          */
         public static function storeOnCloudinaryAs($folder = null, $publicId = null)
         {
@@ -1945,15 +1921,15 @@ namespace Illuminate\Http {
 
 namespace Illuminate\Database\Query {
     /**
-     *
+     * 
      *
      */
     class Builder {
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\QueryBuilderExtraMethods::getGroupBy()
-         * @static
+         * @static 
          */
         public static function getGroupBy()
         {
@@ -1961,10 +1937,10 @@ namespace Illuminate\Database\Query {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\QueryBuilderExtraMethods::getSelect()
-         * @static
+         * @static 
          */
         public static function getSelect()
         {
@@ -1976,7 +1952,7 @@ namespace Illuminate\Database\Query {
 
 namespace Illuminate\Database\Eloquent\Relations {
     /**
-     *
+     * 
      *
      * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
      * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
@@ -1985,7 +1961,7 @@ namespace Illuminate\Database\Eloquent\Relations {
      */
     class Relation {
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoins()
          * @param mixed $builder
@@ -1995,7 +1971,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          * @param bool $disableExtraConditions
          * @param string|null $morphable
          * @param bool $hasCheck
-         * @static
+         * @static 
          */
         public static function performJoinForEloquentPowerJoins($builder, $joinType = 'leftJoin', $callback = null, $alias = null, $disableExtraConditions = false, $morphable = null, $hasCheck = false)
         {
@@ -2003,7 +1979,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForBelongsTo()
          * @param mixed $query
@@ -2011,7 +1987,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          * @param mixed $callback
          * @param mixed $alias
          * @param bool $disableExtraConditions
-         * @static
+         * @static 
          */
         public static function performJoinForEloquentPowerJoinsForBelongsTo($query, $joinType, $callback = null, $alias = null, $disableExtraConditions = false)
         {
@@ -2019,7 +1995,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForBelongsToMany()
          * @param mixed $builder
@@ -2027,7 +2003,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          * @param mixed $callback
          * @param mixed $alias
          * @param bool $disableExtraConditions
-         * @static
+         * @static 
          */
         public static function performJoinForEloquentPowerJoinsForBelongsToMany($builder, $joinType, $callback = null, $alias = null, $disableExtraConditions = false)
         {
@@ -2035,7 +2011,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForMorphToMany()
          * @param mixed $builder
@@ -2043,7 +2019,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          * @param mixed $callback
          * @param mixed $alias
          * @param bool $disableExtraConditions
-         * @static
+         * @static 
          */
         public static function performJoinForEloquentPowerJoinsForMorphToMany($builder, $joinType, $callback = null, $alias = null, $disableExtraConditions = false)
         {
@@ -2051,7 +2027,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForMorph()
          * @param mixed $builder
@@ -2059,7 +2035,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          * @param mixed $callback
          * @param mixed $alias
          * @param bool $disableExtraConditions
-         * @static
+         * @static 
          */
         public static function performJoinForEloquentPowerJoinsForMorph($builder, $joinType, $callback = null, $alias = null, $disableExtraConditions = false)
         {
@@ -2067,7 +2043,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForMorphTo()
          * @param mixed $builder
@@ -2076,7 +2052,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          * @param mixed $alias
          * @param bool $disableExtraConditions
          * @param string|null $morphable
-         * @static
+         * @static 
          */
         public static function performJoinForEloquentPowerJoinsForMorphTo($builder, $joinType, $callback = null, $alias = null, $disableExtraConditions = false, $morphable = null)
         {
@@ -2084,7 +2060,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForHasMany()
          * @param mixed $builder
@@ -2093,7 +2069,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          * @param mixed $alias
          * @param bool $disableExtraConditions
          * @param bool $hasCheck
-         * @static
+         * @static 
          */
         public static function performJoinForEloquentPowerJoinsForHasMany($builder, $joinType, $callback = null, $alias = null, $disableExtraConditions = false, $hasCheck = false)
         {
@@ -2101,7 +2077,7 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performJoinForEloquentPowerJoinsForHasManyThrough()
          * @param mixed $builder
@@ -2109,7 +2085,7 @@ namespace Illuminate\Database\Eloquent\Relations {
          * @param mixed $callback
          * @param mixed $alias
          * @param bool $disableExtraConditions
-         * @static
+         * @static 
          */
         public static function performJoinForEloquentPowerJoinsForHasManyThrough($builder, $joinType, $callback = null, $alias = null, $disableExtraConditions = false)
         {
@@ -2117,14 +2093,14 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::performHavingForEloquentPowerJoins()
          * @param mixed $builder
          * @param mixed $operator
          * @param mixed $count
          * @param string|null $morphable
-         * @static
+         * @static 
          */
         public static function performHavingForEloquentPowerJoins($builder, $operator, $count, $morphable = null)
         {
@@ -2132,11 +2108,11 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::usesSoftDeletes()
          * @param mixed $model
-         * @static
+         * @static 
          */
         public static function usesSoftDeletes($model)
         {
@@ -2144,10 +2120,10 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::getThroughParent()
-         * @static
+         * @static 
          */
         public static function getThroughParent()
         {
@@ -2155,10 +2131,10 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::getFarParent()
-         * @static
+         * @static 
          */
         public static function getFarParent()
         {
@@ -2166,11 +2142,11 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::applyExtraConditions()
          * @param \Kirschbaum\PowerJoins\PowerJoinClause $join
-         * @static
+         * @static 
          */
         public static function applyExtraConditions($join)
         {
@@ -2178,12 +2154,12 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::applyBasicCondition()
          * @param mixed $join
          * @param mixed $condition
-         * @static
+         * @static 
          */
         public static function applyBasicCondition($join, $condition)
         {
@@ -2191,12 +2167,12 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::applyNullCondition()
          * @param mixed $join
          * @param mixed $condition
-         * @static
+         * @static 
          */
         public static function applyNullCondition($join, $condition)
         {
@@ -2204,12 +2180,12 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::applyNotNullCondition()
          * @param mixed $join
          * @param mixed $condition
-         * @static
+         * @static 
          */
         public static function applyNotNullCondition($join, $condition)
         {
@@ -2217,12 +2193,12 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::applyNestedCondition()
          * @param mixed $join
          * @param mixed $condition
-         * @static
+         * @static 
          */
         public static function applyNestedCondition($join, $condition)
         {
@@ -2230,11 +2206,11 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::shouldNotApplyExtraCondition()
          * @param mixed $condition
-         * @static
+         * @static 
          */
         public static function shouldNotApplyExtraCondition($condition)
         {
@@ -2242,10 +2218,10 @@ namespace Illuminate\Database\Eloquent\Relations {
         }
 
         /**
-         *
+         * 
          *
          * @see \Kirschbaum\PowerJoins\Mixins\RelationshipsExtraMethods::getPowerJoinExistenceCompareKey()
-         * @static
+         * @static 
          */
         public static function getPowerJoinExistenceCompareKey()
         {
@@ -2257,18 +2233,18 @@ namespace Illuminate\Database\Eloquent\Relations {
 
 namespace Illuminate\Routing {
     /**
-     *
+     * 
      *
      * @mixin \Illuminate\Routing\RouteRegistrar
      */
     class Router {
         /**
-         *
+         * 
          *
          * @see \Spatie\Enum\Laravel\EnumServiceProvider::registerRouteBindingMacro()
          * @param string $key
          * @param string $class
-         * @static
+         * @static 
          */
         public static function enum($key, $class)
         {
@@ -2277,16 +2253,16 @@ namespace Illuminate\Routing {
 
             }
     /**
-     *
+     * 
      *
      */
     class Route {
         /**
-         *
+         * 
          *
          * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
          * @param mixed $roles
-         * @static
+         * @static 
          */
         public static function role($roles = [])
         {
@@ -2294,11 +2270,11 @@ namespace Illuminate\Routing {
         }
 
         /**
-         *
+         * 
          *
          * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
          * @param mixed $permissions
-         * @static
+         * @static 
          */
         public static function permission($permissions = [])
         {
@@ -2314,7 +2290,6 @@ namespace  {
     class Cloudinary extends \CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary {}
     class L5Swagger extends \L5Swagger\L5SwaggerFacade {}
     class GoogleTranslate extends \Datlechin\GoogleTranslate\Facades\GoogleTranslate {}
-    class InfobipSms extends \Pnlinh\InfobipSms\Facades\InfobipSms {}
 }
 
 
