@@ -331,7 +331,7 @@ class SearchCarOfferController extends Controller
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'is_faragha_jahzeh',
-                            $request_is_faragha_jahzeh
+                            $request_is_faragha_jahzeh ? 1 : 0
                         )
                 )
                 ->when(
