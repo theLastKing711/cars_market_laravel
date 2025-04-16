@@ -17,9 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: ['*']);
         // $middleware->statefulApi();
         $middleware->append(ParseStringToBoolInQueryParameter::class);
+
         $middleware->alias([
-            'optional_auth' => OptionalAuthSanctum::class
-        ])
+            'optional_auth' => OptionalAuthSanctum::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
