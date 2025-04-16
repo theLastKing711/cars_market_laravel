@@ -110,12 +110,17 @@ class SearchCarOfferController extends Controller
                         fn (EloquentBuilder $query) => $query->selectRaw(
                             '*, false as is_favourite'
                         ),
-                        fn (EloquentBuilder $query) => $query
-                            ->selectRaw(
-                                '*,(select exists (select 1 from user_favourites_cars where user_id=? AND car_id=cars.id)) as is_favourite',
-                                [$logged_user_id]
-                            )
+                        // fn (EloquentBuilder $query) => $query
+                        //     ->selectRaw(
+                        //         '*,(select exists (select 1 from user_favourites_cars where user_id=? AND car_id=cars.id)) as is_favourite',
+                        //         [$logged_user_id]
+                        //     )
                     )
+                    ->when($logged_user_id, fn (EloquentBuilder $query) => $query
+                        ->selectRaw(
+                            '*,(select exists (select 1 from user_favourites_cars where user_id=? AND car_id=cars.id)) as is_favourite',
+                            [$logged_user_id]
+                        ))
                     // ->when(
                     //     $request_shippable_to,
                     //     fn (EloquentBuilder $query) => $query
