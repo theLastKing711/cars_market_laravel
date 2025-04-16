@@ -100,7 +100,7 @@ Route::prefix('users')
 
             });
 
-            Route::middleware(['auth:sanctum', 'guest'])->group(function () {
+            Route::middleware(['guest'])->group(function () {
                 Route::get('', SearchCarOfferController::class);
             });
 
