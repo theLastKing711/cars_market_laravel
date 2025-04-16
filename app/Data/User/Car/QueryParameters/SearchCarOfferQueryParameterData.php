@@ -22,21 +22,13 @@ class SearchCarOfferQueryParameterData extends PaginationQueryParameterData
         #[OAT\Property]
         public ?string $search,
         #[OAT\Property]
-        public ?SyrianCity $user_current_syrian_city,
-        #[OAT\Property]
         public ?int $price_from,
         #[OAT\Property]
         public ?int $price_to,
         #[OAT\Property]
-        public ?int $car_sell_location,
-        #[OAT\Property]
-        public ?int $year_manufactured,
-        #[OAT\Property]
         public ?FuelType $fuel_type,
         #[OAT\Property]
         public ?TransmissionType $transmission,
-        #[OAT\Property]
-        public ?int $car_label_origin,
         #[OAT\Property]
         public ?int $miles_travelled_in_km_from,
         #[OAT\Property]
@@ -51,10 +43,10 @@ class SearchCarOfferQueryParameterData extends PaginationQueryParameterData
         public ?bool $is_khalyeh,
         #[OAT\Property]
         public ?bool $is_kassah,
-        #[OAT\Property]
-        public ?ImportType $import_type,
-        #[ArrayProperty(SyrianCity::class)]
-        /** @var SyrianCity[] */
-        public ?array $shippable_to,
+        // #[OAT\Property]
+        // public ?ImportType $import_type,
+        // #[ArrayProperty(SyrianCity::class)]
+        // /** @var SyrianCity[] */
+        // public ?array $shippable_to,
     ) {}
 }

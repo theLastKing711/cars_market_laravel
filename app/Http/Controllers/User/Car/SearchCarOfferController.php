@@ -51,9 +51,6 @@ class SearchCarOfferController extends Controller
             $request
                 ->search;
 
-        $request_shippable_to =
-            $request->shippable_to;
-
         $request_price_from =
             $request
                 ->price_from;
@@ -61,14 +58,6 @@ class SearchCarOfferController extends Controller
         $request_price_to =
             $request
                 ->price_to;
-
-        $request_car_sell_location =
-            $request
-                ->car_sell_location;
-
-        $request_year_manufactured =
-            $request
-                ->year_manufactured;
 
         $request_fuel_type =
             $request
@@ -78,10 +67,6 @@ class SearchCarOfferController extends Controller
             $request
                 ->transmission;
 
-        $request_car_label_origin =
-            $request
-                ->car_label_origin;
-
         $request_miles_travelled_in_km_from
             =
             $request
@@ -90,10 +75,6 @@ class SearchCarOfferController extends Controller
         $request_miles_travelled_in_km_to
             = $request
                 ->miles_travelled_in_km_to;
-
-        $request_user_has_legal_car_papers =
-            $request
-                ->user_has_legal_car_papers;
 
         $request_is_faragha_jahzeh =
             $request
@@ -119,14 +100,6 @@ class SearchCarOfferController extends Controller
             $request
                 ->is_kassah;
 
-        $request_import_type =
-            $request
-                ->import_type;
-
-        $user_current_city =
-            $request
-                ->user_current_syrian_city;
-
         $is_request_search_set = $request_search != null;
 
         // $logged_user_id = Auth::User()->id;
@@ -148,14 +121,14 @@ class SearchCarOfferController extends Controller
                                 [$logged_user_id]
                             )
                     )
-                    ->when(
-                        $request_shippable_to,
-                        fn (EloquentBuilder $query) => $query
-                            ->whereHas(
-                                'shippable_to',
-                                fn (EloquentBuilder $query) => $query->whereIn('id', $request_shippable_to)
-                            )
-                    )
+                    // ->when(
+                    //     $request_shippable_to,
+                    //     fn (EloquentBuilder $query) => $query
+                    //         ->whereHas(
+                    //             'shippable_to',
+                    //             fn (EloquentBuilder $query) => $query->whereIn('id', $request_shippable_to)
+                    //         )
+                    // )
                     ->when(
                         $request_fuel_type,
                         fn (EloquentBuilder $query) => $query
@@ -170,14 +143,6 @@ class SearchCarOfferController extends Controller
                             ->where(
                                 'transmission',
                                 $request_transmission
-                            )
-                    )
-                    ->when(
-                        $request_car_label_origin,
-                        fn (EloquentBuilder $query) => $query
-                            ->where(
-                                'car_label_origin',
-                                $request_car_label_origin
                             )
                     )
                     ->when(
@@ -290,26 +255,10 @@ class SearchCarOfferController extends Controller
                     //     'manufacturer_ar',
                     // ],
                 ])
-                ->when(
-                    $request_shippable_to,
-                    fn (ScoutBuilder $query) => $query->whereIn('city', $request_shippable_to)
-                )
-                ->when(
-                    $request_car_sell_location,
-                    fn (ScoutBuilder $query) => $query
-                        ->where(
-                            'car_sell_location',
-                            $request_car_sell_location
-                        )
-                )
-                ->when(
-                    $request_year_manufactured,
-                    fn (ScoutBuilder $query) => $query
-                        ->where(
-                            'year_manufactured',
-                            $request_year_manufactured
-                        )
-                )
+                // ->when(
+                //     $request_shippable_to,
+                //     fn (ScoutBuilder $query) => $query->whereIn('city', $request_shippable_to)
+                // )
                 ->when(
                     $request_fuel_type,
                     fn (ScoutBuilder $query) => $query
