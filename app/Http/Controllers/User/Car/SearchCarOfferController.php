@@ -101,16 +101,19 @@ class SearchCarOfferController extends Controller
 
         $logged_user_id = Auth::User()?->id;
 
-        Log::info($logged_user_id);
-
         if (! $is_request_search_set) {
+
+            Log::info($logged_user_id);
 
             $local_cars_search =
                 Car::query()
                     ->when(
                         ! $logged_user_id,
                         fn (EloquentBuilder $query) => $query->selectRaw(
-                            '*, false as is_favourite'
+                            '
+                                *,
+                                false as is_favourite
+                            '
                         ),
                         // fn (EloquentBuilder $query) => $query
                         //     ->selectRaw(
