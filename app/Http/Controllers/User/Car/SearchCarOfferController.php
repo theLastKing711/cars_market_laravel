@@ -260,8 +260,6 @@ class SearchCarOfferController extends Controller
                 :
                 '';
 
-        Log::info($car_price_from_query);
-
         $is_request_miles_travelled_in_km_available =
             $request_miles_travelled_in_km_from !== null || $request_miles_travelled_in_km_to !== null;
 
@@ -341,7 +339,7 @@ class SearchCarOfferController extends Controller
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'is_new_car',
-                            $request_is_new_car
+                            $request_is_new_car ? 1 : 0
                         )
                 )
                 ->when(
