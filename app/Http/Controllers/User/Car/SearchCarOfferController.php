@@ -347,7 +347,7 @@ class SearchCarOfferController extends Controller
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'is_khalyeh',
-                            $request_is_khalyeh
+                            $request_is_khalyeh ? 1 : 0
                         )
                 )
                 ->when(
@@ -355,7 +355,7 @@ class SearchCarOfferController extends Controller
                     fn (ScoutBuilder $query) => $query
                         ->where(
                             'is_kassah',
-                            $request_is_kassah
+                            $request_is_kassah ? 1 : 0
                         )
                 )
                 ->when(
