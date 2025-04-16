@@ -307,14 +307,6 @@ class SearchCarOfferController extends Controller
                             $request_is_kassah ? 1 : 0
                         )
                 )
-                ->when(
-                    $request_import_type,
-                    fn (ScoutBuilder $query) => $query
-                        ->where(
-                            'car_import_type',
-                            $request_import_type
-                        )
-                )
     // gets called on client side after remote query success
                 ->query(
                     fn (EloquentBuilder $query) => $query
