@@ -26,7 +26,7 @@ class getUpdateCarOfferController extends CarController
     public function __invoke(CarIdPathParameterData $request_path_data)
     {
 
-        $logged_user_id = Auth::User()->id;
+        // $logged_user_id = Auth::User()->id;
 
         $request_car_id = $request_path_data->id;
 

@@ -16,12 +16,17 @@ class OptionalAuthSanctum
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth('sanctum')->user()) {
+        if (Auth('sanctum')->user()) { // if token is passed, and user valid using token
+            // get the authenticated user using token from header
+            // and db and sign him in,
+            // to access him in controller using Auth::user()
             Auth::setUser(
                 Auth::guard('sanctum')->user()
             );
         }
 
+        // sign in failed using token, or is not passed in the header
+        // guest can view the page and Auth::User returns null
         return $next($request);
     }
 }
