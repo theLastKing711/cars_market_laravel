@@ -6,19 +6,24 @@ use App\Data\Shared\Swagger\Request\JsonRequestBody;
 use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Data\User\Car\UpdateCarOfferRequestData;
-use App\Http\Controllers\Controller;
 use App\Models\Car;
-use Illuminate\Http\Request;
+use App\Services\Api\TranslationService;
 use OpenApi\Attributes as OAT;
 
 class UpdateCarOfferController extends CarController
 {
-
     #[OAT\Patch(path: '/users/cars/{id}', tags: ['usersCars'])]
     #[JsonRequestBody(UpdateCarOfferRequestData::class)]
     #[SuccessNoContentResponse]
-    public function __invoke( UpdateCarOfferRequestData $updateCarOfferRequestData, CarIdPathParameterData $path_data)
-    {
+    public function __invoke(
+        UpdateCarOfferRequestData $updateCarOfferRequestData,
+        CarIdPathParameterData $path_data,
+        TranslationService $translationService
+    ) {
+
+        $car_translation_set =
+                $translationService
+                    ->translate($updateCarOfferRequestData->name_ar);
 
         $request_car_id = $path_data->id;
 
@@ -26,7 +31,9 @@ class UpdateCarOfferController extends CarController
             Car::query()
                 ->where('id', $request_car_id)
                 ->update([
-                    'name_ar' => $updateCarOfferRequestData->name_ar,
+                    'car_name_language_when_uploaded' => $car_translation_set->upload_language,
+                    'name_ar' => $car_translation_set->name_ar,
+                    'name_en' => $car_translation_set->name_en,
                     'is_new_car' => $updateCarOfferRequestData->is_new_car,
                     'car_price' => $updateCarOfferRequestData->car_price,
                     'fuel_type' => $updateCarOfferRequestData->fuel_type,
