@@ -6,6 +6,7 @@ use App\Data\Shared\Swagger\Parameter\QueryParameter\QueryParameter;
 use App\Data\Shared\Swagger\Response\SuccessListResponse;
 use App\Data\User\Car\CarListData;
 use App\Data\User\Car\QueryParameters\SearchMyCarQueryParameterData;
+use App\Data\User\Car\SearchMyCarData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,7 +30,7 @@ class SearchMyCarController extends Controller
 
         if (! $request_search) {
 
-            $remote_car_search_result =
+            $local_car_search_result =
                 Car::query()
                     ->where('user_id', $logged_user_id)
                     ->selectRaw(
@@ -45,7 +46,7 @@ class SearchMyCarController extends Controller
                     ])
                     ->paginate(2);
 
-            return CarListData::collect($remote_car_search_result);
+            return SearchMyCarData::collect($local_car_search_result);
         }
 
         $remote_car_search_result =
@@ -58,13 +59,15 @@ class SearchMyCarController extends Controller
                         ])
                 )
                 ->paginate(2);
-        $paginator = tap($remote_car_search_result, function ($paginatedInstance) use ($logged_user_id) {
-            return $paginatedInstance->getCollection()->transform(function ($model) use ($logged_user_id) {
-                return CarListData::fromModel($model, $logged_user_id);
-            });
-        });
 
-        return $paginator;
+        return SearchMyCarData::collect($remote_car_search_result);
 
+        // $paginator = tap($remote_car_search_result, function ($paginatedInstance) {
+        //     return $paginatedInstance->getCollection()->transform(function ($model) {
+        //         return SearchMyCarData::fromModel($model);
+        //     });
+        // });
+
+        // return $paginator;
     }
 }

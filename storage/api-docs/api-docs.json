@@ -512,20 +512,6 @@
                         }
                     },
                     {
-                        "name": "car_sell_location",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "year_manufactured",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "name": "fuel_type",
                         "in": "query",
                         "schema": {
@@ -540,13 +526,6 @@
                         }
                     },
                     {
-                        "name": "car_label_origin",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "name": "miles_travelled_in_km_from",
                         "in": "query",
                         "schema": {
@@ -555,13 +534,6 @@
                     },
                     {
                         "name": "miles_travelled_in_km_to",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "user_has_legal_car_papers",
                         "in": "query",
                         "schema": {
                             "type": "string"
@@ -593,23 +565,6 @@
                         "in": "query",
                         "schema": {
                             "type": "string"
-                        }
-                    },
-                    {
-                        "name": "car_import_type",
-                        "in": "query",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "shippable_to[]",
-                        "in": "query",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
-                            }
                         }
                     }
                 ],
@@ -754,6 +709,24 @@
                     "usersCars"
                 ],
                 "operationId": "213b5cf2ebee657bb4f2b01f07d47a91",
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/cars/viewCarOffer": {
+            "post": {
+                "tags": [
+                    "usersCars"
+                ],
+                "operationId": "89d56bd049cb7ac001528c87a336edea",
                 "responses": {
                     "204": {
                         "description": "",
@@ -1000,10 +973,6 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "year_manufactured": {
-                        "type": "integer",
-                        "nullable": true
-                    },
                     "car_price": {
                         "type": "integer",
                         "nullable": true
@@ -1028,14 +997,6 @@
                         "oneOf": [
                             {
                                 "$ref": "#/components/schemas/FuelType"
-                            }
-                        ],
-                        "nullable": true
-                    },
-                    "car_sell_location": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/SyrianCity"
                             }
                         ],
                         "nullable": true
@@ -1259,27 +1220,11 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "user_current_syrian_city": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/SyrianCity"
-                            }
-                        ],
-                        "nullable": true
-                    },
                     "price_from": {
                         "type": "integer",
                         "nullable": true
                     },
                     "price_to": {
-                        "type": "integer",
-                        "nullable": true
-                    },
-                    "car_sell_location": {
-                        "type": "integer",
-                        "nullable": true
-                    },
-                    "year_manufactured": {
                         "type": "integer",
                         "nullable": true
                     },
@@ -1297,10 +1242,6 @@
                                 "$ref": "#/components/schemas/TransmissionType"
                             }
                         ],
-                        "nullable": true
-                    },
-                    "car_label_origin": {
-                        "type": "integer",
                         "nullable": true
                     },
                     "miles_travelled_in_km_from": {
@@ -1329,21 +1270,6 @@
                     },
                     "is_kassah": {
                         "type": "boolean",
-                        "nullable": true
-                    },
-                    "import_type": {
-                        "oneOf": [
-                            {
-                                "$ref": "#/components/schemas/ImportType"
-                            }
-                        ],
-                        "nullable": true
-                    },
-                    "shippable_to": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/SyrianCity"
-                        },
                         "nullable": true
                     }
                 },
@@ -1391,7 +1317,73 @@
                 },
                 "type": "object"
             },
-            "SearchMyCarData": {},
+            "SearchMyCarData": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name_ar": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "name_en": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "car_price": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "car_import_type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/ImportType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "miles_travelled_in_km": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "is_new_car": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "fuel_type": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/FuelType"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "is_kassah": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_khalyeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "is_faragha_jahzeh": {
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "view": {
+                        "type": "integer"
+                    },
+                    "image": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/MediaData"
+                            }
+                        ],
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "ShippableToCityData": {
                 "properties": {
                     "city": {
@@ -1453,6 +1445,7 @@
                 },
                 "type": "object"
             },
+            "ViewCarOfferRequestData": {},
             "getUpdateCarOfferResponseData": {
                 "properties": {
                     "id": {

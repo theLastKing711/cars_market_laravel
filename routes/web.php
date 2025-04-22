@@ -20,6 +20,7 @@ use App\Http\Controllers\User\Car\SearchMyFavouriteCarsController;
 use App\Http\Controllers\User\Car\SellCarController;
 use App\Http\Controllers\User\Car\UpdateCarOfferController;
 use App\Http\Controllers\User\Car\UpdateCarOfferImagesController;
+use App\Http\Controllers\User\Car\ViewCarOfferController;
 use App\Models\Car;
 use Illuminate\Support\Facades\Route;
 
@@ -92,6 +93,7 @@ Route::prefix('users')
                 Route::patch('sell/{id}', SellCarController::class);
                 Route::patch('{id}/favourite', FavouriteCarController::class);
                 Route::post('', CreateCarOfferController::class);
+                Route::post('viewCarOffer', ViewCarOfferController::class);
                 // ->can('upload', Car::class);
                 Route::post('{id}/images', UpdateCarOfferImagesController::class);
                 Route::get('searchMyCars', SearchMyCarController::class);

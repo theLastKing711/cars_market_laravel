@@ -2,17 +2,12 @@
 
 namespace App\Data\User\Car;
 
-use App\Data\Shared\Casts\MediallyToSingleMediaCast;
 use App\Data\Shared\Media\MediaData;
-use App\Data\Shared\Swagger\Property\ArrayProperty;
 use App\Enum\FuelType;
 use App\Enum\ImportType;
 use App\Enum\SyrianCity;
 use App\Models\Car;
-use Illuminate\Support\Collection;
 use OpenApi\Attributes as OAT;
-use Spatie\LaravelData\Attributes\MapOutputName;
-use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -27,8 +22,6 @@ class CarListData extends Data
         public ?string $name_ar,
         #[OAT\Property]
         public ?string $name_en,
-        #[OAT\Property]
-        public ?int $year_manufactured,
         #[OAT\Property]
         public ?int $car_price,
         #[OAT\Property]
@@ -85,7 +78,6 @@ class CarListData extends Data
             id: $car->id,
             name_ar: $car->name_ar,
             name_en: $car->name_en,
-            year_manufactured: $car->year_manufactured,
             car_price: $car->car_price,
             car_import_type: null,
             miles_travelled_in_km: $car->miles_travelled_in_km,
@@ -116,7 +108,6 @@ class CarListData extends Data
             id: $car->id,
             name_ar: $car->name_ar,
             name_en: $car->name_en,
-            year_manufactured: $car->year_manufactured,
             car_price: $car->car_price,
             car_import_type: null,
             miles_travelled_in_km: $car->miles_travelled_in_km,
