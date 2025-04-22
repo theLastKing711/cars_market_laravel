@@ -4,7 +4,6 @@ namespace App\Data\User\Car;
 
 use App\Data\Shared\Media\MediaData;
 use App\Enum\FuelType;
-use App\Enum\ImportType;
 use App\Enum\SyrianCity;
 use App\Models\Car;
 use OpenApi\Attributes as OAT;
@@ -24,8 +23,6 @@ class SearchMyCarData extends Data
         public ?string $name_en,
         #[OAT\Property]
         public ?int $car_price,
-        #[OAT\Property]
-        public ?ImportType $car_import_type,
         #[OAT\Property]
         public ?int $miles_travelled_in_km,
         #[OAT\Property]

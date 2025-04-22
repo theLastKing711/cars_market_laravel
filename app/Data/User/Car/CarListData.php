@@ -4,7 +4,6 @@ namespace App\Data\User\Car;
 
 use App\Data\Shared\Media\MediaData;
 use App\Enum\FuelType;
-use App\Enum\ImportType;
 use App\Enum\SyrianCity;
 use App\Models\Car;
 use OpenApi\Attributes as OAT;
@@ -24,8 +23,6 @@ class CarListData extends Data
         public ?string $name_en,
         #[OAT\Property]
         public ?int $car_price,
-        #[OAT\Property]
-        public ?ImportType $car_import_type,
         #[OAT\Property]
         public ?int $miles_travelled_in_km,
         #[OAT\Property]
@@ -79,7 +76,6 @@ class CarListData extends Data
             name_ar: $car->name_ar,
             name_en: $car->name_en,
             car_price: $car->car_price,
-            car_import_type: null,
             miles_travelled_in_km: $car->miles_travelled_in_km,
             is_new_car: $car->is_new_car,
             fuel_type: FuelType::tryFrom($car->fuel_type),
@@ -109,7 +105,6 @@ class CarListData extends Data
             name_ar: $car->name_ar,
             name_en: $car->name_en,
             car_price: $car->car_price,
-            car_import_type: null,
             miles_travelled_in_km: $car->miles_travelled_in_km,
             is_new_car: $car->is_new_car,
             fuel_type: FuelType::tryFrom($car->fuel_type),
