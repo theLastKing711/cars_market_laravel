@@ -171,7 +171,8 @@ class Car extends Model
             'is_faragha_jahzeh' => $this->is_faragha_jahzeh,
             'is_kassah' => $this->is_kassah,
             'is_khalyeh' => $this->is_khalyeh,
-            'car_import_type' => $this->car_import_type,
+            'views' => $this->views,
+            // 'car_import_type' => $this->car_import_type,
         ];
 
         // $index_attributes_array['manufacturer_id'] =

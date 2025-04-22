@@ -2,9 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enum\Currency;
 use App\Enum\FuelType;
-use App\Enum\ImportType;
 use App\Enum\Language;
 use App\Enum\SyrianCity;
 use App\Enum\TransmissionType;
