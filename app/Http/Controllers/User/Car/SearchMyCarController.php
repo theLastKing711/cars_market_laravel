@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
 class SearchMyCarController extends Controller
@@ -45,6 +46,8 @@ class SearchMyCarController extends Controller
                         'medially' => fn ($comments) => $comments->take(1),
                     ])
                     ->paginate(2);
+
+            Log::info($local_car_search_result);
 
             return SearchMyCarData::collect($local_car_search_result);
         }
