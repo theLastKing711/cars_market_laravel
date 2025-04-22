@@ -2,11 +2,14 @@
 
 namespace App\Data\User\Car;
 
+use App\Data\Shared\Casts\MediallyToSingleMediaCast;
 use App\Data\Shared\Media\MediaData;
 use App\Enum\FuelType;
 use App\Enum\SyrianCity;
 use App\Models\Car;
 use OpenApi\Attributes as OAT;
+use Spatie\LaravelData\Attributes\MapOutputName;
+use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -42,11 +45,11 @@ class SearchMyCarData extends Data
         // #[ArrayProperty(ShippableToCityData::class)]
         // /** @var ShippableToCityData[] */
         // public Collection $shippable_to,
-        // #[WithCast(MediallyToSingleMediaCast::class)]
         // public ?MediaData $medially,
-        // #[MapOutputName('image')]
+        #[WithCast(MediallyToSingleMediaCast::class)]
+        #[MapOutputName('image')]
         #[OAT\Property]
-        public ?MediaData $image,
+        public ?MediaData $medially,
     ) {}
 
     // public static function collectArray($items, int $user_id): CarListCollection
