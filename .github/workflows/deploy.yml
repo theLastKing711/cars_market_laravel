@@ -38,7 +38,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/html/cars_market_laravel
-            php artisan migrate:refresh
+            php artisan migrate:refresh --force
             # php artisan migrate --force
             php artisan optimize
             # php artisan db:seed --force
