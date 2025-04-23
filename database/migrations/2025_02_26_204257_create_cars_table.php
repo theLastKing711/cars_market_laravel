@@ -29,7 +29,7 @@ return new class extends Migration
             $table->boolean('is_kassah')->nullable(); // سيارة بدون قيود جمركية  https://www.suwar-magazine.org/articles/2079_%D8%B3%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D9%82-%D8%B5%D8%A9-%D8%AA%D8%BA%D8%B2%D9%88-%D8%A3%D8%B3%D9%88%D8%A7%D9%82-%D8%B4%D9%85%D8%A7%D9%84%D9%8A-%D8%B3%D9%88%D8%B1%D9%8A%D8%A7
             $table->boolean('is_khalyeh')->nullable(); // https://asuaaq.com/blog-detail/421
             $table->boolean('is_sold')->default(false);
-            $table->integer('views');
+            $table->integer('views')->default(0);
             $table->timestamps();
 
             // $table->year('year_manufactured')->nullable();
