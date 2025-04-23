@@ -88,31 +88,31 @@ class UserSeeder extends Seeder
             )
             ->create();
 
-        User::factory()
-            ->has(
-                Car::factory()
-                    ->state([
-                        'name_ar' => 'النترا',
-                    ])
-                    ->count(1)
-            )
-            ->create();
+        // User::factory()
+        //     ->has(
+        //         Car::factory()
+        //             ->state([
+        //                 'name_ar' => 'النترا',
+        //             ])
+        //             ->count(1)
+        //     )
+        //     ->create();
 
-        User::factory()
-            ->staticUser()
-            ->has(
-                Car::factory()
-                    ->count(15)
-            )
-            ->create();
+        // User::factory()
+        //     ->staticUser()
+        //     ->has(
+        //         Car::factory()
+        //             ->count(15)
+        //     )
+        //     ->create();
 
-        User::factory()
-            ->syrianNumber()
-            ->count(5)
-            ->has(
-                Car::factory()
-                    ->count(5)
-            )
-            ->create();
+        // User::factory()
+        //     ->syrianNumber()
+        //     ->count(5)
+        //     ->has(
+        //         Car::factory()
+        //             ->count(5)
+        //     )
+        //     ->create();
     }
 }
