@@ -51,6 +51,13 @@ class CarOfferDetailsController extends Controller
 
         $logged_user_id = Auth::User()?->id;
 
+        Car::query()
+            ->where(
+                'id',
+                $request_car_id
+            )
+            ->increment('views');
+
         $car =
             Car::query()
                 ->whereId($request->id)
