@@ -22,6 +22,6 @@ class SubscriptionSeeder extends Seeder
         //             'maximum_number_of_cars_allowed_to_upload' => $subscription_type->maximum_number_of_cars_allowed_to_upload(),
         //         ]
         //     );
-        }
+        // }
     }
 }
