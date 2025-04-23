@@ -9,16 +9,16 @@ use App\Enum\ImportType;
 use App\Enum\SyrianCity;
 use App\Enum\TransmissionType;
 use Illuminate\Support\Collection;
-use Spatie\LaravelData\Data;
-use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 use OpenApi\Attributes as OAT;
 use Spatie\LaravelData\Attributes\MapOutputName;
+use Spatie\LaravelData\Data;
+use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
 #[Oat\Schema()]
 class getUpdateCarOfferResponseData extends Data
 {
-     /**
+    /**
      * @param  Collection<int, ShippableToCityData>  $shippable_to
      * @param  Collection<int, DeletableMediaData>  $images
      **/
@@ -62,6 +62,7 @@ class getUpdateCarOfferResponseData extends Data
         #[MapOutputName('images')]
         /** @var DeletableMediaData[] */
         public Collection $medially,
+        #[OAT\Property]
+        public int $views,
     ) {}
-
 }

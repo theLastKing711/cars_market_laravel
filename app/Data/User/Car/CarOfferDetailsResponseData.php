@@ -55,8 +55,8 @@ class CarOfferDetailsResponseData extends Data
         #[OAT\Property]
         public ?bool $is_favourite,
         #[ArrayProperty(ShippableToCityData::class)]
-        /** @var ShippableToCityData[] */
-        public Collection $shippable_to,
+        // /** @var ShippableToCityData[] */
+        // public Collection $shippable_to,
         #[ArrayProperty(MediaData::class)]
         #[MapOutputName('images')]
         /** @var MediaData[] */
@@ -85,7 +85,7 @@ class CarOfferDetailsResponseData extends Data
             is_khalyeh: $car->is_khalyeh,
             is_faragha_jahzeh: $car->is_faragha_jahzeh,
             is_favourite: $car->is_favourite,
-            shippable_to: ShippableToCityData::collect($car->shippable_to),
+            // shippable_to: ShippableToCityData::collect($car->shippable_to),
             images: MediaData::collect($car->medially),
             phone_number: $car->user->phone_number,
             max_number_of_car_upload: $car->user->max_number_of_car_upload
