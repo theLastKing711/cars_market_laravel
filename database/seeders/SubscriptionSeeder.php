@@ -15,13 +15,13 @@ class SubscriptionSeeder extends Seeder
     {
         // Reset cached roles and permissions
 
-        foreach (SubscriptionType::cases() as $subscription_type) {
-            Subscription::create(
-                [
-                    'type' => $subscription_type->value,
-                    'maximum_number_of_cars_allowed_to_upload' => $subscription_type->maximum_number_of_cars_allowed_to_upload(),
-                ]
-            );
+        // foreach (SubscriptionType::cases() as $subscription_type) {
+        //     Subscription::create(
+        //         [
+        //             'type' => $subscription_type->value,
+        //             'maximum_number_of_cars_allowed_to_upload' => $subscription_type->maximum_number_of_cars_allowed_to_upload(),
+        //         ]
+        //     );
         }
     }
 }
