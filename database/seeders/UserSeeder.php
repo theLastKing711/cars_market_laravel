@@ -17,76 +17,76 @@ class UserSeeder extends Seeder
             ->staticAdmin()
             ->create();
 
-        User::factory()
-            ->hasRandomSubscriptionType()
-            ->has(
-                Car::factory()
-                    ->santaFeFirst()
-                    ->pick_random_shippable_syrian_cities()
-                    ->count(1)
-            )
-            ->create();
+        // User::factory()
+        //     ->hasRandomSubscriptionType()
+        //     ->has(
+        //         Car::factory()
+        //             ->santaFeFirst()
+        //             ->pick_random_shippable_syrian_cities()
+        //             ->count(1)
+        //     )
+        //     ->create();
 
-        User::factory()
-            ->hasRandomSubscriptionType()
-            ->has(
-                Car::factory()
-                    ->santaFeSecond()
-                    ->pick_random_shippable_syrian_cities()
-                    ->count(1)
-            )
-            ->create();
+        // User::factory()
+        //     ->hasRandomSubscriptionType()
+        //     ->has(
+        //         Car::factory()
+        //             ->santaFeSecond()
+        //             ->pick_random_shippable_syrian_cities()
+        //             ->count(1)
+        //     )
+        //     ->create();
 
-        User::factory()
-            ->hasRandomSubscriptionType()
-            ->has(
-                Car::factory()
-                    ->santaFeThrid()
-                    ->pick_random_shippable_syrian_cities()
-                    ->count(1)
-            )
-            ->create();
+        // User::factory()
+        //     ->hasRandomSubscriptionType()
+        //     ->has(
+        //         Car::factory()
+        //             ->santaFeThrid()
+        //             ->pick_random_shippable_syrian_cities()
+        //             ->count(1)
+        //     )
+        //     ->create();
 
-        User::factory()
-            ->hasRandomSubscriptionType()
-            ->has(
-                Car::factory()
-                    ->state([
-                        'name_ar' => 'ألانترا',
-                    ])
-                    ->pick_random_shippable_syrian_cities()
-                    ->count(1)
-            )
-            ->has(
-                Car::factory()
-                    ->state([
-                        'name_ar' => 'تويوتا',
-                        'name_en' => 'toyota',
-                    ])
-                    ->pick_random_shippable_syrian_cities()
-                    ->count(1)
-            )
-            ->hasFavouriteCars()
-            ->create();
+        // User::factory()
+        //     ->hasRandomSubscriptionType()
+        //     ->has(
+        //         Car::factory()
+        //             ->state([
+        //                 'name_ar' => 'ألانترا',
+        //             ])
+        //             ->pick_random_shippable_syrian_cities()
+        //             ->count(1)
+        //     )
+        //     ->has(
+        //         Car::factory()
+        //             ->state([
+        //                 'name_ar' => 'تويوتا',
+        //                 'name_en' => 'toyota',
+        //             ])
+        //             ->pick_random_shippable_syrian_cities()
+        //             ->count(1)
+        //     )
+        //     ->hasFavouriteCars()
+        //     ->create();
 
-        User::factory()
-            ->hasRandomSubscriptionType()
-            ->has(
-                Car::factory()
-                    ->state([
-                        'name_ar' => 'كيا ريو',
-                    ])
-                    ->count(1)
-            )
-            ->has(
-                Car::factory()
-                    ->state([
-                        'name_ar' => 'تويوتا',
-                        'name_en' => 'toyota',
-                    ])
-                    ->count(1)
-            )
-            ->create();
+        // User::factory()
+        //     ->hasRandomSubscriptionType()
+        //     ->has(
+        //         Car::factory()
+        //             ->state([
+        //                 'name_ar' => 'كيا ريو',
+        //             ])
+        //             ->count(1)
+        //     )
+        //     ->has(
+        //         Car::factory()
+        //             ->state([
+        //                 'name_ar' => 'تويوتا',
+        //                 'name_en' => 'toyota',
+        //             ])
+        //             ->count(1)
+        //     )
+        //     ->create();
 
         // User::factory()
         //     ->has(
