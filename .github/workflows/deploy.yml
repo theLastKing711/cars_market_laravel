@@ -41,6 +41,6 @@ jobs:
             php artisan migrate:refresh --force
             # php artisan migrate --force
             php artisan optimize
-            # php artisan db:seed --force
+            php artisan db:seed --force
             php artisan scout:flush "App\Models\Car"
             # php artisan scout:import "App\Models\Car"
