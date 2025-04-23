@@ -43,4 +43,4 @@ jobs:
             php artisan optimize
             # php artisan db:seed --force
             php artisan scout:flush "App\Models\Car"
-            php artisan scout:import "App\Models\Car"
+            # php artisan scout:import "App\Models\Car"
