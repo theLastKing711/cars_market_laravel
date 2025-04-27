@@ -42,6 +42,8 @@ class SearchCarOfferController extends Controller
 
         Log::info('hello world');
 
+        Log::info('hello world');
+
         $request_search =
             $request
                 ->search;
