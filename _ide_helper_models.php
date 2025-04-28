@@ -132,6 +132,7 @@ namespace App\Models{
  * @property string $car_upload_expiration_date
  * @property int $car_name_language_when_uploaded
  * @property string|null $name_en
+ * @property int $views
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car isNotSold()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarNameLanguageWhenUploaded($value)
@@ -139,6 +140,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereCarUploadStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereNameAr($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Car whereViews($value)
  */
 	class Car extends \Eloquent {}
 }

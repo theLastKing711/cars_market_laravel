@@ -27,6 +27,8 @@ class CarOfferDetailsResponseData extends Data
         #[OAT\Property]
         public int $id,
         #[OAT\Property]
+        public string $fcm_token,
+        #[OAT\Property]
         public ?string $name_ar,
         #[OAT\Property]
         public ?string $name_en,
@@ -72,6 +74,7 @@ class CarOfferDetailsResponseData extends Data
 
         return new CarOfferDetailsResponseData(
             id: $car->id,
+            fcm_token: $car->user->fcm_token,
             name_ar: $car->name_ar,
             name_en: $car->name_en,
             car_price: $car->car_price,

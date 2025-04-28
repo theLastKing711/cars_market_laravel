@@ -56,6 +56,7 @@ class CarOfferDetailsController extends Controller
 
         $car =
             Car::query()
+                ->with('user:id, fcm_token')
                 ->whereId($request->id)
                 ->when(
                     $logged_user_id,

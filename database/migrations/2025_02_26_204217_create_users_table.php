@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('fcm_token')->nullable();
             $table->string('country_code')->nullable();
             $table->string('phone_number')->unique();
             $table->integer('max_number_of_car_upload')->nullable();

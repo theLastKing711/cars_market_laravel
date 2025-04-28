@@ -17,5 +17,7 @@ class CreatePasswordRequestData extends Data
         public string $phone_number,
         #[OAT\Property]
         public string $password,
+        #[OAT\Property]
+        public string $fcm_token,
     ) {}
 }

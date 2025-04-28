@@ -2597,8 +2597,7 @@ namespace PHPSTORM_META {
         registerArgumentsSet('routes', 
 'debugbar.openhandler','debugbar.clockwork','debugbar.assets.css','debugbar.assets.js','debugbar.cache.delete',
 'debugbar.queries.explain','l5-swagger.default.api','l5-swagger.default.docs','l5-swagger.default.asset','l5-swagger.default.oauth2_callback',
-'sanctum.csrf-cookie',
-'storage.local',);
+'sanctum.csrf-cookie','storage.local',);
         registerArgumentsSet('views', 
 'welcome','cloudinary::components.button','cloudinary::components.image','cloudinary::components.video','cloudinary::js',
 'l5-swagger::index','laravel-exceptions-renderer::components.card','laravel-exceptions-renderer::components.context','laravel-exceptions-renderer::components.editor','laravel-exceptions-renderer::components.header',

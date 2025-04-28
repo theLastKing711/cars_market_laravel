@@ -40,7 +40,7 @@ class getUpdateCarOfferController extends CarController
                 ->with(
                     [
                         'medially',
-                        'shippable_to',
+                        // 'shippable_to',
                     ]
                 )
                 ->first();
