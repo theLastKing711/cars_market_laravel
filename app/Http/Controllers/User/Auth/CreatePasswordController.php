@@ -24,6 +24,7 @@ class CreatePasswordController extends Controller
             User::query()
                 ->create([
                     'country_code' => '963',
+                    'fcm_token' => $createPasswordRequestData->fcm_token,
                     'phone_number' => $request_phone_number,
                     'password' => $createPasswordRequestData->password,
                     'max_number_of_car_upload' => 0,
