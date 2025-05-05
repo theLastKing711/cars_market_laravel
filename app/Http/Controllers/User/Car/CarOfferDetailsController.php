@@ -7,7 +7,10 @@ use App\Data\User\Car\CarOfferDetailsResponseData;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\User;
+use App\Notifications\UserCalled;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
 // messente
@@ -50,12 +53,22 @@ class CarOfferDetailsController extends Controller
 
         $logged_user_id = Auth::User()?->id;
 
-        Car::query()
-            ->where(
-                'id',
-                $request_car_id
+        /** @var User $car_owner */
+        $car_owner =
+            tap(
+                Car::query()
+                    ->where(
+                        'id',
+                        $request_car_id
+                    ),
+                function ($query) {
+                    $query->increment();
+                }
             )
-            ->increment('views');
+                ->first()
+                ->id;
+
+        $car_owner->notify(new UserCalled);
 
         $car =
             Car::query()
