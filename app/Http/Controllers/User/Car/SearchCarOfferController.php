@@ -13,7 +13,6 @@ use App\Models\Car;
 use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Laravel\Scout\Builder as ScoutBuilder;
 use OpenApi\Attributes as OAT;
 
@@ -39,10 +38,6 @@ class SearchCarOfferController extends Controller
     #[SuccessItemResponse(SearchCarOfferPaginationResultData::class)]
     public function __invoke(SearchCarOfferQueryParameterData $request)
     {
-
-        Log::info('hello world');
-
-        Log::info('hello world');
 
         $request_search =
             $request
