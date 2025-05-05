@@ -10,7 +10,9 @@ use App\Models\Car;
 use App\Models\User;
 use App\Notifications\UserCalled;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use OpenApi\Attributes as OAT;
 
 // messente
@@ -69,6 +71,51 @@ class CarOfferDetailsController extends Controller
         Log::info($car_owner);
 
         $car_owner->notify(new UserCalled);
+
+        $projectId = config('services.fcm.project_id'); // INSERT COPIED PROJECT ID
+
+        $credentialsFilePath = Storage::path('app/json/file.json');
+        $client = new GoogleClient;
+        $client->setAuthConfig($credentialsFilePath);
+        $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
+        $client->refreshTokenWithAssertion();
+        $token = $client->getAccessToken();
+
+        $access_token = $token['access_token'];
+
+        $headers = [
+            "Authorization: Bearer $access_token",
+            'Content-Type: application/json',
+        ];
+
+        $data = [
+            'message' => [
+                'token' => $car_owner->fcm_token,
+                'notification' => [
+                    'title' => 'test  title',
+                    'body' => 'test description',
+                ],
+            ],
+        ];
+        $payload = json_encode($data);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/v1/projects/{$projectId}/messages:send");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_VERBOSE, true); // Enable verbose output for debugging
+        $response = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+
+        if ($err) {
+            return response()->json([
+                'message' => 'Curl Error: '.$err,
+            ], 500);
+        }
 
         $car =
             Car::query()
