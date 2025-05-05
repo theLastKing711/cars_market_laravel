@@ -10,6 +10,7 @@ use App\Enum\SyrianCity;
 use App\Enum\TransmissionType;
 use App\Models\Car;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Data;
@@ -71,6 +72,8 @@ class CarOfferDetailsResponseData extends Data
 
     public static function fromModel(Car $car): self
     {
+
+        Log::info($car);
 
         return new CarOfferDetailsResponseData(
             id: $car->id,
