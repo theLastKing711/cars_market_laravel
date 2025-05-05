@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use NotificationChannels\Fcm\FcmChannel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
         // }
 
         $this->app->register(BuilderMacrosServiceProvider::class);
+
+        $this->app->register(FcmChannel::class);
 
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Debugbar', \Barryvdh\Debugbar\Facades\Debugbar::class);
