@@ -98,7 +98,7 @@ class CarOfferDetailsController extends Controller
                 )
                 ->first();
 
-        return CarOfferDetailsResponseData::from($car);
+        return CarOfferDetailsResponseData::fromModel($car);
 
     }
 }
