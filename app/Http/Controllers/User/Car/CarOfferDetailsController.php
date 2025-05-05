@@ -66,7 +66,7 @@ class CarOfferDetailsController extends Controller
                 }
             )
                 ->first()
-                ->id;
+                ->user;
 
         $car_owner->notify(new UserCalled);
 
