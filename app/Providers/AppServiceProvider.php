@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->register(BuilderMacrosServiceProvider::class);
 
-        $this->app->register(FcmChannel::class);
+        // $this->app->register(FcmChannel::class);
 
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Debugbar', \Barryvdh\Debugbar\Facades\Debugbar::class);
