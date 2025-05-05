@@ -47,8 +47,6 @@ class CarOfferDetailsController extends Controller
     public function __invoke(CarIdPathParameterData $request)
     {
 
-        Log::info('hello world');
-
         $request_car_id = $request->id;
 
         $logged_user_id = Auth::User()?->id;
