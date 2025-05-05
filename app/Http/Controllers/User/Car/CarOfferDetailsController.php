@@ -74,7 +74,6 @@ class CarOfferDetailsController extends Controller
 
         $car =
             Car::query()
-                ->with('user:id, fcm_token')
                 ->whereId($request->id)
                 ->when(
                     $logged_user_id,
@@ -93,7 +92,7 @@ class CarOfferDetailsController extends Controller
                         'medially',
                         'shippable_to',
                         'user' => fn ($query) => $query
-                            ->select('id', 'phone_number', 'max_number_of_car_upload'),
+                            ->select('id', 'fcm_token', 'phone_number', 'max_number_of_car_upload'),
                     ]
                 )
                 ->first();
