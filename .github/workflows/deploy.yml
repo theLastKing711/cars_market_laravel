@@ -43,5 +43,6 @@ jobs:
             php artisan db:seed --force
             php artisan scout:flush "App\Models\Car"
             php artisan scout:import "App\Models\Car"
+            # php artisan queue:work
             # php artisan migrate --force
 
