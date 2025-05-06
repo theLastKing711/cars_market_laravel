@@ -10,7 +10,6 @@ use App\Models\Car;
 use App\Models\User;
 use App\Notifications\UserCalled;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
 // messente
@@ -46,8 +45,6 @@ class CarOfferDetailsController extends Controller
     #[SuccessItemResponse(CarOfferDetailsResponseData::class)]
     public function __invoke(CarIdPathParameterData $request)
     {
-
-        Log::info('hello world');
 
         $request_car_id = $request->id;
 
