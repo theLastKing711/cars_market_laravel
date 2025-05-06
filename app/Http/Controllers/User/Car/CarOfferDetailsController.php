@@ -65,7 +65,8 @@ class CarOfferDetailsController extends Controller
                     $query->increment('views');
                 }
             )
-                ->first();
+                ->first()
+                ->car;
 
         $car_owner->notify(new UserCalled);
 
