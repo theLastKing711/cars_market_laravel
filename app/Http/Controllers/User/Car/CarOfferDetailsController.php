@@ -62,7 +62,7 @@ class CarOfferDetailsController extends Controller
                         $request_car_id
                     ),
                 function ($query) {
-                    $query->increment();
+                    $query->increment('views');
                 }
             )
                 ->first()
