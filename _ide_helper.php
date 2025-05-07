@@ -1728,6 +1728,58 @@ namespace Datlechin\GoogleTranslate\Facades {
             }
     }
 
+namespace Kreait\Laravel\Firebase\Facades {
+    /**
+     * 
+     *
+     * @method static \Kreait\Firebase\Contract\AppCheck appCheck()
+     * @method static \Kreait\Firebase\Contract\Auth auth()
+     * @method static \Kreait\Firebase\Contract\Database database()
+     * @method static \Kreait\Firebase\Contract\DynamicLinks dynamicLinks()
+     * @method static \Kreait\Firebase\Contract\Firestore firestore()
+     * @method static \Kreait\Firebase\Contract\Messaging messaging()
+     * @method static \Kreait\Firebase\Contract\RemoteConfig remoteConfig()
+     * @method static \Kreait\Firebase\Contract\Storage storage()
+     * @see \Kreait\Laravel\Firebase\FirebaseProjectManager
+     * @see \Kreait\Laravel\Firebase\FirebaseProject
+     */
+    class Firebase {
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function project($name = null)
+        {
+            /** @var \Kreait\Laravel\Firebase\FirebaseProjectManager $instance */
+            return $instance->project($name);
+        }
+
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function getDefaultProject()
+        {
+            /** @var \Kreait\Laravel\Firebase\FirebaseProjectManager $instance */
+            return $instance->getDefaultProject();
+        }
+
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setDefaultProject($name)
+        {
+            /** @var \Kreait\Laravel\Firebase\FirebaseProjectManager $instance */
+            return $instance->setDefaultProject($name);
+        }
+
+            }
+    }
+
 namespace Illuminate\Support {
     /**
      * 
@@ -2290,6 +2342,7 @@ namespace  {
     class Cloudinary extends \CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary {}
     class L5Swagger extends \L5Swagger\L5SwaggerFacade {}
     class GoogleTranslate extends \Datlechin\GoogleTranslate\Facades\GoogleTranslate {}
+    class Firebase extends \Kreait\Laravel\Firebase\Facades\Firebase {}
 }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
@@ -47,5 +48,12 @@ class UserCalled extends Notification implements ShouldQueue
                     ],
                 ],
             ]);
+    }
+
+    public function shouldSend(User $notifiable, string $channel): bool
+    {
+        return
+            $notifiable
+                ->is_subscribed_to_notifications;
     }
 }
