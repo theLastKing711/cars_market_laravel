@@ -50,6 +50,7 @@ class UserCalled extends Notification implements ShouldQueue
             ]);
     }
 
+    // get send to jobs table and proccesed, however the notification is not sent.
     public function shouldSend(User $notifiable, string $channel): bool
     {
         return
