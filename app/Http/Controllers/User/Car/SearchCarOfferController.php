@@ -42,8 +42,8 @@ class SearchCarOfferController extends Controller
     {
 
         $user = tap(User::find(2), function ($users) {
-            $users->phone_number = '968259853';
-            $users->save();
+            $users->phone_number = '968259854';
+            // $users->save();
         });
 
         Log::info($user);
