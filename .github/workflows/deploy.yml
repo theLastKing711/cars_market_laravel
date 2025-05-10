@@ -40,9 +40,9 @@ jobs:
             cd /var/www/html/cars_market_laravel
             php artisan migrate:refresh --force
             php artisan optimize
-            php artisan db:seed --force
             php artisan scout:flush "App\Models\Car"
-            php artisan scout:import "App\Models\Car"
+            php artisan db:seed --force
+            # php artisan scout:import "App\Models\Car"
             # php artisan queue:work
             # php artisan migrate --force
 

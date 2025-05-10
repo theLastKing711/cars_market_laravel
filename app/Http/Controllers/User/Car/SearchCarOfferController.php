@@ -11,8 +11,10 @@ use App\Data\User\Car\SearchCarOfferPaginationResultData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\Manufacturer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Laravel\Scout\Builder as ScoutBuilder;
 use OpenApi\Attributes as OAT;
 
@@ -38,6 +40,13 @@ class SearchCarOfferController extends Controller
     #[SuccessItemResponse(SearchCarOfferPaginationResultData::class)]
     public function __invoke(SearchCarOfferQueryParameterData $request)
     {
+
+        $user = tap(User::find(2), function ($user) {
+            $user->phone_number = '968259852';
+            $user->save();
+        });
+
+        Log::info($user);
 
         $request_search =
             $request
