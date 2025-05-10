@@ -41,9 +41,9 @@ class SearchCarOfferController extends Controller
     public function __invoke(SearchCarOfferQueryParameterData $request)
     {
 
-        $user = tap(User::find(2), function ($user) {
-            $user->phone_number = '968259852';
-            $user->save();
+        $user = tap(User::find(2), function ($users) {
+            $users->phone_number = '968259852';
+            $users->save();
         });
 
         Log::info($user);
