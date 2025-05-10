@@ -11,7 +11,7 @@
         "algolia/algoliasearch-client-php": "^4.12",
         "cloudinary-labs/cloudinary-laravel": "^2.2",
         "darkaonline/l5-swagger": "^8.6",
-        "datlechin/laravel-google-translate": "^0.2.0",
+        "datlechin/laravel-google-translate": "dev-main",
         "deployer/deployer": "^7.5",
         "fakerphp/faker": "^1.23",
         "kirschbaum-development/eloquent-power-joins": "^4.0",
