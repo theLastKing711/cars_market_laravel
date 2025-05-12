@@ -28,8 +28,8 @@ Route::prefix('files')
     ->middleware(['api'])
     ->group(function () {
         Route::get('', [FileController::class, 'index']);
+        Route::post('', [FileController::class, 'store']);
         Route::post('many', [FileController::class, 'storeMany']);
-        // Route::post('', [FileController::class, 'store']);
         Route::delete('{public_id}', [FileController::class, 'delete']);
     });
 

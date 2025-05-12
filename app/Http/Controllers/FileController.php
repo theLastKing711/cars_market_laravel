@@ -44,7 +44,7 @@ class FileController extends Controller
         $file = $uploadFileData->file;
 
         Log::info(
-            'accessing FileController with files {files}',
+            'accessing FileController store, with files {files}',
             ['files' => $file]
         );
         //        abort(404);
@@ -155,7 +155,7 @@ class FileController extends Controller
             function ($file) use ($session_uploaded_media) {
 
                 Log::info(
-                    'accessing FileController with files {files}',
+                    'accessing FileController storeMany, with files {files}',
                     ['files' => $file]
                 );
 
