@@ -29,7 +29,7 @@ Route::prefix('files')
     ->group(function () {
         Route::get('', [FileController::class, 'index']);
         Route::post('many', [FileController::class, 'storeMany']);
-        Route::post('', [FileController::class, 'store']);
+        // Route::post('', [FileController::class, 'store']);
         Route::delete('{public_id}', [FileController::class, 'delete']);
     });
 
