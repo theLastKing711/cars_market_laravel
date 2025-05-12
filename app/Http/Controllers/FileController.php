@@ -163,6 +163,8 @@ class FileController extends Controller
 
                 $file_path = $file->getRealPath();
 
+                Log::info('file path {file_path}', ['file_path' => $file_path]);
+
                 // https://cloudinary.com/documentation/image_upload_api_reference
                 // https://cloudinary.com/documentation/transformation_reference
                 // https://cloudinary.com/documentation/image_optimization
