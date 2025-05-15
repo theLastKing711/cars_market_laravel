@@ -240,6 +240,8 @@ class FileController extends Controller
         $user_has_previous_temporary_uploaded_images =
             $logged_user->temporary_uploaded_images_count != 0;
 
+        Log::info($logged_user->temporary_uploaded_images_count);
+
         if ($user_has_previous_temporary_uploaded_images) {
             Log::info('detaching');
 
