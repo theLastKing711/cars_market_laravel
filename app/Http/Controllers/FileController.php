@@ -159,7 +159,7 @@ class FileController extends Controller
         $temporary_uploaded_images = collect([]);
 
         /** @var User $var description */
-        $logged_user = Auth::User();
+        $logged_user = Auth::User()->loadCount('temporaryUploadedImages');
 
         /** @var Collection<int, Media> $uploaded_medias */
         $uploaded_medias_data = $files->map(
