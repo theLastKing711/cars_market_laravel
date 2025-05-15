@@ -71,6 +71,8 @@ class CreateCarOfferController extends Controller
                         $logged_user->id
                     );
 
+            Log::info($logged_user->id);
+
             $user_car_medias =
                 $user_car_temporary_uploaded_images
                     ->get()
@@ -81,6 +83,7 @@ class CreateCarOfferController extends Controller
                         $media->size = $temporary_uploaded_image->size;
                         $media->file_type = $temporary_uploaded_image->file_type;
                     });
+            Log::info($user_car_medias);
 
             $car
                 ->medially()
