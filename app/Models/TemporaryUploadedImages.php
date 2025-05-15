@@ -37,6 +37,7 @@ class TemporaryUploadedImages extends Model
 
         $temporary_uploaded_image = new TemporaryUploadedImages;
         $temporary_uploaded_image->user_id = $user_id;
+        $temporary_uploaded_image->public_id = $response_file->getPublicId();
         $temporary_uploaded_image->file_name = $response_file->getFileName();
         $temporary_uploaded_image->file_url = $first_eager_response['secure_url'];
         $temporary_uploaded_image->size = $first_eager_response['bytes'];
