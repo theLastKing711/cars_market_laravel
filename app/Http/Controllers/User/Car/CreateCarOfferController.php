@@ -82,6 +82,8 @@ class CreateCarOfferController extends Controller
                         $media->file_url = $temporary_uploaded_image->file_url;
                         $media->size = $temporary_uploaded_image->size;
                         $media->file_type = $temporary_uploaded_image->file_type;
+
+                        return $media;
                     });
             Log::info($user_car_medias);
 
