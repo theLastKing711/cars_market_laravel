@@ -35,13 +35,13 @@ class TemporaryUploadedImages extends Model
         // $media->file_url = $response_file->getSecurePath();
         // $media->size = $first_eager_response->getSize();
 
-        $media = new TemporaryUploadedImages;
-        $media->user_id = $user_id;
-        $media->file_name = $response_file->getFileName();
-        $media->file_url = $first_eager_response['secure_url'];
-        $media->size = $first_eager_response['bytes'];
-        $media->file_type = $response_file->getFileType();
+        $temporary_uploaded_image = new TemporaryUploadedImages;
+        $temporary_uploaded_image->user_id = $user_id;
+        $temporary_uploaded_image->file_name = $response_file->getFileName();
+        $temporary_uploaded_image->file_url = $first_eager_response['secure_url'];
+        $temporary_uploaded_image->size = $first_eager_response['bytes'];
+        $temporary_uploaded_image->file_type = $response_file->getFileType();
 
-        return $media;
+        return $temporary_uploaded_image;
     }
 }
