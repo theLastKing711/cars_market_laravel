@@ -10,8 +10,8 @@ class Media extends \CloudinaryLabs\CloudinaryLaravel\Model\Media
     protected $table = 'media';
 
     // we did made this custom media class that ovveride cloudinary's
-    //to allow usage of factory for the model
-    //and possibly add more features for the model in the future
+    // to allow usage of factory for the model
+    // and possibly add more features for the model in the future
     use HasFactory;
 
     public static function fromCloudinaryUploadResponse(CloudinaryEngine $response_file): self
@@ -21,6 +21,7 @@ class Media extends \CloudinaryLabs\CloudinaryLaravel\Model\Media
             $response_file
                 ->getResponse();
 
+        // first transformed file
         $first_eager_response =
             $response['eager'][0];
 

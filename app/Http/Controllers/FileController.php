@@ -11,9 +11,12 @@ use App\Data\Shared\Swagger\Response\SuccessItemResponse;
 use App\Data\Shared\Swagger\Response\SuccessListResponse;
 use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
 use App\Models\Media;
+use App\Models\TemporaryUploadedImages;
+use App\Models\User;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
@@ -149,12 +152,18 @@ class FileController extends Controller
 
         $files = $uploadFileData->files;
 
-        /** @var Collection<int, Media> $uploaded_medias */
-        $session_uploaded_media = collect([]);
+        // /** @var Collection<int, Media> $uploaded_medias */
+        // $session_uploaded_media = collect([]);
+
+        /** @var Collection<int, TemporaryUploadedImages> $uploaded_medias */
+        $temporary_uploaded_images = collect([]);
+
+        /** @var User $var description */
+        $logged_user = Auth::User();
 
         /** @var Collection<int, Media> $uploaded_medias */
         $uploaded_medias_data = $files->map(
-            function ($file) use ($session_uploaded_media) {
+            function ($file) use ($temporary_uploaded_images, $logged_user) {
 
                 Log::info(
                     'accessing FileController storeMany, with files {files}',
@@ -205,9 +214,21 @@ class FileController extends Controller
                 // example result: jasldkjGAsdfkj
                 // $cloudinary_public_id = $response->getPublicId();
 
-                $uploaded_media = Media::fromCloudinaryUploadResponse($response);
+                // $uploaded_media = Media::fromCloudinaryUploadResponse($response);
 
-                $session_uploaded_media->push($uploaded_media);
+                $uploaded_media = TemporaryUploadedImages::fromCloudinaryUploadResponse($response, $logged_user->id);
+
+                $temporary_uploaded_images->push($uploaded_media);
+
+                // $media = new Media;
+                // $media->file_name = $response_file->getFileName();
+                // // $media->file_url = $response_file->getSecurePath();
+                // // $media->file_url = $response_file->getSecurePath();
+                // $media->file_url = $first_eager_response['secure_url'];
+                // // $media->size = $first_eager_response->getSize();
+                // $media->size = $first_eager_response['bytes'];
+                // $media->file_type = $response_file->getFileType();
+                //         $session_uploaded_media->push($uploaded_media);
 
                 return new UploadFileResponseData(
                     url: $uploaded_media->file_url,
@@ -216,14 +237,18 @@ class FileController extends Controller
             }
         );
 
-        $upload_cars_images_session_key = config('constants.session.upload_car_images');
+        $logged_user
+            ->temporaryUploadedImages()
+            ->saveMany($temporary_uploaded_images);
 
-        $request
-            ->session()
-            ->put(
-                $upload_cars_images_session_key,
-                $session_uploaded_media
-            );
+        // $upload_cars_images_session_key = config('constants.session.upload_car_images');
+
+        // $request
+        //     ->session()
+        //     ->put(
+        //         $upload_cars_images_session_key,
+        //         $session_uploaded_media
+        //     );
 
         return $uploaded_medias_data;
 
@@ -280,33 +305,33 @@ class FileController extends Controller
 
         Log::info('file public id  {data}', ['data' => $deleteFileData->public_id]);
 
-        $uploaded_car_images_session_key = config('constants.session.upload_car_images');
-        /** @var Collection<int, Media> $user_car_medias */
-        $user_car_medias =
-           $request
-               ->session()
-               ->get($uploaded_car_images_session_key);
+        TemporaryUploadedImages::query()
+            ->firstWhere(
+                'public_id',
+                $deleteFileData->public_id
+            )
+            ->delete();
 
-        if ($user_car_medias) {
+        // $uploaded_car_images_session_key = config('constants.session.upload_car_images');
+        // /** @var Collection<int, Media> $user_car_medias */
+        // $user_car_medias =
+        //    $request
+        //        ->session()
+        //        ->get($uploaded_car_images_session_key);
 
-            Log::info('session data {session_data}', ['session_data' => $user_car_medias]);
+        // if ($user_car_medias) {
 
-            $updated_user_car_medias =
-                $user_car_medias
-                    ->filter(function ($item) use ($deleteFileData) {
-                        return $item->file_name != $deleteFileData->public_id;
-                    });
+        //     Log::info('session data {session_data}', ['session_data' => $user_car_medias]);
 
-            $request->session()->forget($uploaded_car_images_session_key);
+        // $updated_user_car_medias =
+        //     $user_car_medias
+        //         ->filter(function ($item) use ($deleteFileData) {
+        //             return $item->file_name != $deleteFileData->public_id;
+        //         });
 
-            $request
-                ->session()
-                ->put(
-                    $uploaded_car_images_session_key,
-                    $updated_user_car_medias
-                );
+        // $request->session()->forget($uploaded_car_images_session_key);
 
-        }
+        // }
 
         Cloudinary::destroy($deleteFileData->public_id);
 

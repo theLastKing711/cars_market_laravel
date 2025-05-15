@@ -7,6 +7,8 @@ use App\Data\Shared\Swagger\Response\SuccessNoContentResponse;
 use App\Data\User\Car\CreateCarOfferRequestData;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\Media;
+use App\Models\TemporaryUploadedImages;
 use App\Models\User;
 use App\Services\Api\TranslationService;
 use Illuminate\Http\Request;
@@ -25,18 +27,18 @@ class CreateCarOfferController extends Controller
 
         // Log::info('createCarOfferController  {data}', ['data' => $createCarOfferRequestData]);
 
-        $uploaded_car_images_session_key =
-            config('constants.session.upload_car_images');
+        // $uploaded_car_images_session_key =
+        //     config('constants.session.upload_car_images');
 
-        /** @var string[] $user_car_medias */
-        $user_car_medias =
-            $request
-                ->session()
-                ->get($uploaded_car_images_session_key);
+        // /** @var string[] $user_car_medias */
+        // $user_car_medias =
+        //     $request
+        //         ->session()
+        //         ->get($uploaded_car_images_session_key);
 
-        $logged_user_id = Auth::User()->id;
+        $logged_user = Auth::User();
 
-        DB::transaction(function () use ($createCarOfferRequestData, $translationService, $user_car_medias, $logged_user_id) {
+        DB::transaction(function () use ($createCarOfferRequestData, $translationService, $logged_user) {
 
             $car_translation_set =
                 $translationService
@@ -46,7 +48,7 @@ class CreateCarOfferController extends Controller
 
             $car = Car::query()
                 ->create([
-                    'user_id' => $logged_user_id,
+                    'user_id' => $logged_user->id,
                     'car_upload_start_date' => now(),
                     'car_upload_expiration_date' => now()->addYear(1),
                     'car_name_language_when_uploaded' => $car_translation_set->upload_language,
@@ -62,22 +64,38 @@ class CreateCarOfferController extends Controller
                     'is_khalyeh' => $createCarOfferRequestData->is_khalyeh,
                 ]);
 
+            $user_car_temporary_uploaded_images =
+                TemporaryUploadedImages::query()
+                    ->where(
+                        'user_id',
+                        $logged_user->id
+                    );
+
+            $user_car_medias =
+                $user_car_temporary_uploaded_images
+                    ->get()
+                    ->map(function ($temporary_uploaded_image) {
+                        $media = new Media;
+                        $media->file_name = $temporary_uploaded_image->file_name;
+                        $media->file_url = $temporary_uploaded_image->file_url;
+                        $media->size = $temporary_uploaded_image->size;
+                        $media->file_type = $temporary_uploaded_image->file_type;
+                    });
+
             $car
                 ->medially()
                 ->saveMany($user_car_medias);
 
-            User::query()
-                ->firstWhere(
-                    'id',
-                    $logged_user_id
-                )
-                ->decrement('max_number_of_car_upload');
+            $user_car_temporary_uploaded_images
+                ->delete();
+
+            $logged_user::decrement('max_number_of_car_upload');
 
         });
 
-        $request
-            ->session()
-            ->remove($uploaded_car_images_session_key);
+        // $request
+        //     ->session()
+        //     ->remove($uploaded_car_images_session_key);
 
         // Log::info('logged user id {logged_user_id}', ['logged_user_id' => ]);
 

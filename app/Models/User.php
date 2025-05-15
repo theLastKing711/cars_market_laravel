@@ -115,6 +115,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all of the temporaryUploadedImages for the User
+     */
+    public function temporaryUploadedImages(): HasMany
+    {
+        return $this->hasMany(TemporaryUploadedImages::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
