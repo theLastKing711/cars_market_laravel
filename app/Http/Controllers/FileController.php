@@ -249,7 +249,7 @@ class FileController extends Controller
 
             $logged_user
                 ->temporaryUploadedImages()
-                ->detach();
+                ->delete();
         }
 
         $logged_user
