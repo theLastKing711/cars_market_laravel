@@ -24,6 +24,15 @@ use App\Http\Controllers\User\Car\ViewCarOfferController;
 use App\Models\Car;
 use Illuminate\Support\Facades\Route;
 
+Route::prefix('files')
+    ->middleware(['api', 'auth:sanctum'])
+    ->group(function () {
+        Route::get('', [FileController::class, 'index']);
+        Route::post('many', [FileController::class, 'storeMany']);
+        Route::post('', [FileController::class, 'store']);
+        Route::delete('{public_id}', [FileController::class, 'delete']);
+    });
+
 // Route::prefix('admin')
 //     ->middleware(['api'])
 //     ->group(function () {
@@ -103,14 +112,5 @@ Route::prefix('users')
             Route::get('{id}', CarOfferDetailsController::class);
 
         });
-
-        Route::prefix('files')
-            ->middleware(['api'])
-            ->group(function () {
-                Route::get('', [FileController::class, 'index']);
-                Route::post('many', [FileController::class, 'storeMany']);
-                Route::post('', [FileController::class, 'store']);
-                Route::delete('{public_id}', [FileController::class, 'delete']);
-            });
 
     });
