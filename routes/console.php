@@ -17,11 +17,11 @@ Schedule::call(function () {
                 now()
                     ->subtract('+1 day'),
             ),
-        function ($query) {
+        function ($temporary_images_to_remove_query) {
 
             /** @var Collection<TemporaryUploadedImages> $temporary_images_to_remove */
             $temporary_images_to_remove =
-                $query
+                $temporary_images_to_remove_query
                     ->get();
 
             $temporary_images_to_remove
@@ -29,7 +29,7 @@ Schedule::call(function () {
                     fn ($item) => Cloudinary::destroy($item->public_id)
                 );
 
-            $query->delete();
+            $temporary_images_to_remove_query->delete();
 
         }
     );
