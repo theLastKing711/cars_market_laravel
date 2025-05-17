@@ -55,9 +55,9 @@ class getUpdateCarOfferResponseData extends Data
         public ?bool $is_khalyeh,
         #[OAT\Property]
         public ?bool $is_faragha_jahzeh,
-        #[ArrayProperty(ShippableToCityData::class)]
-        /** @var ShippableToCityData[] */
-        public Collection $shippable_to,
+        // #[ArrayProperty(ShippableToCityData::class)]
+        // /** @var ShippableToCityData[] */
+        // public Collection $shippable_to,
         #[ArrayProperty(DeletableMediaData::class)]
         #[MapOutputName('images')]
         /** @var DeletableMediaData[] */
