@@ -5,16 +5,19 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 
-Schedule::call(function () {
+// Schedule::call(function () {
 
-    TemporaryUploadedImages::query()
-        ->whereDate(
-            'created_at',
-            '<',
-            now()->subtract('+1 day')
-        );
+//     TemporaryUploadedImages::query()
+//         ->whereDate(
+//             'created_at',
+//             '<=',
+//             now()
+//             // ->subtract('+1 day')
+//             // ->toDateString()
+//         )
+//         // ->delete();
 
-})->everyMinute();
+// })->everySecond();
 
 // Artisan::command('inspire', function () {
 //     $this->comment(Inspiring::quote());
