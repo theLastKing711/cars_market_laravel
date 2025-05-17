@@ -7,6 +7,7 @@ use App\Data\User\Car\getUpdateCarOfferResponseData;
 use App\Data\User\Car\PathParameters\CarIdPathParameterData;
 use App\Models\Car;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OAT;
 
 #[
@@ -25,6 +26,8 @@ class getUpdateCarOfferController extends CarController
     #[SuccessItemResponse(getUpdateCarOfferResponseData::class)]
     public function __invoke(CarIdPathParameterData $request_path_data)
     {
+
+        Log::info('accessing getUpdateCarOfferController ');
 
         // $logged_user_id = Auth::User()->id;
 
